@@ -2,12 +2,11 @@
 
 <resources>
     <string name="app_name">DateConverter</string>
-    <!--
     <string name="mdtp_cancel">Cancel</string>
     <string name="mdtp_ok">Ok</string>
-    -->
 
 
+<!--
     <string name="mdtp_cancel">रद्द गर्नुहोस्</string>
     <string name="mdtp_ok">भयो</string>
 
@@ -24,10 +23,11 @@
     <string name="Magh">माघ</string>
     <string name="Falgun"> फाल्गुन </string>
     <string name="Chaitra">चैत्र </string>
+-->
 
 
 
-    <!--<string name="Baisakh">Baisakh</string>
+    <string name="Baisakh">Baisakh</string>
     <string name="Jestha"> Jestha </string>
     <string name="Ashar"> Ashar</string>
     <string name="Shrawan"> Shrawan</string>
@@ -39,7 +39,6 @@
     <string name="Magh">Magh</string>
     <string name="Falgun"> Falgun </string>
     <string name="Chaitra">Chaitra </string>
--->
 
     <string name="mdtp_item_is_selected">2073 selected</string>
     <string name="mdtp_date_v1_monthyear">MMMM yyyy</string>
