@@ -464,7 +464,8 @@ public abstract class MonthView extends View {
         mStringBuilder.setLength(0);
         */
             //return formatter.format(mCalendar.getTime());
-            return getResources().getString(DateConverter.getNepaliMonth(mCalendar.get(Calendar.MONTH))) + " " + mCalendar.get(Calendar.YEAR);
+            return getResources().getString(DateConverter.getNepaliMonth(mCalendar.get(Calendar.MONTH)))
+                    + " " + mCalendar.get(Calendar.YEAR);
 
         }
 

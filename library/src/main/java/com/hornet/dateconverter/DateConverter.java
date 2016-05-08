@@ -391,7 +391,7 @@ public class DateConverter {
             case 10:
                 return (R.string.Falgun);
             case 11:
-                return (R.string.Baisakh);
+                return (R.string.Chaitra);
         }
         return 0;
     }
