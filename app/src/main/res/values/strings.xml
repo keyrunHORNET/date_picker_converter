@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">NepaliDateConverter</string>
+    <string name="highlight_dates">Highlight certain dates</string>
+    <string name="limit_dates">Limit selectable dates</string>
+    <string name="title_date">Show a title</string>
+    <string name="show_year_first">Show year picker first</string>
+    <string name="dismiss_date">Dismiss on pause (eg: orientaion change)</string>
+    <string name="mode_custom_accent">Use custom accent</string>
+    <string name="mode_dark_date">Use dark theme</string>
+</resources>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+     Copyright (C) 2013 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+
+<resources>
+
+    <string name="app_name">DateConverter</string>
+    <string name="mdtp_cancel">रद्द गर्नुहोस्</string>
+    <string name="mdtp_ok">भयो</string>
+
+    <string name="Baisakh"> बैशाख </string>
+    <string name="Jestha"> जेष्ठ </string>
+    <string name="Ashar"> असार </string>
+    <string name="Shrawan"> श्रावण</string>
+    <string name="Bhadra">भदौ</string>
+    <string name="Ashoj"> आस्विन </string>
+    <string name="Kartik"> कार्तिक </string>
+    <string name="Mangsir"> मंसिर</string>
+    <string name="Poush"> पुस</string>
+    <string name="Magh">माघ</string>
+    <string name="Falgun"> फाल्गुन </string>
+    <string name="Chaitra">चैत्र </string>
+
+
+    <string name="mdtp_item_is_selected">2073 छानियो</string>
+    <string name="mdtp_date_v1_monthyear">MMMM yyyy</string>
+    <string name="mdtp_day_picker_description">Month grid of days</string>
+    <string name="mdtp_select_day">महिना र दिन चयन गर्नुहोस्</string>
+    <string name="mdtp_year_picker_description">बर्षहरु</string>
+    <string name="mdtp_select_year">"वर्ष चयन गर्नुहोस्"</string>
+    <string name="mdtp_day_of_week_label_typeface">sans-serif</string>
+    <string name="mdtp_sans_serif">sans-serif</string>
+    <string name="titleDialog">गते रोज्नुहोस्</string>
+
+</resources>
