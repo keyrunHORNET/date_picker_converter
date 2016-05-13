@@ -13,7 +13,7 @@ Date Picker | Date Picker Localized
 
 
 ## Setup
-Include the library folder in your project.
+Include the library folder as a `module` in your project.
  
 ## Using Date Picker
  
