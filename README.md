@@ -50,12 +50,12 @@ DateConverter dc=new DateConverter();
 `year` `month` `day` when passed beyond the conversion range throws an `IllegalArgumentException`.
 
 
-* To convert and english Date to Nepali date (i.e A.D to B.S):
+* Converting english Date to Nepali date (i.e A.D to B.S):
 ```java
 getNepaliDate(int engYY,int engMM,int engDD);
 ```
 
-* To convert and Nepali Date to English date (i.e B.S to A.D):
+* Converting Nepali Date to English date (i.e B.S to A.D):
 ```java
 getEnglishDate(int nepYY,int nepMM,int nepDD);
 ```
