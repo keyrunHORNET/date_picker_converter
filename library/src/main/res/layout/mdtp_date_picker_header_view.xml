@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,5 +11,3 @@
         android:textColor="@color/mdtp_white"
         android:textSize="@dimen/mdtp_date_picker_header_text_size"
         android:importantForAccessibility="no" />
-
-</LinearLayout>
