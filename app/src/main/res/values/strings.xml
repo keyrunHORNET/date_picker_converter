@@ -7,4 +7,5 @@
     <string name="dismiss_date">Dismiss on pause (eg: orientaion change)</string>
     <string name="mode_custom_accent">Use custom accent</string>
     <string name="mode_dark_date">Use dark theme</string>
+    <string name="pick_date_button">Pick Date</string>
 </resources>
