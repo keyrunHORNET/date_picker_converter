@@ -34,7 +34,7 @@ Date Picker | Date Picker Localized
 ```java
 
  dependencies {
-	        compile 'com.github.keyrunHORNET:date_picker_converter:v1.1-alpha'
+	       compile 'com.github.keyrunHORNET:date_picker_converter:v1.0'
 	}
  ```
 You may also add the library as an Android Library to your project. All the library files live in ```library```.
