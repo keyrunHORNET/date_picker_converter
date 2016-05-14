@@ -19,7 +19,6 @@
 
 <resources>
 
-    <string name="app_name">DateConverter</string>
     <string name="mdtp_cancel">रद्द गर्नुहोस्</string>
     <string name="mdtp_ok">भयो</string>
 
