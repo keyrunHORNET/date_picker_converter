@@ -1,4 +1,5 @@
 # Nepali Date picker Converter
+[![](https://jitpack.io/v/keyrunHORNET/date_picker_converter.svg)](https://jitpack.io/#keyrunHORNET/date_picker_converter)
 
  This work is the derivative of [Material Date Time Picker](https://github.com/wdullaer/MaterialDateTimePicker),in the original work calender
  of a date picker is based on the [Gregorian Calendar](https://en.wikipedia.org/wiki/Gregorian_calendar),
@@ -13,8 +14,32 @@ Date Picker | Date Picker Localized
 
 
 ## Setup
-Include the library folder as a `module` in your project.
- 
+    
+ The easiest way:
+
+   Step 1.
+   Add the JitPack repository to your build file.
+  Add it in your root build.gradle at the end of repositories:
+
+```java
+
+   allprojects {
+		 repositories {
+			  ...
+			  maven { url "https://jitpack.io" }
+		 }
+	}
+ ```
+   Step 2.
+   Add the dependency
+```java
+
+ dependencies {
+	        compile 'com.github.keyrunHORNET:date_picker_converter:v1.1-alpha'
+	}
+ ```
+You may also add the library as an Android Library to your project. All the library files live in ```library```.
+
 ## Using Date Picker
  
 ### Implement an `OnDateSetListener`
