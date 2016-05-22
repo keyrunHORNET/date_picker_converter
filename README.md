@@ -34,26 +34,35 @@ Date Picker | Date Picker Localized
 ```java
 
  dependencies {
-	       compile 'com.github.keyrunHORNET:date_picker_converter:v1.0'
+	       compile 'com.github.keyrunHORNET:date_picker_converter:v1.1'
 	}
  ```
 You may also add the library as an Android Library to your project. All the library files live in ```library```.
 
-## Using Date Picker
+## Using Date Picker / Time Picker
  
-### Implement an `OnDateSetListener`
+### Implement an `OnDateSetListener` / `OnTimeSetListener`
 In order to receive the date set in the picker, you will need to implement the 
 `OnDateSetListener` interfaces. Typically this will be the `Activity` or `Fragment` that creates the Pickers. The callbacks use the same API as the standard Android pickers.
 ```java
 
 @Override
 public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-  String date = "You picked the following date: "+dayOfMonth+"/"+(monthOfYear+1)"/"+year;
+  String date = "You picked the following date: "+dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
   dateTextView.setText(date);
 }
 ```
 
-### Create a `DatePickerDialog` using the supplied factory
+```java
+
+@Override
+public void onTimeSet(RadialPickerLayout view, int hour, int minute, int second) {
+  String time = "You picked the following time:- "+hour+":"+minute+":"+second;
+  timeTextView.setText(time);
+}
+```
+
+### Create a `DatePickerDialog` / `DatePickerDialog` using the supplied factory
 You will need to create a new instance of `DatePickerDialog` using the static `newInstance()` method, supplying proper default values and a callback. Once the dialogs are configured, you can call `show()`.
 ```java
 Calendar now = Calendar.getInstance();
