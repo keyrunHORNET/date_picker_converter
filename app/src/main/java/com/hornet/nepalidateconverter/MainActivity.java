@@ -13,23 +13,23 @@ import android.widget.Toast;
 import com.hornet.dateconverter.DateConverter;
 import com.hornet.dateconverter.DatePicker.DatePickerDialog;
 import com.hornet.dateconverter.Model;
+import com.hornet.dateconverter.TimePicker.RadialPickerLayout;
+import com.hornet.dateconverter.TimePicker.TimePickerDialog;
 import com.hornet.dateconverter.Utils;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
 
     EditText year, month, day;
-    Button adToBs, bsToAd, datePicker;
-    TextView outputConversion, outputDatePicker;
+    Button adToBs, bsToAd, datePicker,timePicker;
+    TextView outputConversion, outputDatePicker,outputTimePicker;
     DateConverter dateConverter;
     private CheckBox modeDarkDate;
     private CheckBox modeCustomAccentDate;
     private CheckBox dismissDate;
     private CheckBox titleDate;
     private CheckBox showYearFirst;
-    private CheckBox limitDates;
-    private CheckBox highlightDates;
 
 
     @Override
@@ -43,18 +43,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adToBs = (Button) findViewById(R.id.adToBsConvertButton);
         bsToAd = (Button) findViewById(R.id.bsToAdConvertButton);
         datePicker = (Button) findViewById(R.id.materialDatePickerButton);
+        timePicker = (Button) findViewById(R.id.materialTimePickerButton);
         outputConversion = (TextView) findViewById(R.id.outputConvertTextView);
         outputDatePicker = (TextView) findViewById(R.id.outputDatePickerTextView);
+        outputTimePicker = (TextView) findViewById(R.id.outputTimePickerTextView);
         adToBs.setOnClickListener(this);
         bsToAd.setOnClickListener(this);
         datePicker.setOnClickListener(this);
+        timePicker.setOnClickListener(this);
 
         modeCustomAccentDate = (CheckBox) findViewById(R.id.mode_custom_accent_date);
         modeDarkDate = (CheckBox) findViewById(R.id.mode_dark_date);
         titleDate = (CheckBox) findViewById(R.id.title_date);
         dismissDate = (CheckBox) findViewById(R.id.dismiss_date);
-        limitDates = (CheckBox) findViewById(R.id.limit_dates);
-        highlightDates = (CheckBox) findViewById(R.id.highlight_dates);
         showYearFirst = (CheckBox) findViewById(R.id.show_year_first);
 
 
@@ -82,26 +83,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (titleDate.isChecked()) {
                 dpd.setTitle("DatePicker Title");
             }
-            if (limitDates.isChecked()) {
-                Calendar[] dates = new Calendar[13];
-                for(int i = -6; i <= 6; i++) {
-                    Calendar date = Calendar.getInstance();
-                    date.add(Calendar.MONTH, i);
-                    dates[i+6] = date;
-                }
-                dpd.setSelectableDays(dates);
-            }
-            if (highlightDates.isChecked()) {
-                Calendar[] dates = new Calendar[13];
-                for(int i = -6; i <= 6; i++) {
-                    Calendar date = Calendar.getInstance();
-                    date.add(Calendar.WEEK_OF_YEAR, i);
-                    dates[i+6] = date;
-                }
-                dpd.setHighlightedDays(dates);
-            }
 
             dpd.show(getSupportFragmentManager(), "DatePicker");
+            return;
+        }
+        if (v.getId() == R.id.materialTimePickerButton) {
+            Calendar now = Calendar.getInstance();
+            TimePickerDialog dpd = TimePickerDialog.newInstance(MainActivity.this,
+                    now.get(Calendar.HOUR_OF_DAY),
+                    now.get(Calendar.MINUTE),
+                    false);
+
+
+            dpd.setThemeDark(modeDarkDate.isChecked());
+            dpd.dismissOnPause(dismissDate.isChecked());
+            if (modeCustomAccentDate.isChecked()) {
+                dpd.setAccentColor(Color.parseColor("#9C27B0"));
+            }
+            if (titleDate.isChecked()) {
+                dpd.setTitle("DatePicker Title");
+            }
+
+            dpd.show(getFragmentManager(), "TimePicker");
             return;
         }
 
@@ -214,5 +217,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         String date = "You picked the following date: " + dayOfMonth + " " + getResources().getString( DateConverter.getNepaliMonth(monthOfYear)) + " " + year;
         outputDatePicker.setText(date);
+    }
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+        String time = "You picked the following time:- " + hourOfDay + ":" + minute + ":" + second;
+        outputTimePicker.setText(time);
+
     }
 }

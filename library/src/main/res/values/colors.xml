@@ -45,6 +45,9 @@
     <color name="mdtp_button_color">@color/mdtp_accent_color</color>
     <color name="mdtp_button_selected">#33969696</color>
 
+    <!-- TimePicker Dark Theme -->
+    <color name="mdtp_circle_background_dark_theme">#525252</color>
+
     <!-- Colors for red theme -->
     <color name="mdtp_red">@color/mdtp_accent_color</color>
     <color name="mdtp_red_focused">@color/mdtp_accent_color_dark</color>
