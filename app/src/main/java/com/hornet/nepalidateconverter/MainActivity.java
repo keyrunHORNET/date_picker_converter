@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements
     private CheckBox limitSelectableDays;
     private CheckBox disableSelectedDays;
     private CheckBox tryNewVersion;
+    private CheckBox highlightDays;
 
 
     @Override
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements
         tryNewVersion = findViewById(R.id.dialog_version);
         limitSelectableDays = findViewById(R.id.limit_selectable_date);
         disableSelectedDays = findViewById(R.id.disable_selected_dates);
+        highlightDays = findViewById(R.id.dialog_highlightDays);
 
 
         modeDarkDate.setChecked(Utils.isDarkTheme(this, modeDarkDate.isChecked()));
@@ -78,9 +80,9 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(View v) {
+        Calendar now = Calendar.getInstance();
 
         if (v.getId() == R.id.materialDatePickerButton) {
-            Calendar now = Calendar.getInstance();
 
             DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this,
                     now.get(Calendar.YEAR),
@@ -107,63 +109,43 @@ public class MainActivity extends AppCompatActivity implements
                 dpd.setTitle("DatePicker Title");
             }
 
-            DateConverter dcm = new DateConverter();
-            Model todayDate = dcm.getNepaliDate(Calendar.getInstance().get(Calendar.YEAR),
-                    Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-
-            //this is a perfectly working line of code
             if (disablePastDays.isChecked())
-                dpd.setMaxDate(todayDate);
+                dpd.setMaxDate(getTodayNepaliDate());
 
+            if (highlightDays.isChecked()) {
+                dpd.setHighlightedDays(getSampleModelList());
+            }
             if (limitSelectableDays.isChecked()) {
-                List<Model> myList = new ArrayList<>();
-
-                for (int i = 0; i < 15; i++) {
-                    myList.add(new Model(2075, 2, i + 2));
-                    myList.add(new Model(2075, 1, i + 2));
-                    myList.add(new Model(2075, 3, i + 2));
-                }
-
-                dpd.setSelectableDays(myList);
+                dpd.setSelectableDays(getSampleModelList());
             }
             if (disableSelectedDays.isChecked()) {
-                List<Model> myList = new ArrayList<>();
-
-                for (int i = 0; i < 15; i++) {
-                    myList.add(new Model(2075, 2, i + 2));
-                    myList.add(new Model(2075, 1, i + 2));
-                    myList.add(new Model(2075, 3, i + 2));
-                }
-                dpd.setDisabledDays(myList);
+                dpd.setDisabledDays(getSampleModelList());
             }
-
             dpd.show(getSupportFragmentManager(), "DatePicker");
             return;
         }
         if (v.getId() == R.id.materialTimePickerButton) {
-            Calendar now = Calendar.getInstance();
-            TimePickerDialog dpd = TimePickerDialog.newInstance(MainActivity.this,
+            TimePickerDialog tpd = TimePickerDialog.newInstance(MainActivity.this,
                     now.get(Calendar.HOUR_OF_DAY),
                     now.get(Calendar.MINUTE),
                     false);
 
             if (tryNewVersion.isChecked()) {
-                dpd.setVersion(TimePickerDialog.Version.VERSION_2);
+                tpd.setVersion(TimePickerDialog.Version.VERSION_2);
             } else {
-                dpd.setVersion(TimePickerDialog.Version.VERSION_1);
+                tpd.setVersion(TimePickerDialog.Version.VERSION_1);
             }
 
-            dpd.setThemeDark(modeDarkDate.isChecked());
-            dpd.dismissOnPause(dismissDate.isChecked());
+            tpd.setThemeDark(modeDarkDate.isChecked());
+            tpd.dismissOnPause(dismissDate.isChecked());
+
             if (modeCustomAccentDate.isChecked()) {
-                dpd.setAccentColor(Color.parseColor("#9C27B0"));
+                tpd.setAccentColor(Color.parseColor("#9C27B0"));
             }
             if (titleDate.isChecked()) {
-                dpd.setTitle("DatePicker Title");
+                tpd.setTitle("TimePicker Title");
             }
-
-
-            dpd.show(getFragmentManager(), "TimePicker");
+            tpd.show(getFragmentManager(), "TimePicker");
             return;
         }
 
@@ -176,8 +158,9 @@ public class MainActivity extends AppCompatActivity implements
                 case R.id.adToBsConvertButton:
                     try {
                         Model nepDate = dateConverter.getNepaliDate(yy, mm, dd);
-                        outputConversion.setText("" + nepDate.getYear() + " " + getResources().getString(DateConverter.getNepaliMonth(nepDate.getMonth())) + " " +
-                                nepDate.getDay() + " " + getDayOfWeek(nepDate.getDayOfWeek()));
+                        String date="" + nepDate.getYear() + " " + getResources().getString(DateConverter.getNepaliMonth(nepDate.getMonth())) + " " +
+                                nepDate.getDay() + " " + getDayOfWeek(nepDate.getDayOfWeek());
+                        outputConversion.setText(date);
                     } catch (IllegalArgumentException e) {
                         Toast.makeText(MainActivity.this, "Date out of Range", Toast.LENGTH_LONG).show();
                     }
@@ -185,8 +168,9 @@ public class MainActivity extends AppCompatActivity implements
                 case R.id.bsToAdConvertButton:
                     try {
                         Model engDate = dateConverter.getEnglishDate(yy, mm, dd);
-                        outputConversion.setText("" + engDate.getYear() + " " + getEnglishMonth(engDate.getMonth()) + " " +
-                                engDate.getDay() + " " + getDayOfWeek(engDate.getDayOfWeek()));
+                        String date="" + engDate.getYear() + " " + getEnglishMonth(engDate.getMonth()) + " " +
+                                engDate.getDay() + " " + getDayOfWeek(engDate.getDayOfWeek());
+                        outputConversion.setText(date);
                     } catch (IllegalArgumentException e) {
                         Toast.makeText(MainActivity.this, "Date out of Range", Toast.LENGTH_LONG).show();
                     }
@@ -196,8 +180,35 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    /*
-    get english month
+    /**
+     * get today nepali date
+     *
+     * @return Model
+     */
+
+    public Model getTodayNepaliDate() {
+        return dateConverter.getNepaliDate(Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+    }
+
+    /**
+     * get List of sample model of date
+     *
+     * @return ArrayList<Model>
+     */
+    public List<Model> getSampleModelList() {
+        List<Model> myList = new ArrayList<>();
+        for (int i = 2; i < 15; i++) {
+            myList.add(new Model(getTodayNepaliDate().getYear(), getTodayNepaliDate().getMonth(), (i + 2)));
+        }
+        return myList;
+    }
+
+
+    /**
+     * get english month
+     *
+     * @return String
      */
     public String getEnglishMonth(int month) {
         switch (month) {
@@ -229,8 +240,10 @@ public class MainActivity extends AppCompatActivity implements
         return "";
     }
 
-    /*
-    get day of the week
+    /**
+     * get day of the week
+     *
+     * @return String
      */
 
     public String getDayOfWeek(int week) {
@@ -253,6 +266,12 @@ public class MainActivity extends AppCompatActivity implements
         }
         return "";
     }
+
+    /**
+     * check if the edit text has valid input
+     *
+     * @return boolean
+     */
 
     public boolean checkEditTextParameter() {
         if (year.getText().toString().length() == 0) {

@@ -213,6 +213,13 @@
             android:checked="false"
             android:text="@string/dialog_version_two" />
 
+        <CheckBox
+            android:id="@+id/dialog_highlightDays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/dialog_highlight_days" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

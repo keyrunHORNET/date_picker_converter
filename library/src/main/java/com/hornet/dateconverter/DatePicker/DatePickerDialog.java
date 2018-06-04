@@ -657,7 +657,7 @@ public class DatePickerDialog extends DialogFragment implements
      * Sets a list of days that are not selectable in the picker
      * Setting this value will take precedence over using setMinDate() and setMaxDate(), but stacks with setSelectableDays()
      *
-     * @param disabledDays an Array of Calendar Objects containing the disabled dates
+     * @param myDisableList a ArrayList of Model Objects containing the disabled dates
      */
     @SuppressWarnings("unused")
     public void setDisabledDays(List<Model> myDisableList) {
@@ -825,16 +825,23 @@ public class DatePickerDialog extends DialogFragment implements
     /**
      * Sets an array of dates which should be highlighted when the picker is drawn
      *
-     * @param highlightedDays an Array of Calendar objects containing the dates to be highlighted
+     * @param myHighlightedDays an Array of Calendar objects containing the dates to be highlighted
      */
     @SuppressWarnings("unused")
-    public void setHighlightedDays(Calendar[] highlightedDays) {
+    public void setHighlightedDays(List<Model> myHighlightedDays) {
 
-        for (Calendar highlightedDay : highlightedDays) {
+        Calendar[] days = new Calendar[myHighlightedDays.size()];
+        for (int i = 0; i < myHighlightedDays.size(); i++) {
+            Calendar mDay = new GregorianCalendar(myHighlightedDays.get(i).getYear(), myHighlightedDays.get(i).getMonth(), myHighlightedDays.get(i).getDay());
+            days[i] = mDay;
+        }
+
+
+        for (Calendar highlightedDay : days) {
             this.highlightedDays.add(Utils.trimToMidnight((Calendar) highlightedDay.clone()));
         }
         // Sort the array to optimize searching over it later on
-        //Arrays.sort(highlightedDays);
+        ///Arrays.sort(highlightedDays);
         if (mDayPickerView != null) mDayPickerView.onChange();
     }
 

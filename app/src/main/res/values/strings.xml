@@ -14,4 +14,5 @@
     <string name="limit_past_date">Disable Past Dates</string>
     <string name="limit_selectable_date">Limit selectable dates</string>
     <string name="disable_selected_dates">Disable selected days</string>
+    <string name="dialog_highlight_days">Highlight Days</string>
 </resources>
