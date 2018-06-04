@@ -3,7 +3,6 @@ package com.hornet.nepalidateconverter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,7 +18,6 @@ import com.hornet.dateconverter.Utils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
@@ -39,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements
     private CheckBox disableSelectedDays;
     private CheckBox tryNewVersion;
     private CheckBox highlightDays;
+    private CheckBox switchScrollOrientation;
 
 
     @Override
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements
         limitSelectableDays = findViewById(R.id.limit_selectable_date);
         disableSelectedDays = findViewById(R.id.disable_selected_dates);
         highlightDays = findViewById(R.id.dialog_highlightDays);
+        switchScrollOrientation = findViewById(R.id.dialog_switch_orientation);
 
 
         modeDarkDate.setChecked(Utils.isDarkTheme(this, modeDarkDate.isChecked()));
@@ -99,7 +99,13 @@ public class MainActivity extends AppCompatActivity implements
             dpd.setThemeDark(modeDarkDate.isChecked());
             dpd.dismissOnPause(dismissDate.isChecked());
             dpd.showYearPickerFirst(showYearFirst.isChecked());
-
+            if (switchScrollOrientation.isChecked()) {
+                if (dpd.getVersion() == DatePickerDialog.Version.VERSION_1) {
+                    dpd.setScrollOrientation(DatePickerDialog.ScrollOrientation.HORIZONTAL);
+                } else {
+                    dpd.setScrollOrientation(DatePickerDialog.ScrollOrientation.VERTICAL);
+                }
+            }
             if (modeCustomAccentDate.isChecked()) {
                 dpd.setAccentColor(Color.parseColor("#9C27B0"));
             }

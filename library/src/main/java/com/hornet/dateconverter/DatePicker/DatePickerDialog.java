@@ -569,7 +569,7 @@ public class DatePickerDialog extends DialogFragment implements
     }
 
     private void updateDisplay(boolean announce) {
-        mYearView.setText("" + mCalendar.getYear());
+        mYearView.setText(String.valueOf(mCalendar.getYear()));
 
         if (mVersion == Version.VERSION_1) {
             if (mDatePickerHeaderView != null) {
@@ -580,13 +580,15 @@ public class DatePickerDialog extends DialogFragment implements
                 }
             }
             mSelectedMonthTextView.setText(getResources().getString(DateConverter.getNepaliMonth(mCalendar.getMonth())));
-            mSelectedDayTextView.setText("" + (mCalendar.getDay()));
+            mSelectedDayTextView.setText(String.valueOf(mCalendar.getDay()));
         }
 
         if (mVersion == Version.VERSION_2) {
             //        mSelectedDayTextView.setText(VERSION_2_FORMAT.format(mCalendar.getTime()));
-            mSelectedDayTextView.setText("" + Utils.getDayOfWeek(mCalendar.getDayOfWeek()) + " "
-                    + getResources().getString(DateConverter.getNepaliMonth(mCalendar.getMonth())) + " " + mCalendar.getDay());
+
+            String mText=(Utils.getDayOfWeek((dc.getWeekDay(mCalendar.getYear(),mCalendar.getMonth()+1,mCalendar.getDay())))).substring(0,3) + ", "
+                    + getResources().getString(DateConverter.getNepaliMonth(mCalendar.getMonth())) + " " + mCalendar.getDay();
+            mSelectedDayTextView.setText(mText);
 
             if (mTitle != null)
                 mDatePickerHeaderView.setText(mTitle.toUpperCase(mLocale));

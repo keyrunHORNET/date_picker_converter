@@ -1,5 +1,6 @@
 package com.hornet.dateconverter;
 
+import android.support.annotation.IntRange;
 import android.util.Log;
 
 import org.joda.time.DateTime;
@@ -210,7 +211,9 @@ public class DateConverter {
     }
 
 
-    /*convert nepali date into english date*/
+    /**
+     * convert nepali date into english date
+     */
     public Model getEnglishDate(int nepYY, int nepMM, int nepDD) {
 
         if (isNepDateInRange(nepYY, nepMM, nepDD)) {
@@ -291,7 +294,9 @@ public class DateConverter {
         } else throw new IllegalArgumentException("Out of Range: Date is out of range to Convert");
     }
 
-    /*convert english date into nepali date*/
+    /**
+     * convert english date into nepali date
+     */
     public Model getNepaliDate(int engYY, int engMM, int engDD) {
 
         if (isEngDateInRange(engYY, engMM, engDD)) {
@@ -317,12 +322,12 @@ public class DateConverter {
             //Calendar baseEngDate = new GregorianCalendar();
             //baseEngDate.set(startingEngYear, startingEngMonth, startingEngDay);
 
-           // long totalEngDaysCount = daysBetween(baseEngDate, currentEngDate);
-           // Log.d("KG: DateConverter", "TotalDaysCount: " + totalEngDaysCount);
+            // long totalEngDaysCount = daysBetween(baseEngDate, currentEngDate);
+            // Log.d("KG: DateConverter", "TotalDaysCount: " + totalEngDaysCount);
 
-           /*calculate the days between two english date*/
-            DateTime base = new DateTime(startingEngYear, startingEngMonth, startingEngDay,0,0); // June 20th, 2010
-            DateTime newDate = new DateTime(engYY, engMM, engDD,0,0); // July 24th
+            /*calculate the days between two english date*/
+            DateTime base = new DateTime(startingEngYear, startingEngMonth, startingEngDay, 0, 0); // June 20th, 2010
+            DateTime newDate = new DateTime(engYY, engMM, engDD, 0, 0); // July 24th
             long totalEngDaysCount = Days.daysBetween(base, newDate).getDays();
 
             //Log.d("KG: DateConverter", "TotalDaysCount: JODA " + totalEngDaysCount);
@@ -357,14 +362,22 @@ public class DateConverter {
         } else throw new IllegalArgumentException("Out of Range: Date is out of range to Convert");
     }
 
-    /*calculate whether english year is leap year or not*/
+    /**
+     * calculate whether english year is leap year or not
+     */
+
     public static boolean isLeapYear(int year) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         return cal.getActualMaximum(Calendar.DAY_OF_YEAR) > 365;
     }
 
-    /*returns nepali month*/
+    /**
+     * returns nepali month
+     *
+     * @param month integer value of month
+     * @return int representing the string value of month
+     */
     public static int getNepaliMonth(int month) {
         switch (month) {
             case 0:
@@ -395,23 +408,86 @@ public class DateConverter {
         return 0;
     }
 
-    /*check if english date is in the range of conversion*/
-    public static boolean isEngDateInRange(int yy, int mm, int dd) {return (yy >= 1944 && yy <= 2033) && (mm >= 1 && mm <= 12) && (dd >= 1 && dd <= 31);}
+    /**
+     * check if english date is in the range of conversion
+     */
+    public static boolean isEngDateInRange(int yy, int mm, int dd) {
+        return (yy >= 1944 && yy <= 2033) && (mm >= 1 && mm <= 12) && (dd >= 1 && dd <= 31);
+    }
 
-    /*check if nepali date is in the range of conversion*/
-    public static boolean isNepDateInRange(int yy, int mm, int dd) {return (yy >= 2000 && yy <= 2090) && (mm >= 1 && mm <= 12) && (dd >= 1 && dd <= 32);}
+    /**
+     * check if nepali date is in the range of conversion
+     */
+    public static boolean isNepDateInRange(int yy, int mm, int dd) {
+        return (yy >= 2000 && yy <= 2090) && (mm >= 1 && mm <= 12) && (dd >= 1 && dd <= 32);
+    }
 
-    /*returns the day of week start for 1st nepali month*/
+    /**
+     * returns the day of week start for 1st nepali month
+     */
     public int getFirstWeekDayMonth(int yy, int mm) {
-        Log.e("JUSTATESTBRO","year: "+yy+" month: "+mm);
-        return startWeekDayMonthMap.get(yy)[mm];}
+        //Log.e("JUSTATESTBRO", "year: " + yy + " month: " + mm);
+        return startWeekDayMonthMap.get(yy)[mm];
+    }
 
-    /*returns the no of days in a particular month of a nepali year*/
+
+    /**
+     * returns the no of days in a particular month of a nepali year
+     */
     public int noOfDaysInMonth(int yy, int mm) {
         return daysInMonthMap.get(yy)[mm];
     }
 
-    /*unused method */
+
+    /**
+     * returns the model with value of weekDay for a given DateModel
+     *
+     * @param nepaliDate suppose you created new nepaliDate {@link Model} and want to know which weekday does it belong to
+     * @return {@link Model}
+     */
+    public Model fillMissingWeekDayValue(Model nepaliDate) {
+        int yy = nepaliDate.getYear();
+        int mm = nepaliDate.getMonth();
+        int dd = nepaliDate.getDay();
+
+        int startWeekDay = getFirstWeekDayMonth(yy, mm);
+        Log.e("OutsideLoop:Initial", "" + startWeekDay);
+
+        for (int i = 1; i < dd; i++) {
+            startWeekDay++;
+            if (startWeekDay > 7) {
+                Log.e("insideLoop:InsideIf", "" + startWeekDay);
+                startWeekDay = 1;
+            }
+            Log.e("insideLoop:OutsideIf", "" + startWeekDay);
+        }
+        Log.e("fillingMissingValue", "" + startWeekDay);
+        nepaliDate.setDayOfWeek(startWeekDay);
+        return nepaliDate;
+    }
+
+    /**
+     * if you want to know the weekday of a specific date without need of passing {@link Model} dateModel
+     * <p>
+     * i dont see much significance of this method
+     * <p>
+     * we can be lazy sometimes , we may want to do things differently or we just want to be a black sheep for no reason
+     * so just in case
+     *
+     * @param yy year of nepali date
+     * @param mm month of nepali date
+     * @param dd day of a nepali date
+     * @return week day value in {@link int} [0-7]
+     */
+    public int getWeekDay(@IntRange(from = 2000, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm, @IntRange(from = 1, to = 32) int dd) {
+        Model tempModel = fillMissingWeekDayValue(new Model(yy, mm, dd));
+        return tempModel.getDayOfWeek();
+    }
+
+
+    /**
+     * unused method
+     */
     public void createFirstWeekDayOfMonthLogData() {
         for (int i = 2080; i < 2091; i++) {
             for (int j = 1; j < 13; j++) {
