@@ -39,6 +39,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Logger;
@@ -659,8 +660,15 @@ public class DatePickerDialog extends DialogFragment implements
      * @param disabledDays an Array of Calendar Objects containing the disabled dates
      */
     @SuppressWarnings("unused")
-    public void setDisabledDays(Calendar[] disabledDays) {
-        mDefaultLimiter.setDisabledDays(disabledDays);
+    public void setDisabledDays(List<Model> myDisableList) {
+
+        Calendar[] days = new Calendar[myDisableList.size()];
+        for (int i = 0; i < myDisableList.size(); i++) {
+            Calendar mDay = new GregorianCalendar(myDisableList.get(i).getYear(), myDisableList.get(i).getMonth(), myDisableList.get(i).getDay());
+            days[i] = mDay;
+        }
+
+        mDefaultLimiter.setDisabledDays(days);
         if (mDayPickerView != null) mDayPickerView.onChange();
     }
 
@@ -676,14 +684,6 @@ public class DatePickerDialog extends DialogFragment implements
     public void setDateRangeLimiter(DateRangeLimiter dateRangeLimiter) {
         mDateRangeLimiter = dateRangeLimiter;
     }
-
-
-    /**
-     * Sets a list of days which are the only valid selections.
-     * Setting this value will take precedence over using setMinDate() and setMaxDate()
-     *
-     * @param selectableDays an Array of Calendar Objects containing the selectable dates
-     */
 
 
     /**
@@ -870,7 +870,14 @@ public class DatePickerDialog extends DialogFragment implements
         return highlightedDays.contains(date);
     }
 
-    public void setSelectableDays(Calendar[] selectableDays) {
+    //modified by hornet...base code by wdullaer
+    public void setSelectableDays(List<Model> myList) {
+        Calendar[] days = new Calendar[myList.size()];
+        for (int i = 0; i < myList.size(); i++) {
+            Calendar mDay = new GregorianCalendar(myList.get(i).getYear(), myList.get(i).getMonth(), myList.get(i).getDay());
+            days[i] = mDay;
+        }
+        selectableDays=days;
         mDefaultLimiter.setSelectableDays(selectableDays);
         if (mDayPickerView != null) mDayPickerView.onChange();
     }

@@ -17,7 +17,10 @@ import com.hornet.dateconverter.Model;
 import com.hornet.dateconverter.TimePicker.TimePickerDialog;
 import com.hornet.dateconverter.Utils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
         View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements
         showYearFirst = findViewById(R.id.show_year_first);
         tryNewVersion = findViewById(R.id.dialog_version);
         limitSelectableDays = findViewById(R.id.limit_selectable_date);
-       disableSelectedDays=findViewById(R.id.disable_selected_dates);
+        disableSelectedDays = findViewById(R.id.disable_selected_dates);
 
 
         modeDarkDate.setChecked(Utils.isDarkTheme(this, modeDarkDate.isChecked()));
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if (v.getId() == R.id.materialDatePickerButton) {
             Calendar now = Calendar.getInstance();
+
             DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this,
                     now.get(Calendar.YEAR),
                     now.get(Calendar.MONTH),
@@ -109,36 +113,28 @@ public class MainActivity extends AppCompatActivity implements
 
             //this is a perfectly working line of code
             if (disablePastDays.isChecked())
-                dpd.setMinDate(todayDate);
+                dpd.setMaxDate(todayDate);
 
             if (limitSelectableDays.isChecked()) {
-                Calendar[] days = new Calendar[13];
-                Calendar day = Calendar.getInstance();
+                List<Model> myList = new ArrayList<>();
 
-                Log.e("MAINACTIVITY", "year: " + todayDate.getYear() + " month: " + todayDate.getMonth());
-
-                for (int i = -6; i < 7; i++) {
-                    Calendar mDay = Calendar.getInstance();
-                    //mDay.add(Calendar.YEAR, todayDate.getYear());
-                    //mDay.add(Calendar.MONTH,todayDate.getMonth());
-                    mDay.add(Calendar.DAY_OF_MONTH, i * 2);
-                    days[i + 6] = mDay;
+                for (int i = 0; i < 15; i++) {
+                    myList.add(new Model(2075, 2, i + 2));
+                    myList.add(new Model(2075, 1, i + 2));
+                    myList.add(new Model(2075, 3, i + 2));
                 }
-                dpd.setSelectableDays(days);
+
+                dpd.setSelectableDays(myList);
             }
             if (disableSelectedDays.isChecked()) {
-                Calendar[] days = new Calendar[13];
-                Calendar day = Calendar.getInstance();
+                List<Model> myList = new ArrayList<>();
 
-
-                for (int i = -6; i < 7; i++) {
-                    Calendar mDay = Calendar.getInstance();
-                    //mDay.add(Calendar.YEAR, todayDate.getYear());
-                    //mDay.add(Calendar.MONTH,todayDate.getMonth());
-                    mDay.add(Calendar.DAY_OF_MONTH, i * 2);
-                    days[i + 6] = mDay;
+                for (int i = 0; i < 15; i++) {
+                    myList.add(new Model(2075, 2, i + 2));
+                    myList.add(new Model(2075, 1, i + 2));
+                    myList.add(new Model(2075, 3, i + 2));
                 }
-                dpd.setDisabledDays(days);
+                dpd.setDisabledDays(myList);
             }
 
             dpd.show(getSupportFragmentManager(), "DatePicker");
@@ -165,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements
             if (titleDate.isChecked()) {
                 dpd.setTitle("DatePicker Title");
             }
-
 
 
             dpd.show(getFragmentManager(), "TimePicker");

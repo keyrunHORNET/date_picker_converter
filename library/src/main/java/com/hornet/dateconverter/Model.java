@@ -1,5 +1,7 @@
 package com.hornet.dateconverter;
 
+import android.support.annotation.IntRange;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -17,7 +19,7 @@ public class Model {
         return dayOfWeek;
     }
 
-    public void setDayOfWeek(int dayOfWeek) {
+    public void setDayOfWeek(@IntRange(from = 1, to = 7) int dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
     }
 
@@ -30,7 +32,9 @@ public class Model {
     }
 
 
-    public Model(int year, int month, int day) {
+    public Model(@IntRange(from = 1900, to = 2100) int year,
+                 @IntRange(from = 0, to = 12) int month,
+                 @IntRange(from = 1, to = 32) int day) {
         this.year = year;
         this.month = month;
         this.day = day;
