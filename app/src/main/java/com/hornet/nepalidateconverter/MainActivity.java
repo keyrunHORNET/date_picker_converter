@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements
         highlightDays = findViewById(R.id.dialog_highlightDays);
         switchScrollOrientation = findViewById(R.id.dialog_switch_orientation);
 
-
         modeDarkDate.setChecked(Utils.isDarkTheme(this, modeDarkDate.isChecked()));
 
     }

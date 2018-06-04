@@ -34,4 +34,5 @@ dependencies {
 
     androidTestImplementation 'com.android.support:support-annotations:27.1.1'
 
+    implementation 'org.jetbrains:annotations-java5:15.0'
 }
