@@ -1,5 +1,6 @@
 package com.hornet.dateconverter;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -25,13 +26,14 @@ public class Model {
         day = date.get(GregorianCalendar.DAY_OF_MONTH);
         month = date.get(GregorianCalendar.MONTH) + 1;
         year = date.get(GregorianCalendar.YEAR);
+        dayOfWeek = date.get(Calendar.DAY_OF_WEEK);
     }
 
 
     public Model(int year, int month, int day) {
-        this.year=year;
-        this.month=month;
-        this.day=day;
+        this.year = year;
+        this.month = month;
+        this.day = day;
     }
 
     public int getYear() {

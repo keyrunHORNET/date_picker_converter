@@ -1,5 +1,5 @@
-package com.hornet.dateconverter.DatePicker;/*
- * Copyright (C) 2013 The Android Open Source Project
+/*
+ * Copyright (C) 2017 Wouter Dullaert
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,24 @@ package com.hornet.dateconverter.DatePicker;/*
  * limitations under the License.
  */
 
+package com.hornet.dateconverter.DatePicker;
 
-import android.content.Context;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
-/**
- * An adapter for a list of {@link SimpleMonthView} items.
- */
-public class SimpleMonthAdapter extends MonthAdapter {
+import java.util.Calendar;
 
-    public SimpleMonthAdapter(DatePickerController controller) {
-        super(controller);
-    }
+@SuppressWarnings("WeakerAccess")
+public interface DateRangeLimiter extends Parcelable {
+    int getMinYear();
 
-    @Override
-    public MonthView createMonthView(Context context) {
-        return new SimpleMonthView(context, null, mController);
-    }
+    int getMaxYear();
+
+    @NonNull Calendar getStartDate();
+
+    @NonNull Calendar getEndDate();
+
+    boolean isOutOfRange(int year, int month, int day);
+
+    @NonNull Calendar setToNearestDate(@NonNull Calendar day);
 }

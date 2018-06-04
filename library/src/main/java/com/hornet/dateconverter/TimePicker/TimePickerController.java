@@ -1,11 +1,11 @@
 package com.hornet.dateconverter.TimePicker;
 
 /**
+ * A collection of methods which need to be shared with all components of the TimePicker
  *
- *  A collection of methods which need to be shared with all components of the TimePicker
- * Created by Hornet on 5/22/2016.
+ * Created by wdullaer on 6/10/15.
  */
-public interface TimePickerController {
+interface TimePickerController {
     /**
      * @return boolean - true if the dark theme should be used
      */
@@ -22,9 +22,14 @@ public interface TimePickerController {
     int getAccentColor();
 
     /**
+     * @return Version - The current version to render
+     */
+    TimePickerDialog.Version getVersion();
+
+    /**
      * Request the device to vibrate
      */
-    //void tryVibrate();
+    void tryVibrate();
 
     /**
      * @param time Timepoint - the selected point in time
@@ -53,5 +58,4 @@ public interface TimePickerController {
      * @return timepoint - the nearest valid timepoint
      */
     Timepoint roundToNearest(Timepoint time, Timepoint.TYPE type);
-
 }

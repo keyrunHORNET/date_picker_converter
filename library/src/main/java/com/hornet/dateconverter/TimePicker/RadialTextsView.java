@@ -1,22 +1,41 @@
+/*
+ * Copyright (C) 2013 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.hornet.dateconverter.TimePicker;
 
 import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.Paint.Align;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 
 import com.hornet.dateconverter.R;
 
+
 /**
- * Created by Hornet on 5/22/2016.
+ * A view to show a series of numbers in a circular pattern.
  */
 public class RadialTextsView extends View {
     private final static String TAG = "RadialTextsView";
@@ -69,7 +88,7 @@ public class RadialTextsView extends View {
     }
 
     public void initialize(Context context, String[] texts, String[] innerTexts,
-                           TimePickerController controller, SelectionValidator validator, boolean disappearsOut) {
+            TimePickerController controller, SelectionValidator validator, boolean disappearsOut) {
         if (mIsInitialized) {
             Log.e(TAG, "This RadialTextsView may only be initialized once.");
             return;
@@ -84,20 +103,20 @@ public class RadialTextsView extends View {
         String typefaceFamilyRegular = res.getString(R.string.mdtp_sans_serif);
         mTypefaceRegular = Typeface.create(typefaceFamilyRegular, Typeface.NORMAL);
         mPaint.setAntiAlias(true);
-        mPaint.setTextAlign(Paint.Align.CENTER);
+        mPaint.setTextAlign(Align.CENTER);
 
         // Set up the selected paint
         int selectedTextColor = ContextCompat.getColor(context, R.color.mdtp_white);
         mSelectedPaint.setColor(selectedTextColor);
         mSelectedPaint.setAntiAlias(true);
-        mSelectedPaint.setTextAlign(Paint.Align.CENTER);
+        mSelectedPaint.setTextAlign(Align.CENTER);
 
         // Set up the inactive paint
         int inactiveColorRes = controller.isThemeDark() ? R.color.mdtp_date_picker_text_disabled_dark_theme
                 : R.color.mdtp_date_picker_text_disabled;
         mInactivePaint.setColor(ContextCompat.getColor(context, inactiveColorRes));
         mInactivePaint.setAntiAlias(true);
-        mInactivePaint.setTextAlign(Paint.Align.CENTER);
+        mInactivePaint.setTextAlign(Align.CENTER);
 
         mTexts = texts;
         mInnerTexts = innerTexts;
@@ -105,7 +124,7 @@ public class RadialTextsView extends View {
         mHasInnerCircle = (innerTexts != null);
 
         // Calculate the radius for the main circle.
-        if (mIs24HourMode) {
+        if (mIs24HourMode || controller.getVersion() != TimePickerDialog.Version.VERSION_1) {
             mCircleRadiusMultiplier = Float.parseFloat(
                     res.getString(R.string.mdtp_circle_radius_multiplier_24HourMode));
         } else {
@@ -121,12 +140,21 @@ public class RadialTextsView extends View {
         if (mHasInnerCircle) {
             mNumbersRadiusMultiplier = Float.parseFloat(
                     res.getString(R.string.mdtp_numbers_radius_multiplier_outer));
-            mTextSizeMultiplier = Float.parseFloat(
-                    res.getString(R.string.mdtp_text_size_multiplier_outer));
             mInnerNumbersRadiusMultiplier = Float.parseFloat(
                     res.getString(R.string.mdtp_numbers_radius_multiplier_inner));
-            mInnerTextSizeMultiplier = Float.parseFloat(
-                    res.getString(R.string.mdtp_text_size_multiplier_inner));
+
+            // Version 2 layout draws outer circle bigger than inner
+            if (controller.getVersion() == TimePickerDialog.Version.VERSION_1) {
+                mTextSizeMultiplier = Float.parseFloat(
+                        res.getString(R.string.mdtp_text_size_multiplier_outer));
+                mInnerTextSizeMultiplier = Float.parseFloat(
+                        res.getString(R.string.mdtp_text_size_multiplier_inner));
+            } else {
+                mTextSizeMultiplier = Float.parseFloat(
+                        res.getString(R.string.mdtp_text_size_multiplier_outer_v2));
+                mInnerTextSizeMultiplier = Float.parseFloat(
+                        res.getString(R.string.mdtp_text_size_multiplier_inner_v2));
+            }
 
             mInnerTextGridHeights = new float[7];
             mInnerTextGridWidths = new float[7];
@@ -236,7 +264,7 @@ public class RadialTextsView extends View {
      * textGridWidths parameters.
      */
     private void calculateGridSizes(float numbersRadius, float xCenter, float yCenter,
-                                    float textSize, float[] textGridHeights, float[] textGridWidths) {
+            float textSize, float[] textGridHeights, float[] textGridWidths) {
         /*
          * The numbers need to be drawn in a 7x7 grid, representing the points on the Unit Circle.
          */
@@ -282,7 +310,7 @@ public class RadialTextsView extends View {
      * Draw the 12 text values at the positions specified by the textGrid parameters.
      */
     private void drawTexts(Canvas canvas, float textSize, Typeface typeface, String[] texts,
-                           float[] textGridWidths, float[] textGridHeights) {
+            float[] textGridWidths, float[] textGridHeights) {
         mPaint.setTextSize(textSize);
         mPaint.setTypeface(typeface);
         Paint[] textPaints = assignTextColors(texts);
@@ -367,7 +395,7 @@ public class RadialTextsView extends View {
         return mReappearAnimator;
     }
 
-    private class InvalidateUpdateListener implements ValueAnimator.AnimatorUpdateListener {
+    private class InvalidateUpdateListener implements AnimatorUpdateListener {
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
             RadialTextsView.this.invalidate();

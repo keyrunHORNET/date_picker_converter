@@ -46,6 +46,6 @@
                 android:layout_height="@dimen/mdtp_header_height"
                 android:layout_gravity="center" />
         </FrameLayout>
-        <include layout="@layout/done_button" />
+        <include layout="@layout/mdtp_done_button" />
     </LinearLayout>
 </LinearLayout>

@@ -17,7 +17,7 @@
  -->
 
 
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="mdtp_cancel">रद्द गर्नुहोस्</string>
     <string name="mdtp_ok">भयो</string>
@@ -36,14 +36,23 @@
     <string name="Chaitra">चैत्र </string>
 
 
-    <string name="mdtp_item_is_selected">2073 छानियो</string>
-    <string name="mdtp_date_v1_monthyear">MMMM yyyy</string>
-    <string name="mdtp_day_picker_description">Month grid of days</string>
-    <string name="mdtp_select_day">महिना र दिन चयन गर्नुहोस्</string>
-    <string name="mdtp_year_picker_description">बर्षहरु</string>
-    <string name="mdtp_select_year">"वर्ष चयन गर्नुहोस्"</string>
+    <string name="mdtp_item_is_selected">छानियो</string>
     <string name="mdtp_day_of_week_label_typeface">sans-serif</string>
     <string name="mdtp_sans_serif">sans-serif</string>
     <string name="titleDialog">गते रोज्नुहोस्</string>
+
+    <string name="mdtp_done_label" msgid="7007948707597430919">"सम्पन्न भयो"</string>
+    <string name="mdtp_hour_picker_description" msgid="7586639618712934060">"घण्टा गोलाकार स्लाइडर"</string>
+    <string name="mdtp_minute_picker_description" msgid="6024811202872705251">"मिनेट गोलाकार स्लाइडर"</string>
+    <string name="mdtp_select_hours" msgid="7651068754188418859">"घण्टा चयन गर्नुहोस्"</string>
+    <string name="mdtp_select_minutes" msgid="8327182090226828481">"मिनेट चयन गर्नुहोस्"</string>
+    <string name="mdtp_day_picker_description" msgid="3968620852217927702">"दिनहरुको महिना ग्रिड"</string>
+    <string name="mdtp_year_picker_description" msgid="6963340404644587098">"वर्ष सूची"</string>
+    <string name="mdtp_select_day" msgid="3973338219107019769">"महिना र दिन चयन गर्नुहोस्"</string>
+    <string name="mdtp_select_year" msgid="2603330600102539372">"वर्ष चयन गर्नुहोस्"</string>
+    <string name="mdtp_deleted_key" msgid="6908431551612331381">"<xliff:g id="KEY">%1$s</xliff:g> हटाइयो"</string>
+    <string name="mdtp_date_v1_monthyear">yyyy MMMM</string>
+    <string name="mdtp_date_v2_daymonthyear">MMM dd, EEE</string>
+
 
 </resources>

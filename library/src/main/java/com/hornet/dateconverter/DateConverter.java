@@ -291,7 +291,6 @@ public class DateConverter {
         } else throw new IllegalArgumentException("Out of Range: Date is out of range to Convert");
     }
 
-
     /*convert english date into nepali date*/
     public Model getNepaliDate(int engYY, int engMM, int engDD) {
 
@@ -403,7 +402,9 @@ public class DateConverter {
     public static boolean isNepDateInRange(int yy, int mm, int dd) {return (yy >= 2000 && yy <= 2090) && (mm >= 1 && mm <= 12) && (dd >= 1 && dd <= 32);}
 
     /*returns the day of week start for 1st nepali month*/
-    public int getFirstWeekDayMonth(int yy, int mm) {return startWeekDayMonthMap.get(yy)[mm];}
+    public int getFirstWeekDayMonth(int yy, int mm) {
+        Log.e("JUSTATESTBRO","year: "+yy+" month: "+mm);
+        return startWeekDayMonthMap.get(yy)[mm];}
 
     /*returns the no of days in a particular month of a nepali year*/
     public int noOfDaysInMonth(int yy, int mm) {

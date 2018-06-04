@@ -5,28 +5,6 @@
     <string name="mdtp_cancel">Cancel</string>
     <string name="mdtp_ok">Ok</string>
 
-
-<!--
-    <string name="mdtp_cancel">रद्द गर्नुहोस्</string>
-    <string name="mdtp_ok">भयो</string>
-
-
-    <string name="Baisakh"> बैशाख </string>
-    <string name="Jestha"> जेष्ठ </string>
-    <string name="Ashar"> असार </string>
-    <string name="Shrawan"> श्रावण</string>
-    <string name="Bhadra">भदौ</string>
-    <string name="Ashoj"> आस्विन </string>
-    <string name="Kartik"> कार्तिक </string>
-    <string name="Mangsir"> मंसिर</string>
-    <string name="Poush"> पुस</string>
-    <string name="Magh">माघ</string>
-    <string name="Falgun"> फाल्गुन </string>
-    <string name="Chaitra">चैत्र </string>
--->
-
-
-
     <string name="Baisakh">Baisakh</string>
     <string name="Jestha"> Jestha </string>
     <string name="Ashar"> Ashar</string>
@@ -41,13 +19,10 @@
     <string name="Chaitra">Chaitra </string>
 
     <string name="mdtp_item_is_selected">2073 selected</string>
-    <string name="mdtp_date_v1_monthyear">MMMM yyyy</string>
     <string name="mdtp_day_picker_description">Month grid of days</string>
     <string name="mdtp_select_day">Select month and day</string>
     <string name="mdtp_year_picker_description">Year list</string>
     <string name="mdtp_select_year">Select year</string>
-    <string name="mdtp_day_of_week_label_typeface">sans-serif</string>
-    <string name="mdtp_sans_serif">sans-serif</string>
     <string name="titleDialog">Pick Date</string>
 
     <!--
@@ -80,13 +55,42 @@
     <!-- Accessibility announcement for second circular picker [CHAR LIMIT=NONE] -->
     <string name="mdtp_select_seconds">Select seconds</string>
 
+    <string name="mdtp_pm">PM</string>
+    <string name="mdtp_am">AM</string>
+
+    <!-- Pattern for the v1 month and year string (localised) -->
+    <string name="mdtp_date_v1_monthyear">MMMM yyyy</string>
+    <!-- Pattern for the v2 day month and year string (localised) -->
+    <string name="mdtp_date_v2_daymonthyear">EEE, MMM dd</string>
+
+    <!-- Label for date or time [CHAR LIMIT=30] -->
+    <string name="mdtp_done_label">Done</string>
+    <!--
+         Content description for the hour selector in the time picker, which displays
+         selectable hours of the day along the inside edge of a circle, as in an analog clock.
+         [CHAR LIMIT=50]
+    -->
+
+    <string name="mdtp_date">Date</string>
+    <string name="mdtp_time">Time</string>
+
+
     <!-- DO NOT TRANSLATE -->
-    <string name="mdtp_time_placeholder" translatable="false">--</string>
+    <string name="mdtp_time_placeholder" translatable="false">00</string>
     <!-- DO NOT TRANSLATE -->
     <string name="mdtp_time_separator" translatable="false">:</string>
 
     <!-- DO NOT TRANSLATE -->
     <string name="mdtp_radial_numbers_typeface" translatable="false">sans-serif</string>
+    <!-- DO NOT TRANSLATE -->
+    <string name="mdtp_sans_serif" translatable="false">sans-serif</string>
+
+    <!-- DO NOT TRANSLATE -->
+    <string name="mdtp_day_of_week_label_typeface" translatable="false">sans-serif</string>
+    <string name="mdtp_button_typeface" translatable="false">Roboto-Medium</string>
+    <string name="mdtp_previous_month_arrow" translatable="false"><![CDATA[\u276E]]></string>
+    <string name="mdtp_next_month_arrow" translatable="false"><![CDATA[\u276F]]></string>
+
 
 
 </resources>

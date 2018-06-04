@@ -33,6 +33,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.View;
 
+import java.util.Calendar;
+
 /**
  * Utility helper functions for time and date pickers.
  */
@@ -51,6 +53,63 @@ public class Utils {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
     }
 
+    /*
+    get english month
+     */
+    public static String getEnglishMonth(int month) {
+        switch (month) {
+            case 0:
+                return "January";
+            case 1:
+                return "February";
+            case 2:
+                return "March";
+            case 3:
+                return "April";
+            case 4:
+                return "May";
+            case 5:
+                return "June";
+            case 6:
+                return "July";
+            case 7:
+                return "August";
+            case 8:
+                return "September";
+            case 9:
+                return "October";
+            case 10:
+                return "November";
+            case 11:
+                return "December";
+        }
+        return "";
+    }
+
+    /*
+    get day of the week
+     */
+
+    public static String getDayOfWeek(int week) {
+
+        switch (week) {
+            case 1:
+                return "Sunday";
+            case 2:
+                return "Monday";
+            case 3:
+                return "Tuesday";
+            case 4:
+                return "Wednesday";
+            case 5:
+                return "Thursday";
+            case 6:
+                return "Friday";
+            case 7:
+                return "Saturday";
+        }
+        return "";
+    }
     /**
      * Try to speak the specified text, for accessibility. Only available on JB or later.
      * @param text Text to announce.
@@ -192,4 +251,20 @@ public class Utils {
         return false;
 
     }
+
+    /**
+     * Trims off all time information, effectively setting it to midnight
+     * Makes it easier to compare at just the day level
+     *
+     * @param calendar The Calendar object to trim
+     * @return The trimmed Calendar object
+     */
+    public static Calendar trimToMidnight(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar;
+    }
+
 }

@@ -1,22 +1,37 @@
-package com.hornet.dateconverter.TimePicker;
-
-/**
- * Created by Hornet on 5/22/2016.
+/*
+ * Copyright (C) 2013 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
+package com.hornet.dateconverter.TimePicker;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.Paint.Align;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+
 
 import com.hornet.dateconverter.R;
 import com.hornet.dateconverter.Utils;
 
 import java.text.DateFormatSymbols;
+import java.util.Locale;
 
 /**
  * Draw the two smaller AM and PM circles next to where the larger circle will be.
@@ -60,7 +75,7 @@ public class AmPmCirclesView extends View {
         mIsInitialized = false;
     }
 
-    public void initialize(Context context, TimePickerController controller, int amOrPm) {
+    public void initialize(Context context, Locale locale, TimePickerController controller, int amOrPm) {
         if (mIsInitialized) {
             Log.e(TAG, "AmPmCirclesView may only be initialized once.");
             return;
@@ -88,13 +103,13 @@ public class AmPmCirclesView extends View {
         Typeface tf = Typeface.create(typefaceFamily, Typeface.NORMAL);
         mPaint.setTypeface(tf);
         mPaint.setAntiAlias(true);
-        mPaint.setTextAlign(Paint.Align.CENTER);
+        mPaint.setTextAlign(Align.CENTER);
 
         mCircleRadiusMultiplier =
                 Float.parseFloat(res.getString(R.string.mdtp_circle_radius_multiplier));
         mAmPmCircleRadiusMultiplier =
                 Float.parseFloat(res.getString(R.string.mdtp_ampm_circle_radius_multiplier));
-        String[] amPmTexts = new DateFormatSymbols().getAmPmStrings();
+        String[] amPmTexts = new DateFormatSymbols(locale).getAmPmStrings();
         mAmText = amPmTexts[0];
         mPmText = amPmTexts[1];
 

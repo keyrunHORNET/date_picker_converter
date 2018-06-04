@@ -33,11 +33,11 @@
 
             <include layout="@layout/mdtp_date_picker_header_view" />
 
-            <include layout="@layout/date_picker_selected_date" />
+            <include layout="@layout/mdtp_date_picker_selected_date" />
         </LinearLayout>
 
-        <include layout="@layout/date_picker_view_animator" />
+        <include layout="@layout/mdtp_date_picker_view_animator" />
     </LinearLayout>
 
-    <include layout="@layout/done_button" />
+    <include layout="@layout/mdtp_done_button" />
 </LinearLayout>

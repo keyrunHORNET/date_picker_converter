@@ -10,7 +10,7 @@ import android.widget.TextView;
 /**
  * Created by Hornet on 4/30/2016.
  */
-public class AccessibleTextView extends TextView {
+public class AccessibleTextView extends android.support.v7.widget.AppCompatTextView {
     public AccessibleTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }

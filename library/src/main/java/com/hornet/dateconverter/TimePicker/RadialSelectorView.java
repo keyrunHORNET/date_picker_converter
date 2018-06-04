@@ -1,13 +1,26 @@
-package com.hornet.dateconverter.TimePicker;
-
-/**
- * Created by Hornet on 5/22/2016.
+/*
+ * Copyright (C) 2013 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
+package com.hornet.dateconverter.TimePicker;
 
 import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -17,6 +30,7 @@ import android.view.View;
 
 import com.hornet.dateconverter.R;
 import com.hornet.dateconverter.Utils;
+
 
 /**
  * View to show what number is selected. This will draw a blue circle over the number, with a blue
@@ -79,7 +93,7 @@ public class RadialSelectorView extends View {
      * Will be ignored when hasInnerCircle is false.
      */
     public void initialize(Context context, TimePickerController controller, boolean hasInnerCircle,
-                           boolean disappearsOut, int selectionDegrees, boolean isInnerCircle) {
+            boolean disappearsOut, int selectionDegrees, boolean isInnerCircle) {
         if (mIsInitialized) {
             Log.e(TAG, "This RadialSelectorView may only be initialized once.");
             return;
@@ -95,7 +109,7 @@ public class RadialSelectorView extends View {
 
         // Calculate values for the circle radius size.
         mIs24HourMode = controller.is24HourMode();
-        if (mIs24HourMode) {
+        if (mIs24HourMode || controller.getVersion() != TimePickerDialog.Version.VERSION_1) {
             mCircleRadiusMultiplier = Float.parseFloat(
                     res.getString(R.string.mdtp_circle_radius_multiplier_24HourMode));
         } else {
@@ -168,14 +182,14 @@ public class RadialSelectorView extends View {
     }
 
     public int getDegreesFromCoords(float pointX, float pointY, boolean forceLegal,
-                                    final Boolean[] isInnerCircle) {
+            final Boolean[] isInnerCircle) {
         if (!mDrawValuesReady) {
             return -1;
         }
 
         double hypotenuse = Math.sqrt(
                 (pointY - mYCenter)*(pointY - mYCenter) +
-                        (pointX - mXCenter)*(pointX - mXCenter));
+                (pointX - mXCenter)*(pointX - mXCenter));
         // Check if we're outside the range
         if (mHasInnerCircle) {
             if (forceLegal) {
@@ -364,7 +378,7 @@ public class RadialSelectorView extends View {
     /**
      * We'll need to invalidate during the animation.
      */
-    private class InvalidateUpdateListener implements ValueAnimator.AnimatorUpdateListener {
+    private class InvalidateUpdateListener implements AnimatorUpdateListener {
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
             RadialSelectorView.this.invalidate();

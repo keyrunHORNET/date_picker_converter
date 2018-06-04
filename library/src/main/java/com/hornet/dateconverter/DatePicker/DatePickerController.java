@@ -1,8 +1,3 @@
-package com.hornet.dateconverter.DatePicker;
-
-/**
- * Created by Hornet on 4/30/2016.
- */
 /*
  * Copyright (C) 2013 The Android Open Source Project
  *
@@ -19,8 +14,11 @@ package com.hornet.dateconverter.DatePicker;
  * limitations under the License.
  */
 
-import java.util.Calendar;
+package com.hornet.dateconverter.DatePicker;
 
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Controller class to communicate among the various components of the date picker dialog.
@@ -29,10 +27,11 @@ public interface DatePickerController {
 
     void onYearSelected(int year);
 
-    void onDayOfMonthSelected(int year, int month, int day);
+    void onDayOfMonthSelected(int year, int month, int day,int dayOfMonth);
 
     void registerOnDateChangedListener(DatePickerDialog.OnDateChangedListener listener);
 
+    @SuppressWarnings("unused")
     void unregisterOnDateChangedListener(DatePickerDialog.OnDateChangedListener listener);
 
     MonthAdapter.CalendarDay getSelectedDay();
@@ -40,10 +39,8 @@ public interface DatePickerController {
     boolean isThemeDark();
 
     int getAccentColor();
-
-    Calendar[] getHighlightedDays();
-
-    Calendar[] getSelectableDays();
+    
+    boolean isHighlighted(int year, int month, int day);
 
     int getFirstDayOfWeek();
 
@@ -57,5 +54,13 @@ public interface DatePickerController {
 
     boolean isOutOfRange(int year, int month, int day);
 
-    //void tryVibrate();
+    void tryVibrate();
+
+    TimeZone getTimeZone();
+
+    Locale getLocale();
+
+    DatePickerDialog.Version getVersion();
+
+    DatePickerDialog.ScrollOrientation getScrollOrientation();
 }
