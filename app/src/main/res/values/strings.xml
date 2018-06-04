@@ -9,4 +9,9 @@
     <string name="mode_dark_date">Use dark theme</string>
     <string name="pick_date_button">Pick Date</string>
     <string name="pick_time_button">Pick Time</string>
+    <string name="limit_date">Limit selectable dates</string>
+    <string name="dialog_version_two">Try new Version 2.0</string>
+    <string name="limit_past_date">Disable Past Dates</string>
+    <string name="limit_selectable_date">Limit selectable dates</string>
+    <string name="disable_selected_dates">Disable selected days</string>
 </resources>

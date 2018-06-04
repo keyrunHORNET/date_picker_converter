@@ -14,15 +14,16 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.hornet.nepalidateconverter.MainActivity">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray" />
 
         <TextView
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Conversion Range is 1944-2033 AD and 2000-2089 BS" />
 
@@ -183,6 +184,34 @@
             android:layout_height="wrap_content"
             android:checked="false"
             android:text="@string/title_date" />
+
+        <CheckBox
+            android:id="@+id/limit_past_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/limit_past_date" />
+
+        <CheckBox
+            android:id="@+id/limit_selectable_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/limit_selectable_date" />
+
+        <CheckBox
+            android:id="@+id/disable_selected_dates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/disable_selected_dates" />
+
+        <CheckBox
+            android:id="@+id/dialog_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/dialog_version_two" />
 
         <View
             android:layout_width="match_parent"

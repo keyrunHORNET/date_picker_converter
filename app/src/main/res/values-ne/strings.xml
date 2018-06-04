@@ -2,5 +2,14 @@
 <resources>
 
     <string name="pick_date_button">महिना र दिन चयन गर्नुहोस</string>
+    <string name="app_name">मिति कनवर्टर</string>
+    <string name="highlight_dates">मिति हाइलाइट</string>
+    <string name="limit_dates">मिति सीमा</string>
+    <string name="title_date">शीर्षक देखाउनु</string>
+    <string name="show_year_first">वर्ष पहिल देखाउनुो</string>
+    <string name="dismiss_date">मिति टिप्ने खारेज</string>
+    <string name="mode_custom_accent">अनुकूलन उच्चारण प्रयोग</string>
+    <string name="mode_dark_date">गाढा रंग प्रयोग</string>
+    <string name="pick_time_button">समय छान्ने</string>
 
 </resources>
