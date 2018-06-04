@@ -248,7 +248,7 @@ public class DatePickerDialog extends DialogFragment implements
         //this.initialize(callBack, mCalendar.getYear(), mCalendar.getMonth(), mCalendar.getDay());
     }
 
-    public static Model currentNepaliDate;
+    private Model currentNepaliDate;
     DateConverter dc;
 
     @Override

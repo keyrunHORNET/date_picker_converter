@@ -16,6 +16,7 @@ import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.support.v4.widget.ExploreByTouchHelper;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
@@ -375,7 +376,11 @@ public abstract class MonthView extends View {
         //final Time today = new Time(Time.getCurrentTimezone());
         //today.setToNow();
         //final Calendar today = Calendar.getInstance();
-        final Model today = DatePickerDialog.currentNepaliDate;
+
+
+        final Model today = dc.getNepaliDate(Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+
         mHasToday = false;
         mToday = -1;
 
@@ -407,8 +412,11 @@ public abstract class MonthView extends View {
         for (int i = 0; i < mNumCells; i++) {
             final int day = i + 1;
             if (sameDay(day, today)) {
+               Log.e("A simple Test:","So we did set mHasToday true");
                 mHasToday = true;
                 mToday = day;
+                Log.e("A simple Test:","mToday: "+mToday);
+                Log.e("A simple Test:","day: "+day);
             }
         }
         mNumRows = calculateNumRows();
@@ -434,6 +442,15 @@ public abstract class MonthView extends View {
     }
 
     private boolean sameDay(int day, Model today) {
+        Log.e("A simple test:",
+        "I am inside the method same day in class monthView"+
+        " day: "+day+
+        " today: "+today.getDay()+
+        " mYear: "+mYear+
+        " year: "+today.getYear()+
+        " mMonth: "+mMonth+
+        " month: "+today.getMonth()
+        );
         return mYear == today.getYear() &&
                 mMonth == today.getMonth() &&
                 day == today.getDay();

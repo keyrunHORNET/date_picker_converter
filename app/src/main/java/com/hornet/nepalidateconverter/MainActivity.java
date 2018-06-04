@@ -97,9 +97,7 @@ public class MainActivity extends AppCompatActivity implements
             }
 
             dpd.setThemeDark(modeDarkDate.isChecked());
-
             dpd.dismissOnPause(dismissDate.isChecked());
-
             dpd.showYearPickerFirst(showYearFirst.isChecked());
 
             if (modeCustomAccentDate.isChecked()) {
@@ -108,10 +106,8 @@ public class MainActivity extends AppCompatActivity implements
             if (titleDate.isChecked()) {
                 dpd.setTitle("DatePicker Title");
             }
-
             if (disablePastDays.isChecked())
-                dpd.setMaxDate(getTodayNepaliDate());
-
+                dpd.setMinDate(getTodayNepaliDate());
             if (highlightDays.isChecked()) {
                 dpd.setHighlightedDays(getSampleModelList());
             }
