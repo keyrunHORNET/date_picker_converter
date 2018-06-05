@@ -261,8 +261,7 @@ public class DatePickerDialog extends DialogFragment implements
     }
 
     public void initialize(OnDateSetListener callBack, int year, int monthOfYear, int dayOfMonth) {
-        Model dateModel = new Model(year, monthOfYear, dayOfMonth);
-        this.initialize(callBack, dateModel);
+        this.initialize(callBack, new Model(year, monthOfYear, dayOfMonth));
     }
 
 

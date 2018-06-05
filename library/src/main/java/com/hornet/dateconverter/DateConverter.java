@@ -290,7 +290,7 @@ public class DateConverter {
             engYY = startingEngYear;
             engMM = startingEngMonth;
             engDD = startingEngDay;
-            int endDayOfMonth = 0;
+            int endDayOfMonth ;
             int dayOfWeek = startingDayOfWeek;
             while (totalNepDaysCount != 0) {
                 if (isEngLeapYear(engYY)) {
