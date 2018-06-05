@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements
                 dpd.setTitle("DatePicker Title");
             }
             if (disablePastDays.isChecked())
-                dpd.setMinDate(getTodayNepaliDate());
+                dpd.setMinDate(dateConverter.getTodayNepaliDate());
             if (highlightDays.isChecked()) {
                 dpd.setHighlightedDays(getSampleModelList());
             }
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements
                 case R.id.adToBsConvertButton:
                     try {
                         Model nepDate = dateConverter.getNepaliDate(yy, mm, dd);
-                        String date="" + nepDate.getYear() + " " + getResources().getString(DateConverter.getNepaliMonth(nepDate.getMonth())) + " " +
+                        String date="" + nepDate.getYear() + " " + getResources().getString(DateConverter.getNepaliMonthString(nepDate.getMonth())) + " " +
                                 nepDate.getDay() + " " + getDayOfWeek(nepDate.getDayOfWeek());
                         outputConversion.setText(date);
                     } catch (IllegalArgumentException e) {
@@ -181,16 +181,6 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    /**
-     * get today nepali date
-     *
-     * @return Model
-     */
-
-    public Model getTodayNepaliDate() {
-        return dateConverter.getNepaliDate(Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-    }
 
     /**
      * get List of sample model of date
@@ -200,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements
     public List<Model> getSampleModelList() {
         List<Model> myList = new ArrayList<>();
         for (int i = 2; i < 15; i++) {
-            myList.add(new Model(getTodayNepaliDate().getYear(), getTodayNepaliDate().getMonth(), (i + 2)));
+            myList.add(new Model(dateConverter.getTodayNepaliDate().getYear(), dateConverter.getTodayNepaliDate().getMonth(), (i + 2)));
         }
         return myList;
     }
@@ -294,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = "You picked the following date: " + dayOfMonth + " " + getResources().getString(DateConverter.getNepaliMonth(monthOfYear)) + " " + year;
+        String date = "You picked the following date: " + dayOfMonth + " " + getResources().getString(DateConverter.getNepaliMonthString(monthOfYear)) + " " + year;
         outputDatePicker.setText(date);
     }
 

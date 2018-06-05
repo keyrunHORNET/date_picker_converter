@@ -42,7 +42,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.logging.Logger;
 
 /**
  * Created by Hornet on 4/30/2016.
@@ -186,6 +185,9 @@ public class DatePickerDialog extends DialogFragment implements
     private String mSelectDay;
     private String mSelectYear;
 
+    //private Model currentNepaliDate;
+    DateConverter dc;
+
     /**
      * The callback used to indicate the user is done filling in the date.
      */
@@ -228,6 +230,19 @@ public class DatePickerDialog extends DialogFragment implements
         return ret;
     }
 
+    @SuppressWarnings("unused")
+    public static DatePickerDialog newInstance(OnDateSetListener callback) {
+        DateConverter dc=new DateConverter();
+        return DatePickerDialog.newInstance(callback, dc.getTodayNepaliDate());
+    }
+
+    @SuppressWarnings("unused")
+    public static DatePickerDialog newInstance(OnDateSetListener callback, Model initialSelection) {
+        DatePickerDialog ret = new DatePickerDialog();
+        ret.initialize(callback, initialSelection);
+        return ret;
+    }
+
     /*private void initialize(OnDateSetListener callBack,Calendar initialSelection){
         mCallBack=callBack;
         mCalendar=Utils.trimToMidnight((Calendar) initialSelection.clone());
@@ -235,21 +250,21 @@ public class DatePickerDialog extends DialogFragment implements
     }
     */
 
-    public void initialize(OnDateSetListener callBack, int year, int monthOfYear, int dayOfMonth) {
+    public void initialize(OnDateSetListener callBack, Model initialSelection) {
         mCallBack = callBack;
-        mCalendar.setYear(year);
-        //mCalendar.set(Calendar.YEAR, year);
-        mCalendar.setMonth(monthOfYear);
-        //mCalendar.set(Calendar.MONTH, monthOfYear);
-        mCalendar.setDay(dayOfMonth);
+        mCalendar.setYear(initialSelection.getYear());
+        mCalendar.setMonth(initialSelection.getMonth());
+        mCalendar.setDay(initialSelection.getDay());
         mScrollOrientation = null;
-        //mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
         mVersion = Build.VERSION.SDK_INT < Build.VERSION_CODES.M ? Version.VERSION_1 : Version.VERSION_2;
-        //this.initialize(callBack, mCalendar.getYear(), mCalendar.getMonth(), mCalendar.getDay());
     }
 
-    private Model currentNepaliDate;
-    DateConverter dc;
+    public void initialize(OnDateSetListener callBack, int year, int monthOfYear, int dayOfMonth) {
+        Model dateModel = new Model(year, monthOfYear, dayOfMonth);
+        this.initialize(callBack, dateModel);
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -274,11 +289,8 @@ public class DatePickerDialog extends DialogFragment implements
         VERSION_2_FORMAT.setTimeZone(getTimeZone());
 
 
-        //converting the current Gregorian date into Bikram Sambat
         dc = new DateConverter();
-        currentNepaliDate = dc.getNepaliDate(Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        mCalendar = currentNepaliDate;
+        mCalendar = dc.getTodayNepaliDate();
 
         Log.d("KG: mCalander", ""
                 + mCalendar.getYear() + "YEAR: MONTH: "
@@ -579,15 +591,15 @@ public class DatePickerDialog extends DialogFragment implements
                     mDatePickerHeaderView.setText(Utils.getDayOfWeek(mCalendar.getDayOfWeek()).toUpperCase());
                 }
             }
-            mSelectedMonthTextView.setText(getResources().getString(DateConverter.getNepaliMonth(mCalendar.getMonth())));
+            mSelectedMonthTextView.setText(getResources().getString(DateConverter.getNepaliMonthString(mCalendar.getMonth())));
             mSelectedDayTextView.setText(String.valueOf(mCalendar.getDay()));
         }
 
         if (mVersion == Version.VERSION_2) {
             //        mSelectedDayTextView.setText(VERSION_2_FORMAT.format(mCalendar.getTime()));
 
-            String mText=(Utils.getDayOfWeek((dc.getWeekDay(mCalendar.getYear(),mCalendar.getMonth()+1,mCalendar.getDay())))).substring(0,3) + ", "
-                    + getResources().getString(DateConverter.getNepaliMonth(mCalendar.getMonth())) + " " + mCalendar.getDay();
+            String mText = (Utils.getDayOfWeek((dc.getWeekDay(mCalendar.getYear(), mCalendar.getMonth() + 1, mCalendar.getDay())))).substring(0, 3) + ", "
+                    + getResources().getString(DateConverter.getNepaliMonthString(mCalendar.getMonth())) + " " + mCalendar.getDay();
             mSelectedDayTextView.setText(mText);
 
             if (mTitle != null)
@@ -771,7 +783,7 @@ public class DatePickerDialog extends DialogFragment implements
      */
     public void setMinDate(Model minDate) {
         //mMinDate = calendar;
-        Calendar mCalendar = new GregorianCalendar(minDate.getYear(),minDate.getMonth(),minDate.getDay(),0,0,0);
+        Calendar mCalendar = new GregorianCalendar(minDate.getYear(), minDate.getMonth(), minDate.getDay(), 0, 0, 0);
         /*mCalendar.setLenient(false);
         mCalendar.set(Calendar.MONTH, minDate.getMonth());
         mCalendar.set(Calendar.YEAR, minDate.getYear());
@@ -804,7 +816,7 @@ public class DatePickerDialog extends DialogFragment implements
     @SuppressWarnings("unused")
     public void setMaxDate(Model maxDate) {
         //mMaxDate = calendar;
-        Calendar calendar = new GregorianCalendar(maxDate.getYear(),maxDate.getMonth(),maxDate.getDay(),0,0,0);
+        Calendar calendar = new GregorianCalendar(maxDate.getYear(), maxDate.getMonth(), maxDate.getDay(), 0, 0, 0);
         /*calendar.set(Calendar.MONTH, maxDate.getMonth());
         calendar.set(Calendar.YEAR, maxDate.getYear());
         calendar.set(Calendar.DAY_OF_MONTH, maxDate.getDay());
@@ -886,7 +898,7 @@ public class DatePickerDialog extends DialogFragment implements
             Calendar mDay = new GregorianCalendar(myList.get(i).getYear(), myList.get(i).getMonth(), myList.get(i).getDay());
             days[i] = mDay;
         }
-        selectableDays=days;
+        selectableDays = days;
         mDefaultLimiter.setSelectableDays(selectableDays);
         if (mDayPickerView != null) mDayPickerView.onChange();
     }

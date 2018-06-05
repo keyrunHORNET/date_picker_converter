@@ -31,7 +31,6 @@ import java.security.InvalidParameterException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Formatter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -378,9 +377,7 @@ public abstract class MonthView extends View {
         //final Calendar today = Calendar.getInstance();
 
 
-        final Model today = dc.getNepaliDate(Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-
+        final Model today = dc.getTodayNepaliDate();
         mHasToday = false;
         mToday = -1;
 
@@ -524,7 +521,7 @@ public abstract class MonthView extends View {
         mStringBuilder.setLength(0);
         */
         //return formatter.format(mCalendar.getTime());
-        return getResources().getString(DateConverter.getNepaliMonth(mCalendar.get(Calendar.MONTH)))
+        return getResources().getString(DateConverter.getNepaliMonthString(mCalendar.get(Calendar.MONTH)))
                 + " " + mCalendar.get(Calendar.YEAR);
 
     }

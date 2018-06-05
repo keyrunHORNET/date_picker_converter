@@ -21,7 +21,6 @@ package com.hornet.dateconverter;
 import android.annotation.SuppressLint;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import org.jetbrains.annotations.Contract;
 import org.joda.time.DateTime;
@@ -247,14 +246,16 @@ public class DateConverter {
      * I've got 99 problems, but you ain't one
      * --Jay Z
      *
-     * @param nepYY nepali year
-     * @param nepMM nepali month
-     * @param nepDD day
+     * @param nepYY {@code int} year of nepali date [2000-2090]
+     * @param nepMM {@code int} month of nepali date [1-12]
+     * @param nepDD {@code int} day of a nepali date [1-32]
      * @return {@link Model } object with the converted value from nepali to english
      */
-    public Model getEnglishDate(int nepYY, int nepMM, int nepDD) {
+    public Model getEnglishDate(@IntRange(from = 2000, to = 2090) int nepYY,
+                                @IntRange(from = 1, to = 12) int nepMM,
+                                @IntRange(from = 1, to = 32) int nepDD) {
 
-        if (isNepDateInRange(nepYY, nepMM, nepDD)) {
+        if (isNepDateInConversionRange(nepYY, nepMM, nepDD)) {
 
             int startingEngYear = 1943;
             int startingEngMonth = 4;
@@ -292,7 +293,7 @@ public class DateConverter {
             int endDayOfMonth = 0;
             int dayOfWeek = startingDayOfWeek;
             while (totalNepDaysCount != 0) {
-                if (isLeapYear(engYY)) {
+                if (isEngLeapYear(engYY)) {
                     endDayOfMonth = daysInMonthOfLeapYear[engMM];
                 } else {
                     endDayOfMonth = daysInMonth[engMM];
@@ -322,6 +323,16 @@ public class DateConverter {
     }
 
     /**
+     * @param date {@link Calendar} Gregorian calendar
+     * @return {@link Model} dateModel after conversion from the given Calendar
+     */
+    @SuppressWarnings("unused")
+    public Calendar getEnglishDate(Model date) {
+        Model tempModel = getNepaliDate(date.getYear(), date.getMonth(), date.getDay());
+        return new GregorianCalendar(tempModel.getYear(), tempModel.getMonth(), tempModel.getDay(), 0, 0, 0);
+    }
+
+    /**
      * convert english date into nepali date
      * <p>
      * this is probably the method you are looking for
@@ -330,14 +341,16 @@ public class DateConverter {
      * tweak it, make it, break it, shake it, share it
      * </p>
      *
-     * @param engYY english year
-     * @param engMM english month
-     * @param engDD day
+     * @param engYY {@code int} year of nepali date [1944-2033]
+     * @param engMM {@code int} month of nepali date [1-12]
+     * @param engDD {@code int} day of a nepali date [1-31]
      * @return return nepali date as a {@link Model} object converted from english to nepali
      */
-    public Model getNepaliDate(int engYY, int engMM, int engDD) {
+    public Model getNepaliDate(@IntRange(from = 1944 - 2033) int engYY,
+                               @IntRange(from = 1, to = 12) int engMM,
+                               @IntRange(from = 1, to = 31) int engDD) {
 
-        if (isEngDateInRange(engYY, engMM, engDD)) {
+        if (isEngDateInConversionRange(engYY, engMM, engDD)) {
 
             int startingEngYear = 1944;
             int startingEngMonth = 1;
@@ -398,15 +411,25 @@ public class DateConverter {
     }
 
     /**
+     * @param date {@link Calendar} Gregorian calendar
+     * @return {@link Model} dateModel after conversion from the given Calendar
+     */
+    @SuppressWarnings("unused")
+    public Model getNepaliDate(Calendar date) {
+        return getNepaliDate(date.get(Calendar.YEAR),
+                date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH));
+    }
+
+    /**
      * calculate whether english year is leap year or not
      * <p>
      * what if i tell you this method is useless! would you believe me?
      * </p>
      *
-     * @param year int value of the year
+     * @param year {@code int} value of the year
      * @return {@code Boolean} true if it is leapYear and false if it is not a leapYear
      */
-    private static boolean isLeapYear(int year) {
+    private static boolean isEngLeapYear(int year) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         return cal.getActualMaximum(Calendar.DAY_OF_YEAR) > 365;
@@ -418,11 +441,11 @@ public class DateConverter {
      * where's waldo?
      * </p>
      *
-     * @param month integer value of month
+     * @param month {@code int} [0-11] integer value of month
      * @return {@code int} representing the string value of month
      */
     @Contract(pure = true)
-    public static int getNepaliMonth(int month) {
+    public static int getNepaliMonthString(@IntRange(from = 0, to = 11) int month) {
         switch (month) {
             case 0:
                 return (R.string.Baisakh);
@@ -459,13 +482,13 @@ public class DateConverter {
      * where is the fun in that???
      * </p>
      *
-     * @param yy english year
-     * @param mm english month
-     * @param dd day
+     * @param yy {@code int} year of english date
+     * @param mm {@code int} month of english date
+     * @param dd {@code int} day of a english date
      * @return {@code Boolean} true if it is in range or false if it is not in range
      */
     @Contract(pure = true)
-    private static boolean isEngDateInRange(int yy, int mm, int dd) {
+    private static boolean isEngDateInConversionRange(int yy, int mm, int dd) {
         return (yy >= 1944 && yy <= 2033) && (mm >= 1 && mm <= 12) && (dd >= 1 && dd <= 31);
     }
 
@@ -473,13 +496,13 @@ public class DateConverter {
      * check if nepali date is in the range of conversion
      * <p>anyone interested in improving this whole algorithm .....you need to have 3 P's </p>
      *
-     * @param yy nepali year
-     * @param mm nepali month
-     * @param dd day
+     * @param yy {@code int} year of nepali date
+     * @param mm {@code int} month of nepali date
+     * @param dd {@code int} day of a nepali date
      * @return {@code Boolean} true if it is in range / false if it is not in range
      */
     @Contract(pure = true)
-    private static boolean isNepDateInRange(int yy, int mm, int dd) {
+    private static boolean isNepDateInConversionRange(int yy, int mm, int dd) {
         return (yy >= 2000 && yy <= 2090) && (mm >= 1 && mm <= 12) && (dd >= 1 && dd <= 32);
     }
 
@@ -491,14 +514,13 @@ public class DateConverter {
      * if you think memory is your first priority than performance....i would have to think again
      * </p>
      *
-     * @param yy nepali year
-     * @param mm nepali month
+     * @param yy {@code int} year of nepali date [2000-2090]
+     * @param mm {@code int} month of nepali date [1-12]
      * @return {@code int} first week day of given month in given year
      */
     public int getFirstWeekDayMonth(@IntRange(from = 2000, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm) {
         return startWeekDayMonthMap.get(yy)[mm];
     }
-
 
     /**
      * returns the number of days in a particular month of a nepali year
@@ -507,14 +529,13 @@ public class DateConverter {
      * nepali date is not like the one in {@link GregorianCalendar}
      * </p>
      *
-     * @param yy nepali year
-     * @param mm nepali month
+     * @param yy {@code int} nepali year
+     * @param mm {@code int} nepali month
      * @return {@link int} number of days in a given month of a given year
      */
     public int noOfDaysInMonth(@IntRange(from = 2000, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm) {
         return daysInMonthMap.get(yy)[mm];
     }
-
 
     /**
      * returns the model with value of weekDay for a given DateModel
@@ -522,21 +543,15 @@ public class DateConverter {
      * suppose you created new nepaliDate {@link Model} and want to know which weekday does it belong to
      * </p>
      *
-     * @param nepaliDate any nepali date model with the missing weekDay value
+     * @param nepaliDate {@link Model} any nepali date model with the missing weekDay value
      * @return {@link Model} nepaliDate is returned after setting the weekDay value
      */
     private Model fillMissingWeekDayValue(@NonNull Model nepaliDate) {
-        int yy = nepaliDate.getYear();
-        int mm = nepaliDate.getMonth();
-        int dd = nepaliDate.getDay();
-
-        int startWeekDay = getFirstWeekDayMonth(yy, mm);
-
-        for (int i = 1; i < dd; i++) {
+        int startWeekDay = getFirstWeekDayMonth(nepaliDate.getYear(),
+                nepaliDate.getMonth());
+        for (int i = 1; i < nepaliDate.getDay(); i++) {
             startWeekDay++;
-            if (startWeekDay > 7) {
-                startWeekDay = 1;
-            }
+            if (startWeekDay > 7) startWeekDay = 1;
         }
         nepaliDate.setDayOfWeek(startWeekDay);
         return nepaliDate;
@@ -551,28 +566,40 @@ public class DateConverter {
      * so just in case
      * </P>
      *
-     * @param yy year of nepali date
-     * @param mm month of nepali date
-     * @param dd day of a nepali date
+     * @param yy {@code int} year of nepali date [2000-2090]
+     * @param mm {@code int} month of nepali date [1-12]
+     * @param dd {@code int} day of a nepali date [1-32]
      * @return week day value in {@link int} [0-7]
      */
     public int getWeekDay(@IntRange(from = 2000, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm, @IntRange(from = 1, to = 32) int dd) {
         Model tempModel = fillMissingWeekDayValue(new Model(yy, mm, dd));
         return tempModel.getDayOfWeek();
     }
+    /**
+     * aja kati gate ho oi?
+     *
+     * @return {@link Model} returns the date model with value of present date
+     */
+
+    public Model getTodayNepaliDate() {
+        return getNepaliDate(Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+    }
+    /**
+     * @param  tempModel {@link Model} dateModel that need to be converted into Calendar
+     * @return  {@link Calendar} Gregorian calendar
+     */
+    @SuppressWarnings("unused")
+    public Calendar convertModelToCalendar(Model tempModel) {
+        return new GregorianCalendar(tempModel.getYear(), tempModel.getMonth(), tempModel.getDay(), 0, 0, 0);
+    }
 
     /**
-     * <p>
-     * unused method, as useless as me
-     * </p>
+     * @param date {@link Calendar} Gregorian calendar
+     * @return {@link Model} dateModel after conversion from the given Calendar
      */
-    public void createFirstWeekDayOfMonthLogData() {
-        for (int i = 2080; i < 2091; i++) {
-            for (int j = 1; j < 13; j++) {
-                Model tempModel = getEnglishDate(i, j, 1);
-                int k = tempModel.getDayOfWeek();
-                //   Log.d("KG: DATA", "YEAR: " + i + " MONTH: " + j + " WEEKDAYSTART: " + k);
-            }
-        }
+    @SuppressWarnings("unused")
+    public Model convertCalendarToModel(Calendar date) {
+        return new Model(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
     }
 }
