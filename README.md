@@ -7,12 +7,12 @@
  and tweaked it to fill the need for Nepali Calendar System with the extra feature of converting Gregorian(AD) date to Nepali(BS) and Vice versa.
 
  
-Date Picker | Date Picker Localized
----- | ----
-![Date Picker](https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2016-05-08-14-09-32.png) | ![Localized](https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2016-05-08-11-49-49.png)
+Date Picker 2 | Date Picker Localized 
+---- | ---- 
+![Date Picker 2](https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2018-06-04-14-09-32.png) | ![Localized](https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2016-05-08-11-49-49.png) 
 
 
-###see demo app https://play.google.com/store/apps/details?id=com.hornet.nepalidateconverter
+###demo (old version) https://play.google.com/store/apps/details?id=com.hornet.nepalidateconverter
 
 
 ## Setup
@@ -37,7 +37,7 @@ Date Picker | Date Picker Localized
 ```java
 
  dependencies {
-	       compile 'com.github.keyrunHORNET:date_picker_converter:v1.1'
+	       compile 'com.github.keyrunHORNET:date_picker_converter:v2.0'
 	}
  ```
 You may also add the library as an Android Library to your project. All the library files live in ```library```.
@@ -68,13 +68,7 @@ public void onTimeSet(RadialPickerLayout view, int hour, int minute, int second)
 ### Create a `DatePickerDialog` / `DatePickerDialog` using the supplied factory
 You will need to create a new instance of `DatePickerDialog` using the static `newInstance()` method, supplying proper default values and a callback. Once the dialogs are configured, you can call `show()`.
 ```java
-Calendar now = Calendar.getInstance();
-DatePickerDialog dpd = DatePickerDialog.newInstance(
-  MainActivity.this,
-  now.get(Calendar.YEAR),
-  now.get(Calendar.MONTH),
-  now.get(Calendar.DAY_OF_MONTH)
-);
+DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this);
 dpd.show(getFragmentManager(), "Datepickerdialog");
 ```
 
@@ -90,6 +84,7 @@ DateConverter dc=new DateConverter();
 ```java
 getNepaliDate(int engYY,int engMM,int engDD);
 ```
+you can also pass the calendar instance as an argument
 
 * Converting Nepali Date to English date (i.e B.S to A.D):
 ```java
@@ -109,7 +104,7 @@ int month=outputOfConversion.getMonth();
 int day=outputOfConversion.getDay();
 ```
 
-###Additional Options###
+###Additional Options
 
 * `isEngDateInRange(int yy,int mm,int dd)` this static method of class `DateConverter` returns `true` if english date is within the range of conversion.
 
@@ -118,6 +113,14 @@ int day=outputOfConversion.getDay();
 * `getFirstWeekDayMonth(int yy,int mm)` public method of class `DateConverter` returns `int` range from `1-7` the starting week day of a given month in given nepali year.
 
 * `noOfDaysInMonth(int yy,int mm)` public method of class `DateConverter` returns the no of days `int` in a particular month of a given nepali year.
+
+* `convertModelToCalendar(Model dateModel)` public method of class `DateConverter` returns Gregorian `Calendar`   
+
+* `convertCalendarToModel(Calendar dateModel)` public method of class `DateConverter` returns Nepali date `Model`   
+
+* `getTodayNepaliDate()` public method of class `DateConverter` returns Nepali Date Model   
+
+* `getWeekDay(int nepYY, int nepMM, int nepDD)` public method of class `DateConverter` returns `int` [1-7] representing seven days of week   
 
 * `DatePickerDialog` dark theme
 The `DatePickerDialog` has a dark theme that can be set by calling
@@ -133,6 +136,27 @@ Shows a title at the top of the `DatePickerDialog`
 
 * `showYearPickerFirst(boolean yearPicker)`  
 Show the year picker first, rather than the month and day picker.
+
+* `setScrollOrientation(int orientation)`
+change the scroll orientation of the picker.
+
+* `setVersion(int version)`
+choose between two versions of picker.
+
+* `setMinDate(Model minDate)`
+enable only dates after minDate for selection in picker.
+
+* `setMaxDate(Model maxDate)`
+disable all dates after maxDate for selection in picker.
+
+* `setHighlightedDays(List<Model> days)`
+highlight all the days provided in the ArrayList of model, as an argument.
+
+* `setSelectableDays(List<Model> days)`
+only the days provided in the ArrayList of model, as an argument can be selected in picker, all other dates are disabled.
+
+* `setDisabledDays(List<Model> days)`
+ days provided in the ArrayList of model, as an argument can not be selected in picker, all other dates are enabled.
 
 * `dismissOnPause(boolean dismissOnPause)`  
 Set whether the picker dismisses itself when the parent Activity is paused or whether it recreates itself when the Activity is resumed.
