@@ -6,13 +6,12 @@
  The library uses the code from the [Material Date Time Picker](https://github.com/wdullaer/MaterialDateTimePicker) as a base 
  and tweaked it to fill the need for Nepali Calendar System with the extra feature of converting Gregorian(AD) date to Nepali(BS) and Vice versa.
 
- 
-Date Picker 2 | Date Picker Localized 
----- | ---- 
-![Date Picker 2](https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2018-06-04-14-09-32.png) | ![Localized](https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2016-05-08-11-49-49.png) 
+<p align="center">
+  <img width="300" height="550" src="https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2018-06-04.png">
+</p> 
 
-
-###demo (old version) https://play.google.com/store/apps/details?id=com.hornet.nepalidateconverter
+### demo (old version)
+https://play.google.com/store/apps/details?id=com.hornet.nepalidateconverter
 
 
 ## Setup
@@ -104,7 +103,7 @@ int month=outputOfConversion.getMonth();
 int day=outputOfConversion.getDay();
 ```
 
-###Additional Options
+### Additional Options
 
 * `isEngDateInRange(int yy,int mm,int dd)` this static method of class `DateConverter` returns `true` if english date is within the range of conversion.
 
@@ -169,7 +168,6 @@ In java `Calendar` class DAY_OF_MONTH cant be assigned to 32, and throws an `Ill
 ### Why does the `DatePickerDialog` and `DateConverter` return the selected month -1?
 In the java `Calendar` class months use 0 based indexing: January is month 0, December is month 11. This convention is widely used in the java world, for example the native Android DatePicker.And in Nepali Calendar `Baisakh` is month 0, `Chaitra` is month 11.
 
-
 ## License
 
 Copyright (c) 2016 Kiran Gyawali
@@ -185,3 +183,5 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+#### P.S. Clone for the demo of latest commit
