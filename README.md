@@ -36,7 +36,7 @@ https://play.google.com/store/apps/details?id=com.hornet.nepalidateconverter
 ```java
 
  dependencies {
-	       compile 'com.github.keyrunHORNET:date_picker_converter:v2.0'
+	       implementation 'com.github.keyrunHORNET:date_picker_converter:v2.0'
 	}
  ```
 You may also add the library as an Android Library to your project. All the library files live in ```library```.
