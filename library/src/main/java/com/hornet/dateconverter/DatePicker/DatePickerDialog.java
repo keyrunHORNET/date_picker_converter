@@ -232,7 +232,7 @@ public class DatePickerDialog extends DialogFragment implements
 
     @SuppressWarnings("unused")
     public static DatePickerDialog newInstance(OnDateSetListener callback) {
-        DateConverter dc=new DateConverter();
+        DateConverter dc = new DateConverter();
         return DatePickerDialog.newInstance(callback, dc.getTodayNepaliDate());
     }
 
@@ -289,8 +289,9 @@ public class DatePickerDialog extends DialogFragment implements
 
 
         dc = new DateConverter();
-        mCalendar = dc.getTodayNepaliDate();
-
+        if (mCalendar == null) {
+            mCalendar = dc.getTodayNepaliDate();
+        }
         Log.d("KG: mCalander", ""
                 + mCalendar.getYear() + "YEAR: MONTH: "
                 + mCalendar.getMonth() + " DAY: "
