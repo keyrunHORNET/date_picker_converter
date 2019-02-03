@@ -36,7 +36,7 @@ https://play.google.com/store/apps/details?id=com.hornet.nepalidateconverter
 ```java
 
  dependencies {
-	       implementation 'com.github.keyrunHORNET:date_picker_converter:v2.0'
+	       implementation 'com.github.keyrunHORNET:date_picker_converter:v2.1'
 	}
  ```
 You may also add the library as an Android Library to your project. All the library files live in ```library```.
@@ -64,7 +64,7 @@ public void onTimeSet(RadialPickerLayout view, int hour, int minute, int second)
 }
 ```
 
-### Create a `DatePickerDialog` / `DatePickerDialog` using the supplied factory
+### Create a `DatePickerDialog` / `TimePickerDialog` using the supplied factory
 You will need to create a new instance of `DatePickerDialog` using the static `newInstance()` method, supplying proper default values and a callback. Once the dialogs are configured, you can call `show()`.
 ```java
 DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this);

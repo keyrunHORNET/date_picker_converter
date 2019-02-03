@@ -328,7 +328,7 @@ public class DateConverter {
      */
     @SuppressWarnings("unused")
     public Calendar getEnglishDate(Model date) {
-        Model tempModel = getNepaliDate(date.getYear(), date.getMonth(), date.getDay());
+        Model tempModel = getEnglishDate(date.getYear(), date.getMonth(), date.getDay());
         return new GregorianCalendar(tempModel.getYear(), tempModel.getMonth(), tempModel.getDay(), 0, 0, 0);
     }
 
