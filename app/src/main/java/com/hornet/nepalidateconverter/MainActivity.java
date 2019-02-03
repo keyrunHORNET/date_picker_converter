@@ -82,19 +82,19 @@ public class MainActivity extends AppCompatActivity implements
         Calendar now = Calendar.getInstance();
 
         if (v.getId() == R.id.materialDatePickerButton) {
-/*
+            /*
             DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this,
                     2015,
                     3,
                     17);*/
-/*
-DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this,
+            /*
+            DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this,
                     now.get(Calendar.YEAR),
                     now.get(Calendar.MONTH),
                     now.get(Calendar.DAY_OF_MONTH));
-*/
+            */
 
-            DatePickerDialog dpd = DatePickerDialog.newInstance(this);
+            DatePickerDialog dpd = DatePickerDialog.newInstance(this,dateConverter.getNepaliDate(now));
 
             if (tryNewVersion.isChecked()) {
                 dpd.setVersion(DatePickerDialog.Version.VERSION_2);
