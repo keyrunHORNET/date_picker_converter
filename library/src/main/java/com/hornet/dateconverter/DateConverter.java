@@ -39,6 +39,7 @@ import java.util.HashMap;
  * I don't mind unless you are a metalHead
  * <p>
  * Created by Hornet on 4/29/2016.
+ * Edited by Jeffrey Jongko on 7/2/2019.
  */
 public class DateConverter {
 
@@ -54,38 +55,44 @@ public class DateConverter {
          month "Baisakh", index 2 refers to second month "Jesth" and so on.
          */
 
-        /*new*/
-        daysInMonthMap.put(1970, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});// 1970
-        daysInMonthMap.put(1971, new int[]{0, 31, 31, 32, 31, 32, 30, 30, 29, 30, 29, 30, 30});// 1971
-        daysInMonthMap.put(1972, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30});// 1972
-        daysInMonthMap.put(1973, new int[]{0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31});// 1973
-        daysInMonthMap.put(1974, new int[]{0, 31, 31, 32, 30, 31, 31, 30, 29, 30, 29, 30, 30});// 1974
-        daysInMonthMap.put(1975, new int[]{0, 31, 31, 32, 32, 30, 31, 30, 29, 30, 29, 30, 30});// 1975
-        daysInMonthMap.put(1976, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31});// 1976
-        daysInMonthMap.put(1977, new int[]{0, 30, 32, 31, 32, 31, 31, 29, 30, 29, 30, 29, 31});// 1977
-        daysInMonthMap.put(1978, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});// 1978
-        daysInMonthMap.put(1979, new int[]{0, 31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30});// 1979
-        daysInMonthMap.put(1980, new int[]{0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31});// 1980
-        daysInMonthMap.put(1981, new int[]{0, 31, 31, 31, 32, 31, 31, 29, 30, 30, 29, 30, 30});// 1981
-        daysInMonthMap.put(1982, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});// 1982
-        daysInMonthMap.put(1983, new int[]{0, 31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30});// 1983
-        daysInMonthMap.put(1984, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31});// 1984
-        daysInMonthMap.put(1985, new int[]{0, 31, 31, 31, 32, 31, 31, 29, 30, 30, 29, 30, 30});// 1985
-        daysInMonthMap.put(1986, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});// 1986
-        daysInMonthMap.put(1987, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 29, 30, 29, 30, 30});// 1987
-        daysInMonthMap.put(1988, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31});// 1988
-        daysInMonthMap.put(1989, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});// 1989
-        daysInMonthMap.put(1990, new int[]{0, 30, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});// 1990
-        daysInMonthMap.put(1991, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 29, 30, 29, 30, 30});// 1991
-        daysInMonthMap.put(1992, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 30});// 1992
-        daysInMonthMap.put(1993, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});// 1993
-        daysInMonthMap.put(1994, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});// 1994
-        daysInMonthMap.put(1995, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});// 1995
-        daysInMonthMap.put(1996, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});// 1996
-        daysInMonthMap.put(1997, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});// 1997
-        daysInMonthMap.put(1998, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});// 1998
-        daysInMonthMap.put(1999, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});// 1999
-        /*old*/
+        // add data for dates till 1970
+        // based on https://github.com/bahadurbaniya/Date-Converter-Bikram-Sambat-to-English-Date/blob/master/src/main/java/np/com/converter/date/nepali/Lookup.java
+        daysInMonthMap.put(1970, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1971, new int[]{0, 31, 31, 32, 31, 32, 30, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1972, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30});
+        daysInMonthMap.put(1973, new int[]{0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31});
+        daysInMonthMap.put(1974, new int[]{0, 31, 31, 32, 30, 31, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1975, new int[]{0, 31, 31, 32, 32, 30, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1976, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31});
+        daysInMonthMap.put(1977, new int[]{0, 30, 32, 31, 32, 31, 31, 29, 30, 29, 30, 29, 31});
+        daysInMonthMap.put(1978, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1979, new int[]{0, 31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30});
+
+        daysInMonthMap.put(1980, new int[]{0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31});
+        daysInMonthMap.put(1981, new int[]{0, 31, 31, 31, 32, 31, 31, 29, 30, 30, 29, 30, 30});
+        daysInMonthMap.put(1982, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1983, new int[]{0, 31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1984, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31});
+        daysInMonthMap.put(1985, new int[]{0, 31, 31, 31, 32, 31, 31, 29, 30, 30, 29, 30, 30});
+        daysInMonthMap.put(1986, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1987, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1988, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31});
+        daysInMonthMap.put(1989, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});
+
+        daysInMonthMap.put(1990, new int[]{0, 30, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1991, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1992, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 30});
+        daysInMonthMap.put(1993, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1994, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1995, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1996, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1997, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1998, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});
+        daysInMonthMap.put(1999, new int[]{0, 31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30});
+
+
+
+        //old
         daysInMonthMap.put(2000, new int[]{0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31});
         daysInMonthMap.put(2001, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});
         daysInMonthMap.put(2002, new int[]{0, 31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30});
@@ -177,7 +184,8 @@ public class DateConverter {
         daysInMonthMap.put(2088, new int[]{0, 30, 31, 32, 32, 30, 31, 30, 30, 29, 30, 30, 30});
         daysInMonthMap.put(2089, new int[]{0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30});
         daysInMonthMap.put(2090, new int[]{0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30});
-        /*new*/
+       /* *//*new*//*
+        // based on https://github.com/bahadurbaniya/Date-Converter-Bikram-Sambat-to-English-Date/blob/master/src/main/java/np/com/converter/date/nepali/Lookup.java
         daysInMonthMap.put(2091, new int[]{31, 31, 32, 31, 31, 31, 30, 30, 29, 30, 30, 30});// 2091
         daysInMonthMap.put(2092, new int[]{31, 31, 32, 32, 31, 30, 30, 30, 29, 30, 30, 30});// 2092
         daysInMonthMap.put(2093, new int[]{31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30});// 2093
@@ -188,39 +196,41 @@ public class DateConverter {
         daysInMonthMap.put(2098, new int[]{31, 31, 32, 31, 31, 31, 29, 30, 29, 30, 30, 31});// 2098
         daysInMonthMap.put(2099, new int[]{31, 31, 32, 31, 31, 31, 30, 29, 29, 30, 30, 30});// 2099
         daysInMonthMap.put(2100, new int[]{31, 32, 31, 32, 30, 31, 30, 29, 30, 29, 30, 30});// 2100
+        */
 
+        // add data for dates till 1970
+        // based on www.ashesh.com.np/neplai-date-converter
+        startWeekDayMonthMap.put(1970, new int[]{0, 1, 4, 7, 4, 7, 3, 6, 1, 2, 4, 5, 7});
+        startWeekDayMonthMap.put(1971, new int[]{0, 2, 5, 1, 5, 1, 5, 7, 2, 3, 5, 6, 1});
+        startWeekDayMonthMap.put(1972, new int[]{0, 3, 6, 3, 6, 3, 6, 1, 3, 5, 6, 7, 2});
+        startWeekDayMonthMap.put(1973, new int[]{0, 5, 7, 4, 7, 4, 7, 2, 4, 6, 7, 2, 3});
+        startWeekDayMonthMap.put(1974, new int[]{0, 6, 1, 5, 2, 5, 1, 4, 6, 7, 2, 3, 5});
+        startWeekDayMonthMap.put(1975, new int[]{0, 7, 3, 6, 3, 7, 3, 5, 7, 1, 3, 4, 6});
+        startWeekDayMonthMap.put(1976, new int[]{0, 1, 4, 1, 4, 1, 4, 6, 1, 3, 4, 5, 7});
+        startWeekDayMonthMap.put(1977, new int[]{0, 3, 5, 2, 5, 2, 5, 1, 2, 4, 5, 7, 1});
+        startWeekDayMonthMap.put(1978, new int[]{0, 4, 7, 3, 7, 3, 6, 2, 4, 5, 7, 1, 3});
+        startWeekDayMonthMap.put(1979, new int[]{0, 5, 1, 4, 1, 5, 1, 3, 5, 6, 1, 2, 4});
+        startWeekDayMonthMap.put(1980, new int[]{0, 6, 2, 6, 2, 6, 2, 4, 6, 1, 2, 3, 5});
+        startWeekDayMonthMap.put(1981, new int[]{0, 1, 4, 7, 3, 7, 3, 6, 7, 2, 4, 5, 7});
+        startWeekDayMonthMap.put(1982, new int[]{0, 2, 5, 1, 5, 1, 4, 7, 2, 3, 5, 6, 1});
+        startWeekDayMonthMap.put(1983, new int[]{0, 3, 6, 2, 6, 3, 6, 1, 3, 4, 6, 7, 2});
+        startWeekDayMonthMap.put(1984, new int[]{0, 4, 7, 4, 7, 4, 7, 2, 4, 6, 7, 1, 3});
+        startWeekDayMonthMap.put(1985, new int[]{0, 6, 2, 5, 1, 5, 1, 4, 5, 7, 2, 3, 5});
+        startWeekDayMonthMap.put(1986, new int[]{0, 7, 3, 6, 3, 6, 2, 5, 7, 1, 3, 4, 6});
+        startWeekDayMonthMap.put(1987, new int[]{0, 1, 4, 1, 4, 1, 4, 6, 1, 2, 4, 5, 7});
+        startWeekDayMonthMap.put(1988, new int[]{0, 2, 5, 2, 5, 2, 5, 7, 2, 4, 5, 6, 1});
+        startWeekDayMonthMap.put(1989, new int[]{0, 4, 7, 3, 6, 3, 6, 2, 4, 5, 7, 1, 3});
+        startWeekDayMonthMap.put(1990, new int[]{0, 5, 1, 4, 1, 4, 7, 3, 5, 6, 1, 2, 4});
+        startWeekDayMonthMap.put(1991, new int[]{0, 6, 2, 6, 2, 6, 2, 4, 6, 1, 2, 3, 5});
+        startWeekDayMonthMap.put(1992, new int[]{0, 7, 3, 7, 3, 7, 3, 5, 7, 2, 3, 5, 6});
+        startWeekDayMonthMap.put(1993, new int[]{0, 2, 5, 1, 4, 1, 4, 7, 2, 3, 5, 6, 1});
+        startWeekDayMonthMap.put(1994, new int[]{0, 3, 6, 2, 6, 2, 5, 1, 3, 4, 6, 7, 2});
+        startWeekDayMonthMap.put(1995, new int[]{0, 4, 7, 4, 7, 4, 7, 2, 4, 6, 7, 1, 3});
+        startWeekDayMonthMap.put(1996, new int[]{0, 5, 1, 5, 1, 5, 1, 3, 5, 7, 1, 3, 4});
+        startWeekDayMonthMap.put(1997, new int[]{0, 7, 3, 6, 3, 6, 2, 5, 7, 1, 3, 4, 6});
+        startWeekDayMonthMap.put(1998, new int[]{0, 1, 4, 7, 4, 7, 3, 6, 1, 2, 4, 5, 7});
+        startWeekDayMonthMap.put(1999, new int[]{0, 2, 5, 2, 5, 2, 5, 7, 2, 4, 5, 6, 1});
 
-        /*new but dummy just for test todo fix with real data*/
-        startWeekDayMonthMap.put(1970, new int[]{0, 4, 6, 3, 6, 3, 6, 1, 3, 5, 6, 1, 2});
-        startWeekDayMonthMap.put(1971, new int[]{0, 5, 1, 4, 1, 4, 7, 3, 5, 6, 1, 2, 4});
-        startWeekDayMonthMap.put(1972, new int[]{0, 6, 2, 5, 2, 6, 2, 4, 6, 7, 2, 3, 5});
-        startWeekDayMonthMap.put(1973, new int[]{0, 7, 3, 7, 3, 7, 3, 5, 7, 2, 3, 4, 6});
-        startWeekDayMonthMap.put(1974, new int[]{0, 2, 4, 1, 4, 1, 4, 6, 1, 3, 4, 6, 7});
-        startWeekDayMonthMap.put(1975, new int[]{0, 3, 6, 2, 6, 2, 5, 1, 3, 4, 6, 7, 2});
-        startWeekDayMonthMap.put(1976, new int[]{0, 4, 7, 3, 7, 4, 7, 2, 4, 5, 7, 1, 3});
-        startWeekDayMonthMap.put(1977, new int[]{0, 5, 1, 5, 1, 5, 1, 3, 5, 7, 1, 2, 4});
-        startWeekDayMonthMap.put(1978, new int[]{0, 7, 3, 6, 2, 6, 2, 5, 6, 1, 3, 4, 5});
-        startWeekDayMonthMap.put(1979, new int[]{0, 1, 4, 7, 4, 7, 3, 6, 1, 2, 4, 5, 7});
-        startWeekDayMonthMap.put(1980, new int[]{0, 2, 5, 1, 5, 2, 5, 7, 2, 3, 5, 6, 1});
-        startWeekDayMonthMap.put(1981, new int[]{0, 3, 6, 3, 6, 3, 6, 1, 3, 5, 6, 7, 2});
-        startWeekDayMonthMap.put(1982, new int[]{0, 5, 1, 4, 7, 4, 7, 3, 4, 6, 1, 2, 4});
-        startWeekDayMonthMap.put(1983, new int[]{0, 6, 2, 5, 2, 5, 1, 4, 6, 7, 2, 3, 5});
-        startWeekDayMonthMap.put(1984, new int[]{0, 7, 3, 6, 3, 7, 3, 5, 7, 1, 3, 4, 6});
-        startWeekDayMonthMap.put(1985, new int[]{0, 1, 4, 1, 4, 1, 4, 6, 1, 3, 4, 5, 7});
-        startWeekDayMonthMap.put(1986, new int[]{0, 3, 6, 2, 5, 2, 5, 1, 2, 4, 6, 7, 2});
-        startWeekDayMonthMap.put(1987, new int[]{0, 4, 7, 3, 7, 3, 6, 2, 4, 5, 7, 1, 3});
-        startWeekDayMonthMap.put(1988, new int[]{0, 5, 1, 5, 1, 5, 1, 3, 5, 6, 1, 2, 4});
-        startWeekDayMonthMap.put(1989, new int[]{0, 6, 2, 6, 2, 6, 2, 4, 6, 1, 2, 4, 5});
-        startWeekDayMonthMap.put(1990, new int[]{0, 1, 4, 7, 3, 7, 3, 6, 1, 2, 4, 5, 7});
-        startWeekDayMonthMap.put(1991, new int[]{0, 2, 5, 1, 5, 1, 4, 7, 2, 3, 5, 6, 1});
-        startWeekDayMonthMap.put(1992, new int[]{0, 3, 6, 3, 6, 3, 6, 1, 3, 5, 6, 7, 2});
-        startWeekDayMonthMap.put(1993, new int[]{0, 4, 7, 4, 7, 4, 7, 2, 4, 6, 7, 2, 3});
-        startWeekDayMonthMap.put(1994, new int[]{0, 6, 2, 5, 1, 5, 1, 4, 6, 7, 2, 3, 5});
-        startWeekDayMonthMap.put(1995, new int[]{0, 7, 3, 6, 3, 6, 2, 5, 7, 1, 3, 4, 6});
-        startWeekDayMonthMap.put(1996, new int[]{0, 1, 4, 1, 4, 1, 4, 6, 1, 3, 4, 5, 7});
-        startWeekDayMonthMap.put(1997, new int[]{0, 3, 5, 2, 5, 2, 5, 7, 2, 4, 5, 7, 1});
-        startWeekDayMonthMap.put(1998, new int[]{0, 4, 7, 3, 7, 3, 6, 2, 4, 5, 7, 1, 3});
-        startWeekDayMonthMap.put(1999, new int[]{0, 5, 1, 4, 1, 4, 1, 3, 5, 6, 1, 2, 4});
         /*old*/
         startWeekDayMonthMap.put(2000, new int[]{0, 4, 6, 3, 6, 3, 6, 1, 3, 5, 6, 1, 2});
         startWeekDayMonthMap.put(2001, new int[]{0, 5, 1, 4, 1, 4, 7, 3, 5, 6, 1, 2, 4});
@@ -313,7 +323,7 @@ public class DateConverter {
         startWeekDayMonthMap.put(2088, new int[]{0, 3, 5, 1, 5, 2, 4, 7, 2, 4, 5, 7, 2});
         startWeekDayMonthMap.put(2089, new int[]{0, 4, 6, 3, 6, 3, 6, 1, 3, 5, 6, 1, 3});
         startWeekDayMonthMap.put(2090, new int[]{0, 5, 7, 4, 7, 4, 7, 2, 4, 6, 7, 2, 4});
-        /*new but dummy just for test todo fix with real data*/
+      /*  *//*start of new but dummy data just for test todo fix with real data*//*
         startWeekDayMonthMap.put(2091, new int[]{0, 5, 1, 4, 1, 4, 7, 3, 5, 6, 1, 2, 4});
         startWeekDayMonthMap.put(2092, new int[]{0, 6, 2, 5, 2, 6, 2, 4, 6, 7, 2, 3, 5});
         startWeekDayMonthMap.put(2093, new int[]{0, 7, 3, 7, 3, 7, 3, 5, 7, 2, 3, 4, 6});
@@ -324,7 +334,7 @@ public class DateConverter {
         startWeekDayMonthMap.put(2098, new int[]{0, 7, 3, 6, 2, 6, 2, 5, 6, 1, 3, 4, 5});
         startWeekDayMonthMap.put(2099, new int[]{0, 1, 4, 7, 4, 7, 3, 6, 1, 2, 4, 5, 7});
         startWeekDayMonthMap.put(2100, new int[]{0, 4, 6, 3, 6, 3, 6, 1, 3, 5, 6, 1, 2});
-    }
+   */ }
 
 
     /**
@@ -338,19 +348,20 @@ public class DateConverter {
      * @param nepDD {@code int} day of a nepali date [1-32]
      * @return {@link Model } object with the converted value from nepali to english
      */
-    public Model getEnglishDate(@IntRange(from = 2000, to = 2090) int nepYY,
+    public Model getEnglishDate(@IntRange(from = 1970, to = 2090) int nepYY,
                                 @IntRange(from = 1, to = 12) int nepMM,
                                 @IntRange(from = 1, to = 32) int nepDD) {
 
         if (isNepDateInConversionRange(nepYY, nepMM, nepDD)) {
 
-            int startingEngYear = 1943;
+            int startingEngYear = 1913;
             int startingEngMonth = 4;
-            int startingEngDay = 14;
+            int startingEngDay = 13;
 
-            int startingDayOfWeek = Calendar.WEDNESDAY; // 2000/1/1 is Wednesday
 
-            int startingNepYear = 2000;
+            int startingDayOfWeek = Calendar.SUNDAY; // 1970/1/1 is Sunday /// based on www.ashesh.com.np/neplai-date-converter
+
+            int startingNepYear = 1970;
             int startingNepMonth = 1;
             int startingNepDay = 1;
 
@@ -433,21 +444,22 @@ public class DateConverter {
      * @param engDD {@code int} day of a nepali date [1-31]
      * @return return nepali date as a {@link Model} object converted from english to nepali
      */
-    public Model getNepaliDate(@IntRange(from = 1944 - 2033) int engYY,
+    public Model getNepaliDate(@IntRange(from = 1913 - 2033) int engYY,
                                @IntRange(from = 1, to = 12) int engMM,
                                @IntRange(from = 1, to = 31) int engDD) {
 
         if (isEngDateInConversionRange(engYY, engMM, engDD)) {
 
-            int startingEngYear = 1944;
-            int startingEngMonth = 1;
-            int startingEngDay = 1;
+            int startingEngYear = 1913;
+            int startingEngMonth = 4;
+            int startingEngDay = 13;
 
-            int startingDayOfWeek = Calendar.SATURDAY; // 1944/1/1 is Saturday
+            int startingDayOfWeek = Calendar.SUNDAY; // 1913/4/13 is a Sunday
 
-            int startingNepYear = 2000;
-            int startingNepMonth = 9;
-            int startingNepDay = 17;
+            int startingNepYear = 1970;
+            int startingNepMonth = 1;
+            int startingNepDay = 1;
+
 
             int nepYY, nepMM, nepDD;
             int dayOfWeek = startingDayOfWeek;
@@ -576,7 +588,7 @@ public class DateConverter {
      */
     @Contract(pure = true)
     private static boolean isEngDateInConversionRange(int yy, int mm, int dd) {
-        return (yy >= 1944 && yy <= 2033) && (mm >= 1 && mm <= 12) && (dd >= 1 && dd <= 31);
+        return (yy >= 1913 && yy <= 2033) && (mm >= 1 && mm <= 12) && (dd >= 1 && dd <= 31);
     }
 
     /**
@@ -590,7 +602,7 @@ public class DateConverter {
      */
     @Contract(pure = true)
     private static boolean isNepDateInConversionRange(int yy, int mm, int dd) {
-        return (yy >= 2000 && yy <= 2090) && (mm >= 1 && mm <= 12) && (dd >= 1 && dd <= 32);
+        return (yy >= 1970 && yy <= 2090) && (mm >= 1 && mm <= 12) && (dd >= 1 && dd <= 32);
     }
 
     /**
@@ -605,7 +617,7 @@ public class DateConverter {
      * @param mm {@code int} month of nepali date [1-12]
      * @return {@code int} first week day of given month in given year
      */
-    public int getFirstWeekDayMonth(@IntRange(from = 2000, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm) {
+    public int getFirstWeekDayMonth(@IntRange(from = 1970, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm) {
         return startWeekDayMonthMap.get(yy)[mm];
     }
 
@@ -620,7 +632,7 @@ public class DateConverter {
      * @param mm {@code int} nepali month
      * @return {@link int} number of days in a given month of a given year
      */
-    public int noOfDaysInMonth(@IntRange(from = 2000, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm) {
+    public int noOfDaysInMonth(@IntRange(from = 1970, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm) {
         return daysInMonthMap.get(yy)[mm];
     }
 
@@ -658,7 +670,7 @@ public class DateConverter {
      * @param dd {@code int} day of a nepali date [1-32]
      * @return week day value in {@link int} [0-7]
      */
-    public int getWeekDay(@IntRange(from = 2000, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm, @IntRange(from = 1, to = 32) int dd) {
+    public int getWeekDay(@IntRange(from = 1970, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm, @IntRange(from = 1, to = 32) int dd) {
         Model tempModel = fillMissingWeekDayValue(new Model(yy, mm, dd));
         return tempModel.getDayOfWeek();
     }
