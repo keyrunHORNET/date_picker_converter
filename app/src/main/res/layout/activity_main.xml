@@ -18,8 +18,7 @@
 
         <com.hornet.dateconverter.CalendarView.Calendar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:accentColor="@color/colorPrimary" />
+            android:layout_height="300dp" />
 
         <View
             android:layout_width="match_parent"

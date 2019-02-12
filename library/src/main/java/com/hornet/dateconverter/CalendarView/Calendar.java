@@ -1,19 +1,26 @@
 package com.hornet.dateconverter.CalendarView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.hornet.dateconverter.DateConverter;
+import com.hornet.dateconverter.DatePicker.AccessibleDateAnimator;
 import com.hornet.dateconverter.DatePicker.DatePickerController;
 import com.hornet.dateconverter.DatePicker.DatePickerDialog;
+import com.hornet.dateconverter.DatePicker.DateRangeLimiter;
 import com.hornet.dateconverter.DatePicker.DayPickerGroup;
+import com.hornet.dateconverter.DatePicker.DefaultDateRangeLimiter;
 import com.hornet.dateconverter.DatePicker.MonthAdapter;
-import com.hornet.dateconverter.DatePicker.YearPickerView;
+import com.hornet.dateconverter.Model;
 import com.hornet.dateconverter.R;
+import com.hornet.dateconverter.Utils;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -24,16 +31,15 @@ import java.util.TimeZone;
  * Created by Kiran Gyawali on 10/28/2018.
  */
 public class Calendar extends LinearLayout
-        implements View.OnClickListener , DatePickerController {
+        implements View.OnClickListener, DatePickerController {
 
-    private TextView mDatePickerHeaderView;
-    private LinearLayout mMonthAndDayView;
-    private TextView mSelectedMonthTextView;
-    private TextView mSelectedDayTextView;
-    private TextView mYearView;
+    private DefaultDateRangeLimiter mDefaultLimiter = new DefaultDateRangeLimiter();
+
     private DayPickerGroup mDayPickerView;
-    private YearPickerView mYearPickerView;
+    private AccessibleDateAnimator mAnimator;
+    private java.util.Calendar mCalendar;
 
+    private DateRangeLimiter mDateRangeLimiter = mDefaultLimiter;
 
     public Calendar(Context context) {
         this(context, null);
@@ -46,25 +52,27 @@ public class Calendar extends LinearLayout
 
     public Calendar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(attrs, context);
 
     }
 
-    private void init() {
-        setOrientation(LinearLayout.VERTICAL);
-        Calendar view = (Calendar) LayoutInflater.from(getContext()).inflate(R.layout.mdtp_date_picker_dialog_v2, this, true);
-        mDatePickerHeaderView = view.findViewById(R.id.mdtp_date_picker_header);
-        mDatePickerHeaderView.setVisibility(GONE);
-        mMonthAndDayView = view.findViewById(R.id.mdtp_date_picker_month_and_day);
-        mMonthAndDayView.setOnClickListener(this);
-        mSelectedMonthTextView = view.findViewById(R.id.mdtp_date_picker_month);
-        mSelectedDayTextView = view.findViewById(R.id.mdtp_date_picker_day);
-        mYearView = view.findViewById(R.id.mdtp_date_picker_year);
-        mYearView.setOnClickListener(this);
-
-
-        mDayPickerView = new DayPickerGroup(getContext(), this);
-        mYearPickerView = new YearPickerView(getContext(), this);
+    private void init(AttributeSet attrs, Context context) {
+        ((Activity) getContext())
+                .getLayoutInflater()
+                .inflate(R.layout.mdtp_date_picker_view_animator_v2, this, true);
+        Model today = new DateConverter().getTodayNepaliDate();
+        mCalendar = new DateConverter().convertModelToCalendar(today);
+        mAnimator = findViewById(R.id.mdtp_animator);
+        mDayPickerView = new DayPickerGroup(context, this);
+        mDefaultLimiter.setController(this);
+        mAnimator.addView(mDayPickerView);
+        mAnimator.setDateMillis(java.util.Calendar.getInstance().getTimeInMillis());
+        Animation animation = new AlphaAnimation(0.0f, 1.0f);
+        animation.setDuration(300);
+        mAnimator.setInAnimation(animation);
+        Animation animation2 = new AlphaAnimation(1.0f, 0.0f);
+        animation2.setDuration(300);
+        mAnimator.setOutAnimation(animation2);
 
     }
 
@@ -77,7 +85,7 @@ public class Calendar extends LinearLayout
 
     @Override
     public void onClick(View view) {
-
+        Toast.makeText(getContext(), "onClick calendar view", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -102,7 +110,7 @@ public class Calendar extends LinearLayout
 
     @Override
     public MonthAdapter.CalendarDay getSelectedDay() {
-        return null;
+        return new MonthAdapter.CalendarDay(new Model());
     }
 
     @Override
@@ -112,7 +120,7 @@ public class Calendar extends LinearLayout
 
     @Override
     public int getAccentColor() {
-        return 0;
+        return Utils.getAccentColorFromThemeIfAvailable(getContext());
     }
 
     @Override
@@ -122,32 +130,32 @@ public class Calendar extends LinearLayout
 
     @Override
     public int getFirstDayOfWeek() {
-        return 0;
+        return 2;
     }
 
     @Override
     public int getMinYear() {
-        return 0;
+        return mDateRangeLimiter.getMinYear();
     }
 
     @Override
     public int getMaxYear() {
-        return 0;
+        return mDateRangeLimiter.getMaxYear();
     }
 
     @Override
     public java.util.Calendar getStartDate() {
-        return null;
+        return mDateRangeLimiter.getStartDate();
     }
 
     @Override
     public java.util.Calendar getEndDate() {
-        return null;
+        return mDateRangeLimiter.getEndDate();
     }
 
     @Override
     public boolean isOutOfRange(int year, int month, int day) {
-        return false;
+        return mDateRangeLimiter.isOutOfRange(year, month, day);
     }
 
     @Override
@@ -157,21 +165,21 @@ public class Calendar extends LinearLayout
 
     @Override
     public TimeZone getTimeZone() {
-        return null;
+        return TimeZone.getDefault();
     }
 
     @Override
     public Locale getLocale() {
-        return null;
+        return Locale.getDefault();
     }
 
     @Override
     public DatePickerDialog.Version getVersion() {
-        return null;
+        return DatePickerDialog.Version.VERSION_2;
     }
 
     @Override
     public DatePickerDialog.ScrollOrientation getScrollOrientation() {
-        return null;
+        return DatePickerDialog.ScrollOrientation.HORIZONTAL;
     }
 }
