@@ -31,7 +31,7 @@ public class Model {
         dayOfWeek = date.get(Calendar.DAY_OF_WEEK);
     }
 
-    public Model(@IntRange(from=2000,to=2090) int year,
+    public Model(@IntRange(from=1970,to=2090) int year,
                  @IntRange(from = 0, to = 12) int month,
                  @IntRange(from = 1, to = 32) int day) {
         this.year = year;
