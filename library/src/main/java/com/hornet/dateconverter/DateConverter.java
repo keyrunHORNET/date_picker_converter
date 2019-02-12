@@ -343,7 +343,7 @@ public class DateConverter {
      * I've got 99 problems, but you ain't one
      * --Jay Z
      *
-     * @param nepYY {@code int} year of nepali date [2000-2090]
+     * @param nepYY {@code int} year of nepali date [1970-2090]
      * @param nepMM {@code int} month of nepali date [1-12]
      * @param nepDD {@code int} day of a nepali date [1-32]
      * @return {@link Model } object with the converted value from nepali to english
@@ -613,7 +613,7 @@ public class DateConverter {
      * if you think memory is your first priority than performance....i would have to think again
      * </p>
      *
-     * @param yy {@code int} year of nepali date [2000-2090]
+     * @param yy {@code int} year of nepali date [1970-2090]
      * @param mm {@code int} month of nepali date [1-12]
      * @return {@code int} first week day of given month in given year
      */
@@ -665,7 +665,7 @@ public class DateConverter {
      * so just in case
      * </P>
      *
-     * @param yy {@code int} year of nepali date [2000-2090]
+     * @param yy {@code int} year of nepali date [1970-2090]
      * @param mm {@code int} month of nepali date [1-12]
      * @param dd {@code int} day of a nepali date [1-32]
      * @return week day value in {@link int} [0-7]
