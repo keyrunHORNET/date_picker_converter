@@ -6,8 +6,8 @@
  The library uses the code from the [Material Date Time Picker](https://github.com/wdullaer/MaterialDateTimePicker) as a base 
  and tweaked it to fill the need for Nepali Calendar System with the extra feature of converting Gregorian(AD) date to Nepali(BS) and Vice versa.
 
-## Contributor
-# Jeffrey Jongko
+### Contributor
+ `Jeffrey Jongko`
 
 <p align="center">
   <img width="300" height="550" src="https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2018-06-04.png">
