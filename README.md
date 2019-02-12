@@ -6,6 +6,9 @@
  The library uses the code from the [Material Date Time Picker](https://github.com/wdullaer/MaterialDateTimePicker) as a base 
  and tweaked it to fill the need for Nepali Calendar System with the extra feature of converting Gregorian(AD) date to Nepali(BS) and Vice versa.
 
+## Contributor
+# Jeffrey Jongko
+
 <p align="center">
   <img width="300" height="550" src="https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2018-06-04.png">
 </p> 
@@ -36,7 +39,7 @@ https://play.google.com/store/apps/details?id=com.hornet.nepalidateconverter
 ```java
 
  dependencies {
-	       implementation 'com.github.keyrunHORNET:date_picker_converter:v2.1'
+	       implementation 'com.github.keyrunHORNET:date_picker_converter:$latest_version'
 	}
  ```
 You may also add the library as an Android Library to your project. All the library files live in ```library```.
