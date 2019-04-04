@@ -44,12 +44,17 @@ import java.util.HashMap;
 public class DateConverter {
 
     @SuppressLint("UseSparseArrays")
-    private HashMap<Integer, int[]> daysInMonthMap = new HashMap<>();
+    private HashMap<Integer, int[]> daysInMonthMap;
     @SuppressLint("UseSparseArrays")
-    private HashMap<Integer, int[]> startWeekDayMonthMap = new HashMap<>();
+    private HashMap<Integer, int[]> startWeekDayMonthMap;
 
     public DateConverter() {
-        /*
+        initializeData();
+    }
+
+    @SuppressLint("UseSparseArrays")
+    private void initializeData() {
+          /*
          The 0s at index 0 are dummy values so as to make the int array of
          days in months seems more intuitive that index 1 refers to first
          month "Baisakh", index 2 refers to second month "Jesth" and so on.
@@ -57,6 +62,10 @@ public class DateConverter {
 
         // add data for dates till 1970
         // based on https://github.com/bahadurbaniya/Date-Converter-Bikram-Sambat-to-English-Date/blob/master/src/main/java/np/com/converter/date/nepali/Lookup.java
+        daysInMonthMap = new HashMap<>();
+        startWeekDayMonthMap = new HashMap<>();
+
+
         daysInMonthMap.put(1970, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});
         daysInMonthMap.put(1971, new int[]{0, 31, 31, 32, 31, 32, 30, 30, 29, 30, 29, 30, 30});
         daysInMonthMap.put(1972, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31});
@@ -89,7 +98,6 @@ public class DateConverter {
         daysInMonthMap.put(1997, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});
         daysInMonthMap.put(1998, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});
         daysInMonthMap.put(1999, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31});
-
 
 
         //old
@@ -184,7 +192,7 @@ public class DateConverter {
         daysInMonthMap.put(2088, new int[]{0, 30, 31, 32, 32, 30, 31, 30, 30, 29, 30, 30, 30});
         daysInMonthMap.put(2089, new int[]{0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30});
         daysInMonthMap.put(2090, new int[]{0, 30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30});
-       /* *//*new*//*
+        /* *//*new*//*
         // based on https://github.com/bahadurbaniya/Date-Converter-Bikram-Sambat-to-English-Date/blob/master/src/main/java/np/com/converter/date/nepali/Lookup.java
         daysInMonthMap.put(2091, new int[]{31, 31, 32, 31, 31, 31, 30, 30, 29, 30, 30, 30});// 2091
         daysInMonthMap.put(2092, new int[]{31, 31, 32, 32, 31, 30, 30, 30, 29, 30, 30, 30});// 2092
@@ -323,7 +331,7 @@ public class DateConverter {
         startWeekDayMonthMap.put(2088, new int[]{0, 3, 5, 1, 5, 2, 4, 7, 2, 4, 5, 7, 2});
         startWeekDayMonthMap.put(2089, new int[]{0, 4, 6, 3, 6, 3, 6, 1, 3, 5, 6, 1, 3});
         startWeekDayMonthMap.put(2090, new int[]{0, 5, 7, 4, 7, 4, 7, 2, 4, 6, 7, 2, 4});
-      /*  *//*start of new but dummy data just for test todo fix with real data*//*
+        /*  *//*start of new but dummy data just for test todo fix with real data*//*
         startWeekDayMonthMap.put(2091, new int[]{0, 5, 1, 4, 1, 4, 7, 3, 5, 6, 1, 2, 4});
         startWeekDayMonthMap.put(2092, new int[]{0, 6, 2, 5, 2, 6, 2, 4, 6, 7, 2, 3, 5});
         startWeekDayMonthMap.put(2093, new int[]{0, 7, 3, 7, 3, 7, 3, 5, 7, 2, 3, 4, 6});
@@ -334,8 +342,8 @@ public class DateConverter {
         startWeekDayMonthMap.put(2098, new int[]{0, 7, 3, 6, 2, 6, 2, 5, 6, 1, 3, 4, 5});
         startWeekDayMonthMap.put(2099, new int[]{0, 1, 4, 7, 4, 7, 3, 6, 1, 2, 4, 5, 7});
         startWeekDayMonthMap.put(2100, new int[]{0, 4, 6, 3, 6, 3, 6, 1, 3, 5, 6, 1, 2});
-   */ }
-
+   */
+    }
 
     /**
      * convert nepali date into english date
@@ -373,6 +381,8 @@ public class DateConverter {
             //*count total no of days in nepali year from our starting range*//
             for (int i = startingNepYear; i < nepYY; i++) {
                 for (int j = 1; j <= 12; j++) {
+                    if(daysInMonthMap==null)
+                        initializeData();
                     totalNepDaysCount = totalNepDaysCount + daysInMonthMap.get(i)[j];
                 }
             }

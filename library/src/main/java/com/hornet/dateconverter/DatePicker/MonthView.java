@@ -110,7 +110,11 @@ public abstract class MonthView extends View {
 
     protected DatePickerController mController;
 
-    DateConverter dc = new DateConverter();
+    DateConverter dc;
+
+
+
+
     // affects the padding on the sides of this view
     protected int mEdgePadding = 0;
 
@@ -184,6 +188,7 @@ public abstract class MonthView extends View {
         super(context, attr);
         mController = controller;
         Resources res = context.getResources();
+        dc = new DateConverter();
 
         mDayLabelCalendar = Calendar.getInstance();
         //mDayLabelCalendar = DatePickerDialog.currentNepaliDate;
