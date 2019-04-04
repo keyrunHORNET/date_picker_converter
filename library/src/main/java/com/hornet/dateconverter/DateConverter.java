@@ -18,9 +18,9 @@
 
 package com.hornet.dateconverter;
 
-import android.annotation.SuppressLint;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
+import android.util.SparseArray;
 
 import org.jetbrains.annotations.Contract;
 import org.joda.time.DateTime;
@@ -28,7 +28,6 @@ import org.joda.time.Days;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 
 /**
  * @author Kiran Gyawali
@@ -41,11 +40,10 @@ import java.util.HashMap;
  * Created by Hornet on 4/29/2016.
  * Edited by Jeffrey Jongko on 7/2/2019.
  */
-@SuppressLint("UseSparseArrays")
 public class DateConverter {
 
-    private HashMap<Integer, int[]> daysInMonthMap;
-    private HashMap<Integer, int[]> startWeekDayMonthMap;
+    private SparseArray<int[]> daysInMonthMap;
+    private SparseArray<int[]> startWeekDayMonthMap;
 
     public DateConverter() {
         initializeData();
@@ -56,9 +54,9 @@ public class DateConverter {
         getDaysInMonthMap();
     }
 
-    private HashMap<Integer, int[]> getDaysInMonthMap() {
-        if (daysInMonthMap != null) return daysInMonthMap;
-        daysInMonthMap = new HashMap<>();
+    private void getDaysInMonthMap() {
+//        if (daysInMonthMap != null) return daysInMonthMap;
+        daysInMonthMap = new SparseArray<>();
         /*
          The 0s at index 0 are dummy values so as to make the int array of
          days in months seems more intuitive that index 1 refers to first
@@ -206,12 +204,12 @@ public class DateConverter {
         daysInMonthMap.put(2099, new int[]{31, 31, 32, 31, 31, 31, 30, 29, 29, 30, 30, 30});// 2099
         daysInMonthMap.put(2100, new int[]{31, 32, 31, 32, 30, 31, 30, 29, 30, 29, 30, 30});// 2100
         */
-        return daysInMonthMap;
+//        return daysInMonthMap;
     }
 
-    private HashMap<Integer, int[]> getStartWeekDayMonthMap() {
-        if (startWeekDayMonthMap != null) return startWeekDayMonthMap;
-        startWeekDayMonthMap = new HashMap<>();
+    private void getStartWeekDayMonthMap() {
+//        if (startWeekDayMonthMap != null) return startWeekDayMonthMap;
+        startWeekDayMonthMap = new SparseArray<>();
 
         /*
          The 0s at index 0 are dummy values so as to make the int array of
@@ -355,7 +353,7 @@ public class DateConverter {
         startWeekDayMonthMap.put(2099, new int[]{0, 1, 4, 7, 4, 7, 3, 6, 1, 2, 4, 5, 7});
         startWeekDayMonthMap.put(2100, new int[]{0, 4, 6, 3, 6, 3, 6, 1, 3, 5, 6, 1, 2});
         */
-        return startWeekDayMonthMap;
+//        return startWeekDayMonthMap;
     }
 
     /**
