@@ -85,7 +85,7 @@ public class Calendar extends LinearLayout
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(view.getContext(), "onClick calendar view", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -95,6 +95,7 @@ public class Calendar extends LinearLayout
 
     @Override
     public void onDayOfMonthSelected(int year, int month, int day, int dayOfMonth) {
+        Toast.makeText(getContext(), "onClick " + day, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -110,7 +111,7 @@ public class Calendar extends LinearLayout
 
     @Override
     public MonthAdapter.CalendarDay getSelectedDay() {
-        return new MonthAdapter.CalendarDay(new Model());
+        return new MonthAdapter.CalendarDay(new DateConverter().getTodayNepaliDate());
     }
 
     @Override
@@ -130,7 +131,7 @@ public class Calendar extends LinearLayout
 
     @Override
     public int getFirstDayOfWeek() {
-        return 2;
+        return 7;
     }
 
     @Override
