@@ -61,7 +61,7 @@ public class Calendar extends LinearLayout
                 .getLayoutInflater()
                 .inflate(R.layout.mdtp_date_picker_view_animator_v2, this, true);
         Model today = new DateConverter().getTodayNepaliDate();
-        mCalendar = new DateConverter().convertModelToCalendar(today);
+        mCalendar = DateConverter.convertModelToCalendar(today);
         mAnimator = findViewById(R.id.mdtp_animator);
         mDayPickerView = new DayPickerGroup(context, this);
         mDefaultLimiter.setController(this);
@@ -85,7 +85,7 @@ public class Calendar extends LinearLayout
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(getContext(), "onClick calendar view", Toast.LENGTH_SHORT).show();
+        Toast.makeText(view.getContext(), "onClick calendar view", Toast.LENGTH_SHORT).show();
     }
 
     @Override

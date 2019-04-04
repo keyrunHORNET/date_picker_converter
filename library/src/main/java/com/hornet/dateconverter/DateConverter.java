@@ -590,7 +590,7 @@ public class DateConverter {
      * @return  {@link Calendar} Gregorian calendar
      */
     @SuppressWarnings("unused")
-    public Calendar convertModelToCalendar(Model tempModel) {
+    public static Calendar convertModelToCalendar(Model tempModel) {
         return new GregorianCalendar(tempModel.getYear(), tempModel.getMonth(), tempModel.getDay(), 0, 0, 0);
     }
 
@@ -599,7 +599,7 @@ public class DateConverter {
      * @return {@link Model} dateModel after conversion from the given Calendar
      */
     @SuppressWarnings("unused")
-    public Model convertCalendarToModel(Calendar date) {
+    public static Model  convertCalendarToModel(Calendar date) {
         return new Model(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
     }
 }
