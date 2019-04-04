@@ -110,7 +110,11 @@ public abstract class MonthView extends View {
 
     protected DatePickerController mController;
 
-    DateConverter dc = new DateConverter();
+    DateConverter dc;
+
+
+
+
     // affects the padding on the sides of this view
     protected int mEdgePadding = 0;
 
@@ -184,6 +188,7 @@ public abstract class MonthView extends View {
         super(context, attr);
         mController = controller;
         Resources res = context.getResources();
+        dc = new DateConverter();
 
         mDayLabelCalendar = Calendar.getInstance();
         //mDayLabelCalendar = DatePickerDialog.currentNepaliDate;
@@ -409,11 +414,11 @@ public abstract class MonthView extends View {
         for (int i = 0; i < mNumCells; i++) {
             final int day = i + 1;
             if (sameDay(day, today)) {
-               Log.e("A simple Test:","So we did set mHasToday true");
+                // Log.e("A simple Test:", "So we did set mHasToday true");
                 mHasToday = true;
                 mToday = day;
-                Log.e("A simple Test:","mToday: "+mToday);
-                Log.e("A simple Test:","day: "+day);
+                // Log.e("A simple Test:", "mToday: " + mToday);
+                // Log.e("A simple Test:", "day: " + day);
             }
         }
         mNumRows = calculateNumRows();
@@ -439,15 +444,15 @@ public abstract class MonthView extends View {
     }
 
     private boolean sameDay(int day, Model today) {
-        Log.e("A simple test:",
-        "I am inside the method same day in class monthView"+
-        " day: "+day+
-        " today: "+today.getDay()+
-        " mYear: "+mYear+
-        " year: "+today.getYear()+
-        " mMonth: "+mMonth+
-        " month: "+today.getMonth()
-        );
+       /* Log.e("A simple test:",
+                "I am inside the method same day in class monthView" +
+                        " day: " + day +
+                        " today: " + today.getDay() +
+                        " mYear: " + mYear +
+                        " year: " + today.getYear() +
+                        " mMonth: " + mMonth +
+                        " month: " + today.getMonth()
+        );*/
         return mYear == today.getYear() &&
                 mMonth == today.getMonth() &&
                 day == today.getDay();
@@ -521,9 +526,10 @@ public abstract class MonthView extends View {
         mStringBuilder.setLength(0);
         */
         //return formatter.format(mCalendar.getTime());
-        return getResources().getString(DateConverter.getNepaliMonthString(mCalendar.get(Calendar.MONTH)))
-                + " " + mCalendar.get(Calendar.YEAR);
-
+        /*return getResources().getString(DateConverter.getNepaliMonthString(mCalendar.get(Calendar.MONTH)))
+                + " " + mCalendar.get(Calendar.YEAR);*/
+        return getResources().getString(DateConverter.getNepaliMonthString(getMonth()))
+                + " " + getYear();
     }
 
     protected void drawMonthTitle(Canvas canvas) {

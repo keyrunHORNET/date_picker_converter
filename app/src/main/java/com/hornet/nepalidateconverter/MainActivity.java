@@ -82,12 +82,19 @@ public class MainActivity extends AppCompatActivity implements
         Calendar now = Calendar.getInstance();
 
         if (v.getId() == R.id.materialDatePickerButton) {
-
+            /*
+            DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this,
+                    2015,
+                    3,
+                    17);*/
+            /*
             DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this,
                     now.get(Calendar.YEAR),
                     now.get(Calendar.MONTH),
                     now.get(Calendar.DAY_OF_MONTH));
+            */
 
+            DatePickerDialog dpd = DatePickerDialog.newInstance(this,dateConverter.getNepaliDate(now));
 
             if (tryNewVersion.isChecked()) {
                 dpd.setVersion(DatePickerDialog.Version.VERSION_2);
@@ -159,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements
                 case R.id.adToBsConvertButton:
                     try {
                         Model nepDate = dateConverter.getNepaliDate(yy, mm, dd);
-                        String date="" + nepDate.getYear() + " " + getResources().getString(DateConverter.getNepaliMonthString(nepDate.getMonth())) + " " +
+                        String date = "" + nepDate.getYear() + " " + getResources().getString(DateConverter.getNepaliMonthString(nepDate.getMonth())) + " " +
                                 nepDate.getDay() + " " + getDayOfWeek(nepDate.getDayOfWeek());
                         outputConversion.setText(date);
                     } catch (IllegalArgumentException e) {
@@ -169,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements
                 case R.id.bsToAdConvertButton:
                     try {
                         Model engDate = dateConverter.getEnglishDate(yy, mm, dd);
-                        String date="" + engDate.getYear() + " " + getEnglishMonth(engDate.getMonth()) + " " +
+                        String date = "" + engDate.getYear() + " " + getEnglishMonth(engDate.getMonth()) + " " +
                                 engDate.getDay() + " " + getDayOfWeek(engDate.getDayOfWeek());
                         outputConversion.setText(date);
                     } catch (IllegalArgumentException e) {

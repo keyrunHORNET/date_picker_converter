@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         minSdkVersion 16
@@ -21,18 +21,18 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'joda-time:joda-time:2.9.2' // for joda
-    implementation'com.android.support:support-v4:28.0.0-rc02'
-    implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
-    implementation 'com.android.support:support-v13:28.0.0-rc02'
-    implementation 'com.android.support:design:28.0.0-rc02'
+    implementation'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-v13:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.pholser:junit-quickcheck-core:0.7'
     testImplementation 'com.pholser:junit-quickcheck-generators:0.7'
 
-    androidTestImplementation 'com.android.support:support-annotations:27.1.1'
+    androidTestImplementation 'com.android.support:support-annotations:28.0.0'
 
     implementation 'org.jetbrains:annotations-java5:15.0'
 }

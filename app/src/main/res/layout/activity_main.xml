@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Conversion Range is 1944-2033 AD and 2000-2089 BS" />
+            android:text="Conversion Range is 1913-2033 AD and 1970-2089 BS" />
 
 
         <LinearLayout
