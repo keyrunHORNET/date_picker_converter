@@ -24,6 +24,10 @@ import com.hornet.dateconverter.Utils;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -34,11 +38,11 @@ public class Calendar extends LinearLayout
         implements View.OnClickListener, DatePickerController {
 
     private DefaultDateRangeLimiter mDefaultLimiter = new DefaultDateRangeLimiter();
-
+    //    MdtpDatePickerViewAnimatorV2Binding mainBinding;
     private DayPickerGroup mDayPickerView;
     private AccessibleDateAnimator mAnimator;
     private java.util.Calendar mCalendar;
-
+    private HashSet<java.util.Calendar> highlightedDays = new HashSet<>();
     private DateRangeLimiter mDateRangeLimiter = mDefaultLimiter;
 
     public Calendar(Context context) {
@@ -57,6 +61,10 @@ public class Calendar extends LinearLayout
     }
 
     private void init(AttributeSet attrs, Context context) {
+        /*LayoutInflater inflater = (LayoutInflater)
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mainBinding= MdtpDatePickerViewAnimatorV2Binding.inflate(inflater);
+        */
         ((Activity) getContext())
                 .getLayoutInflater()
                 .inflate(R.layout.mdtp_date_picker_view_animator_v2, this, true);
@@ -73,7 +81,7 @@ public class Calendar extends LinearLayout
         Animation animation2 = new AlphaAnimation(1.0f, 0.0f);
         animation2.setDuration(300);
         mAnimator.setOutAnimation(animation2);
-
+        setHighlightedDays(getSampleModelList());//for test purpose todo remove
     }
 
 
@@ -126,7 +134,12 @@ public class Calendar extends LinearLayout
 
     @Override
     public boolean isHighlighted(int year, int month, int day) {
-        return false;
+        java.util.Calendar date = java.util.Calendar.getInstance(getTimeZone());
+        date.set(java.util.Calendar.YEAR, year);
+        date.set(java.util.Calendar.MONTH, month);
+        date.set(java.util.Calendar.DAY_OF_MONTH, day);
+        Utils.trimToMidnight(date);
+        return highlightedDays.contains(date);
     }
 
     @Override
@@ -183,4 +196,36 @@ public class Calendar extends LinearLayout
     public DatePickerDialog.ScrollOrientation getScrollOrientation() {
         return DatePickerDialog.ScrollOrientation.HORIZONTAL;
     }
+
+    public void setHighlightedDays(List<Model> myHighlightedDays) {
+
+        java.util.Calendar[] days = new java.util.Calendar[myHighlightedDays.size()];
+        for (int i = 0; i < myHighlightedDays.size(); i++) {
+            java.util.Calendar mDay = new GregorianCalendar(myHighlightedDays.get(i).getYear(), myHighlightedDays.get(i).getMonth(), myHighlightedDays.get(i).getDay());
+            days[i] = mDay;
+        }
+
+        for (java.util.Calendar highlightedDay : days) {
+            this.highlightedDays.add(Utils.trimToMidnight((java.util.Calendar) highlightedDay.clone()));
+        }
+        // Sort the array to optimize searching over it later on
+        ///Arrays.sort(highlightedDays);
+        if (mDayPickerView != null) mDayPickerView.onChange();
+    }
+
+
+    /**
+     * get List of sample model of date
+     *
+     * @return ArrayList<Model>
+     */
+    public List<Model> getSampleModelList() {
+        DateConverter dateConverter = new DateConverter();
+        List<Model> myList = new ArrayList<>();
+        for (int i = 2; i < 15; i++) {
+            myList.add(new Model(dateConverter.getTodayNepaliDate().getYear(), dateConverter.getTodayNepaliDate().getMonth(), (i + 2)));
+        }
+        return myList;
+    }
+
 }

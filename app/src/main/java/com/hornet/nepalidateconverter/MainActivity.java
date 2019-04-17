@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements
 
     DateConverter dateConverter;
     ActivityMainBinding mainBinding;
-
+    com.hornet.dateconverter.CalendarView.Calendar mCalendar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +35,10 @@ public class MainActivity extends AppCompatActivity implements
         mainBinding.materialDatePickerButton.setOnClickListener(this);
         mainBinding.materialTimePickerButton.setOnClickListener(this);
 
-
+//        mCalendar = findViewById(R.id.nepaliCalendar);
         mainBinding.modeDarkDate.setChecked(Utils.isDarkTheme(this, mainBinding.modeDarkDate.isChecked()));
+
+//        mCalendar.setHighlightedDays(getSampleModelList());
 
     }
 
