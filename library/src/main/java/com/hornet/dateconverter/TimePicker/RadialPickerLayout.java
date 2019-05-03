@@ -38,7 +38,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.FrameLayout;
 
-
+import com.bugfender.sdk.Bugfender;
 import com.hornet.dateconverter.R;
 
 import java.util.Calendar;
@@ -50,7 +50,7 @@ import java.util.Locale;
  * when they'd been touched.
  */
 public class RadialPickerLayout extends FrameLayout implements OnTouchListener {
-    private static final String TAG = "RadialPickerLayout";
+    private static final String TAG = RadialPickerLayout.class.getSimpleName();
 
     private final int TOUCH_SLOP;
     private final int TAP_TIMEOUT;
@@ -837,7 +837,7 @@ public class RadialPickerLayout extends FrameLayout implements OnTouchListener {
             case MotionEvent.ACTION_UP:
                 if (!mInputEnabled) {
                     // If our touch input was disabled, tell the listener to re-enable us.
-                    Log.d(TAG, "Input was disabled, but received ACTION_UP.");
+                    Bugfender.d(TAG, "Input was disabled, but received ACTION_UP.");
                     mListener.enablePicker();
                     return true;
                 }

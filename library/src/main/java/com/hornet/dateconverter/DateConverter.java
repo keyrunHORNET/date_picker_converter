@@ -22,6 +22,8 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
+import com.bugfender.sdk.Bugfender;
+
 import org.jetbrains.annotations.Contract;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -41,6 +43,7 @@ import java.util.GregorianCalendar;
  * Edited by Jeffrey Jongko on 7/2/2019.
  */
 public class DateConverter {
+    private static final String TAG = DateConverter.class.getSimpleName();
 
     private SparseArray<int[]> daysInMonthMap;
     private SparseArray<int[]> startWeekDayMonthMap;
@@ -52,6 +55,7 @@ public class DateConverter {
     private void initializeData() {
         getStartWeekDayMonthMap();
         getDaysInMonthMap();
+        Bugfender.d(TAG, "init");
     }
 
     private void getDaysInMonthMap() {
@@ -370,6 +374,7 @@ public class DateConverter {
     public Model getEnglishDate(@IntRange(from = 1970, to = 2090) int nepYY,
                                 @IntRange(from = 1, to = 12) int nepMM,
                                 @IntRange(from = 1, to = 32) int nepDD) {
+        Bugfender.d(TAG, "getEnglishDate :: yy-mm-dd" + nepYY + "-" + nepMM + "-" + nepDD);
 
         if (isNepDateInConversionRange(nepYY, nepMM, nepDD)) {
 
@@ -466,6 +471,7 @@ public class DateConverter {
     public Model getNepaliDate(@IntRange(from = 1913 - 2033) int engYY,
                                @IntRange(from = 1, to = 12) int engMM,
                                @IntRange(from = 1, to = 31) int engDD) {
+        Bugfender.d(TAG, "getNepaliDate :: yy-mm-dd" + engYY + "-" + engMM + "-" + engDD);
 
         if (isEngDateInConversionRange(engYY, engMM, engDD)) {
 
@@ -637,6 +643,7 @@ public class DateConverter {
      * @return {@code int} first week day of given month in given year
      */
     public int getFirstWeekDayMonth(@IntRange(from = 1970, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm) {
+        Bugfender.d(TAG, "getFirstWeekDayMonth :: yy-mm" + yy + "-" + mm);
         return startWeekDayMonthMap.get(yy)[mm];
     }
 

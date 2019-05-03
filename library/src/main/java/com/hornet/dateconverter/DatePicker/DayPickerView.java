@@ -32,8 +32,10 @@ import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
+import com.bugfender.sdk.Bugfender;
 import com.hornet.dateconverter.GravitySnapHelper;
 import com.hornet.dateconverter.Utils;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -43,7 +45,7 @@ import java.util.Locale;
  */
 public abstract class DayPickerView extends RecyclerView implements DatePickerDialog.OnDateChangedListener {
 
-    private static final String TAG = "MonthFragment";
+    private static final String TAG = DayPickerView.class.getSimpleName();
 
     private static SimpleDateFormat YEAR_FORMAT = new SimpleDateFormat("yyyy", Locale.getDefault());
 
@@ -206,7 +208,7 @@ public abstract class DayPickerView extends RecyclerView implements DatePickerDi
             }
             top = child.getTop();
             if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "child at " + (i - 1) + " has top " + top);
+                Bugfender.d(TAG, "child at " + (i - 1) + " has top " + top);
             }
         } while (top < 0);
 
@@ -218,7 +220,7 @@ public abstract class DayPickerView extends RecyclerView implements DatePickerDi
         }
 
         if (Log.isLoggable(TAG, Log.DEBUG)) {
-            Log.d(TAG, "GoTo position " + position);
+            Bugfender.d(TAG, "GoTo position " + position);
         }
         // Check if the selected day is now outside of our visible range
         // and if so scroll to the month that contains it
