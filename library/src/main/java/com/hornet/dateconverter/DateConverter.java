@@ -67,8 +67,20 @@ public class DateConverter {
          month "Baisakh", index 2 refers to second month "Jesth" and so on.
          */
 
-        // based on https://github.com/bahadurbaniya/Date-Converter-Bikram-Sambat-to-English-Date/blob/master/src/main/java/np/com/converter/date/nepali/Lookup.java
 
+        /*  INFO
+         *  this is a dummy data, last month value is an educated guess but other are dummy,
+         *  do not rely on this and its of no use except to prevent null
+         *  don't believe the values of year 1969
+         *  however it does not effect the conversion
+         */
+
+        daysInMonthMap.put(1969, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 31});
+
+        /*
+         *  below dates are based on
+         *  based on https://github.com/bahadurbaniya/Date-Converter-Bikram-Sambat-to-English-Date/blob/master/src/main/java/np/com/converter/date/nepali/Lookup.java
+         */
         daysInMonthMap.put(1970, new int[]{0, 31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30});
         daysInMonthMap.put(1971, new int[]{0, 31, 31, 32, 31, 32, 30, 30, 29, 30, 29, 30, 30});
         daysInMonthMap.put(1972, new int[]{0, 31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31});
@@ -222,6 +234,7 @@ public class DateConverter {
          */
 
         // based on www.ashesh.com.np/neplai-date-converter
+        startWeekDayMonthMap.put(1969, new int[]{0, 7, 2, 6, 2, 6, 2, 4, 6, 1, 2, 4, 5});
         startWeekDayMonthMap.put(1970, new int[]{0, 1, 4, 7, 4, 7, 3, 6, 1, 2, 4, 5, 7});
         startWeekDayMonthMap.put(1971, new int[]{0, 2, 5, 1, 5, 1, 5, 7, 2, 3, 5, 6, 1});
         startWeekDayMonthMap.put(1972, new int[]{0, 3, 6, 3, 6, 3, 6, 1, 3, 5, 6, 7, 2});
@@ -643,7 +656,8 @@ public class DateConverter {
      * @return {@code int} first week day of given month in given year
      */
     public int getFirstWeekDayMonth(@IntRange(from = 1970, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm) {
-        Bugfender.d(TAG, "getFirstWeekDayMonth :: yy-mm" + yy + "-" + mm);
+        int size = startWeekDayMonthMap.size();
+        Bugfender.d(TAG, "getFirstWeekDayMonth :: array_size-yy-mm " + size + "-" + yy + "-" + mm);
         return startWeekDayMonthMap.get(yy)[mm];
     }
 
@@ -659,6 +673,8 @@ public class DateConverter {
      * @return {@link int} number of days in a given month of a given year
      */
     public int noOfDaysInMonth(@IntRange(from = 1970, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm) {
+        int size = daysInMonthMap.size();
+        Bugfender.d(TAG, "noOfDaysInMonth :: array_size-yy-mm " + size + "-" + yy + "-" + mm);
         return daysInMonthMap.get(yy)[mm];
     }
 

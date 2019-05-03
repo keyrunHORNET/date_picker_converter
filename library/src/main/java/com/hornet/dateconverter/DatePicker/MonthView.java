@@ -188,7 +188,7 @@ public abstract class MonthView extends View {
         super(context, attr);
         mController = controller;
         Resources res = context.getResources();
-        dc = new DateConverter();
+
 
         mDayLabelCalendar = Calendar.getInstance();
         //mDayLabelCalendar = DatePickerDialog.currentNepaliDate;
@@ -381,7 +381,7 @@ public abstract class MonthView extends View {
         //today.setToNow();
         //final Calendar today = Calendar.getInstance();
 
-
+        dc = new DateConverter();
         final Model today = dc.getTodayNepaliDate();
         mHasToday = false;
         mToday = -1;
