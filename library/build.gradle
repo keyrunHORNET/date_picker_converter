@@ -10,6 +10,13 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,7 +35,7 @@ dependencies {
     implementation 'com.android.support:support-v13:28.0.0'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.bugfender.sdk:android:1.+'
-
+    testImplementation 'org.robolectric:robolectric:4.3'
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.pholser:junit-quickcheck-core:0.7'
     testImplementation 'com.pholser:junit-quickcheck-generators:0.7'
