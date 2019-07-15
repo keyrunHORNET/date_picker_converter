@@ -22,7 +22,6 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
-import com.bugfender.sdk.Bugfender;
 
 import org.jetbrains.annotations.Contract;
 import org.joda.time.DateTime;
@@ -55,7 +54,6 @@ public class DateConverter {
     private void initializeData() {
         getStartWeekDayMonthMap();
         getDaysInMonthMap();
-        Bugfender.d(TAG, "init");
     }
 
     private void getDaysInMonthMap() {
@@ -387,7 +385,6 @@ public class DateConverter {
     public Model getEnglishDate(@IntRange(from = 1970, to = 2090) int nepYY,
                                 @IntRange(from = 1, to = 12) int nepMM,
                                 @IntRange(from = 1, to = 32) int nepDD) {
-        Bugfender.d(TAG, "getEnglishDate :: yy-mm-dd" + nepYY + "-" + nepMM + "-" + nepDD);
 
         if (isNepDateInConversionRange(nepYY, nepMM, nepDD)) {
 
@@ -484,7 +481,6 @@ public class DateConverter {
     public Model getNepaliDate(@IntRange(from = 1913 - 2033) int engYY,
                                @IntRange(from = 1, to = 12) int engMM,
                                @IntRange(from = 1, to = 31) int engDD) {
-        Bugfender.d(TAG, "getNepaliDate :: yy-mm-dd" + engYY + "-" + engMM + "-" + engDD);
 
         if (isEngDateInConversionRange(engYY, engMM, engDD)) {
 
@@ -657,7 +653,6 @@ public class DateConverter {
      */
     public int getFirstWeekDayMonth(@IntRange(from = 1970, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm) {
         int size = startWeekDayMonthMap.size();
-        Bugfender.d(TAG, "getFirstWeekDayMonth :: array_size-yy-mm " + size + "-" + yy + "-" + mm);
         return startWeekDayMonthMap.get(yy)[mm];
     }
 
@@ -674,7 +669,6 @@ public class DateConverter {
      */
     public int noOfDaysInMonth(@IntRange(from = 1970, to = 2090) int yy, @IntRange(from = 1, to = 12) int mm) {
         int size = daysInMonthMap.size();
-        Bugfender.d(TAG, "noOfDaysInMonth :: array_size-yy-mm " + size + "-" + yy + "-" + mm);
         return daysInMonthMap.get(yy)[mm];
     }
 

@@ -187,4 +187,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-#### P.S. Clone for the demo of latest commit
+
+#### Heads Up
+* input argument on conversion method ==> month starts from 1 and ends at 12
+* output of conversion ==> month starts from 0 and ends at 11
+

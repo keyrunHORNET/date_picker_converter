@@ -38,7 +38,6 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.FrameLayout;
 
-import com.bugfender.sdk.Bugfender;
 import com.hornet.dateconverter.R;
 
 import java.util.Calendar;
@@ -837,7 +836,6 @@ public class RadialPickerLayout extends FrameLayout implements OnTouchListener {
             case MotionEvent.ACTION_UP:
                 if (!mInputEnabled) {
                     // If our touch input was disabled, tell the listener to re-enable us.
-                    Bugfender.d(TAG, "Input was disabled, but received ACTION_UP.");
                     mListener.enablePicker();
                     return true;
                 }

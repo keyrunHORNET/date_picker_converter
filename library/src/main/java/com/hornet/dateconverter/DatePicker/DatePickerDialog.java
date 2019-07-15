@@ -28,7 +28,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bugfender.sdk.Bugfender;
 import com.hornet.dateconverter.DateConverter;
 import com.hornet.dateconverter.Model;
 import com.hornet.dateconverter.R;
@@ -257,7 +256,6 @@ public class DatePickerDialog extends DialogFragment implements
         mCalendar.setMonth(initialSelection.getMonth());
         mCalendar.setDay(initialSelection.getDay());
         mScrollOrientation = null;
-        Bugfender.d(TAG, "init :: " + "MM-DD-YY" + mCalendar.getYear() + "-" + mCalendar.getMonth() + "-" + mCalendar.getDay()); // you can also use Bugfender to log messages
 
         mVersion = Build.VERSION.SDK_INT < Build.VERSION_CODES.M ? Version.VERSION_1 : Version.VERSION_2;
     }
@@ -295,10 +293,6 @@ public class DatePickerDialog extends DialogFragment implements
             mCalendar = dc.getTodayNepaliDate();
         }
 
-        Bugfender.d(DatePickerDialog.class.getSimpleName(), "mCalendar values"
-                + mCalendar.getYear() + "YEAR: MONTH: "
-                + mCalendar.getMonth() + " DAY: "
-                + mCalendar.getDay());
 
     }
 
@@ -343,7 +337,6 @@ public class DatePickerDialog extends DialogFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Bugfender.d(TAG, "onCreateView: ");
 
         int listPosition = -1;
         int listPositionOffset = 0;

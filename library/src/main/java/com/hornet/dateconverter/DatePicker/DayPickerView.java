@@ -32,7 +32,6 @@ import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
-import com.bugfender.sdk.Bugfender;
 import com.hornet.dateconverter.GravitySnapHelper;
 import com.hornet.dateconverter.Utils;
 
@@ -208,7 +207,6 @@ public abstract class DayPickerView extends RecyclerView implements DatePickerDi
             }
             top = child.getTop();
             if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Bugfender.d(TAG, "child at " + (i - 1) + " has top " + top);
             }
         } while (top < 0);
 
@@ -220,7 +218,6 @@ public abstract class DayPickerView extends RecyclerView implements DatePickerDi
         }
 
         if (Log.isLoggable(TAG, Log.DEBUG)) {
-            Bugfender.d(TAG, "GoTo position " + position);
         }
         // Check if the selected day is now outside of our visible range
         // and if so scroll to the month that contains it
