@@ -292,10 +292,6 @@ public class DatePickerDialog extends DialogFragment implements
         if (mCalendar == null) {
             mCalendar = dc.getTodayNepaliDate();
         }
-        Log.d("KG: mCalander", ""
-                + mCalendar.getYear() + "YEAR: MONTH: "
-                + mCalendar.getMonth() + " DAY: "
-                + mCalendar.getDay());
 
     }
 

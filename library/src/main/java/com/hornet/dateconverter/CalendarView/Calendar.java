@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.hornet.dateconverter.DateConverter;
 import com.hornet.dateconverter.DatePicker.AccessibleDateAnimator;
@@ -37,11 +36,12 @@ import java.util.TimeZone;
 public class Calendar extends LinearLayout
         implements View.OnClickListener, DatePickerController {
 
+    private OnDateSetListener mCallback;
     private DefaultDateRangeLimiter mDefaultLimiter = new DefaultDateRangeLimiter();
     //    MdtpDatePickerViewAnimatorV2Binding mainBinding;
     private DayPickerGroup mDayPickerView;
     private AccessibleDateAnimator mAnimator;
-    private java.util.Calendar mCalendar;
+    private Model mCalendar;
     private HashSet<java.util.Calendar> highlightedDays = new HashSet<>();
     private DateRangeLimiter mDateRangeLimiter = mDefaultLimiter;
 
@@ -60,6 +60,10 @@ public class Calendar extends LinearLayout
 
     }
 
+    public void setOnDateSetListener(OnDateSetListener listener) {
+        this.mCallback = listener;
+    }
+
     private void init(AttributeSet attrs, Context context) {
         /*LayoutInflater inflater = (LayoutInflater)
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -68,8 +72,7 @@ public class Calendar extends LinearLayout
         ((Activity) getContext())
                 .getLayoutInflater()
                 .inflate(R.layout.mdtp_date_picker_view_animator_v2, this, true);
-        Model today = new DateConverter().getTodayNepaliDate();
-        mCalendar = DateConverter.convertModelToCalendar(today);
+        mCalendar = new DateConverter().getTodayNepaliDate();
         mAnimator = findViewById(R.id.mdtp_animator);
         mDayPickerView = new DayPickerGroup(context, this);
         mDefaultLimiter.setController(this);
@@ -102,9 +105,12 @@ public class Calendar extends LinearLayout
     }
 
     @Override
-    public void onDayOfMonthSelected(int year, int month, int day, int dayOfMonth) {
-        Toast.makeText(getContext(), "onClick " + day, Toast.LENGTH_SHORT).show();
-
+    public void onDayOfMonthSelected(int year, int month, int day, int dayOfWeek) {
+        mCalendar.setDayOfWeek(dayOfWeek);
+        mCalendar.setYear(year);
+        mCalendar.setMonth(month);
+        mCalendar.setDay(day);
+        notifyDateSet();
     }
 
     @Override
@@ -213,6 +219,19 @@ public class Calendar extends LinearLayout
         if (mDayPickerView != null) mDayPickerView.onChange();
     }
 
+    public void notifyDateSet() {
+        if (mCallback != null) {
+            mCallback.onDateClick(Calendar.this,  mCalendar.getYear(),
+                    mCalendar.getMonth(), mCalendar.getDay());
+        }
+    }
+
+
+    public interface OnDateSetListener {
+
+
+        void onDateClick(View calendar, int year, int month, int day);
+    }
 
     /**
      * get List of sample model of date

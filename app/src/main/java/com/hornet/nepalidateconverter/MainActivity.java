@@ -19,11 +19,10 @@ import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
-        View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+        View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, com.hornet.dateconverter.CalendarView.Calendar.OnDateSetListener {
 
     DateConverter dateConverter;
     ActivityMainBinding mainBinding;
-    com.hornet.dateconverter.CalendarView.Calendar mCalendar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +34,10 @@ public class MainActivity extends AppCompatActivity implements
         mainBinding.materialDatePickerButton.setOnClickListener(this);
         mainBinding.materialTimePickerButton.setOnClickListener(this);
 
-//        mCalendar = findViewById(R.id.nepaliCalendar);
-        mainBinding.modeDarkDate.setChecked(Utils.isDarkTheme(this, mainBinding.modeDarkDate.isChecked()));
+//        mainBinding.calendar.setOnDateSetListener(this);
+//        mainBinding.calendar.setHighlightedDays(getSampleModelList());
 
-//        mCalendar.setHighlightedDays(getSampleModelList());
+        mainBinding.modeDarkDate.setChecked(Utils.isDarkTheme(this, mainBinding.modeDarkDate.isChecked()));
 
     }
 
@@ -266,5 +265,10 @@ public class MainActivity extends AppCompatActivity implements
         String time = "You picked the following time:- " + hourOfDay + ":" + minute + ":" + second;
         mainBinding.outputTimePickerTextView.setText(time);
 
+    }
+
+    @Override
+    public void onDateClick(View calendar, int year, int month, int day) {
+        Toast.makeText(this, "year :: " + year + "  month :: " + month + " day :: " + day, Toast.LENGTH_SHORT).show();
     }
 }
