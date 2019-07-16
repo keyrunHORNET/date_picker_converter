@@ -21,9 +21,11 @@
             android:paddingBottom="@dimen/activity_vertical_margin"
             tools:context="com.hornet.nepalidateconverter.MainActivity">
 
-            <com.hornet.dateconverter.CalendarView.Calendar
+            <Button
+                android:id="@+id/btnCalendar"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:text="View Calendar" />
 
             <View
                 android:layout_width="match_parent"

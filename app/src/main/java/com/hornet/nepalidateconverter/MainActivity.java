@@ -1,5 +1,6 @@
 package com.hornet.nepalidateconverter;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,12 +29,13 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         dateConverter = new DateConverter();
+        setTitle("Nepali Date Picker Converter");
 
         mainBinding.adToBsConvertButton.setOnClickListener(this);
         mainBinding.bsToAdConvertButton.setOnClickListener(this);
         mainBinding.materialDatePickerButton.setOnClickListener(this);
         mainBinding.materialTimePickerButton.setOnClickListener(this);
-
+        mainBinding.btnCalendar.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CalendarActivity.class)));
 //        mainBinding.calendar.setOnDateSetListener(this);
 //        mainBinding.calendar.setHighlightedDays(getSampleModelList());
 
@@ -46,17 +48,6 @@ public class MainActivity extends AppCompatActivity implements
         Calendar now = Calendar.getInstance();
 
         if (v.getId() == R.id.materialDatePickerButton) {
-            /*
-            DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this,
-                    2015,
-                    3,
-                    17);*/
-            /*
-            DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this,
-                    now.get(Calendar.YEAR),
-                    now.get(Calendar.MONTH),
-                    now.get(Calendar.DAY_OF_MONTH));
-            */
 
             DatePickerDialog dpd = DatePickerDialog.newInstance(this,dateConverter.getNepaliDate(now));
 

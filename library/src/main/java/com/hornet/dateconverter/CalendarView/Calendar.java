@@ -84,7 +84,6 @@ public class Calendar extends LinearLayout
         Animation animation2 = new AlphaAnimation(1.0f, 0.0f);
         animation2.setDuration(300);
         mAnimator.setOutAnimation(animation2);
-        setHighlightedDays(getSampleModelList());//for test purpose todo remove
     }
 
 
@@ -150,7 +149,7 @@ public class Calendar extends LinearLayout
 
     @Override
     public int getFirstDayOfWeek() {
-        return 7;
+        return 1;//week start is sunday by default
     }
 
     @Override
@@ -195,7 +194,7 @@ public class Calendar extends LinearLayout
 
     @Override
     public DatePickerDialog.Version getVersion() {
-        return DatePickerDialog.Version.VERSION_2;
+        return DatePickerDialog.Version.VERSION_2; //default version 2
     }
 
     @Override
@@ -219,6 +218,17 @@ public class Calendar extends LinearLayout
         if (mDayPickerView != null) mDayPickerView.onChange();
     }
 
+
+    public void setSelectableDays(List<Model> myList) {
+        java.util.Calendar[] days = new java.util.Calendar[myList.size()];
+        for (int i = 0; i < myList.size(); i++) {
+            java.util.Calendar mDay = new GregorianCalendar(myList.get(i).getYear(), myList.get(i).getMonth(), myList.get(i).getDay());
+            days[i] = mDay;
+        }
+        mDefaultLimiter.setSelectableDays(days);
+        if (mDayPickerView != null) mDayPickerView.onChange();
+    }
+
     public void notifyDateSet() {
         if (mCallback != null) {
             mCallback.onDateClick(Calendar.this,  mCalendar.getYear(),
@@ -231,20 +241,6 @@ public class Calendar extends LinearLayout
 
 
         void onDateClick(View calendar, int year, int month, int day);
-    }
-
-    /**
-     * get List of sample model of date
-     *
-     * @return ArrayList<Model>
-     */
-    public List<Model> getSampleModelList() {
-        DateConverter dateConverter = new DateConverter();
-        List<Model> myList = new ArrayList<>();
-        for (int i = 2; i < 15; i++) {
-            myList.add(new Model(dateConverter.getTodayNepaliDate().getYear(), dateConverter.getTodayNepaliDate().getMonth(), (i + 2)));
-        }
-        return myList;
     }
 
 }
