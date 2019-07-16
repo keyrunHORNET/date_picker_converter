@@ -26,8 +26,6 @@ public class CalendarActivity extends AppCompatActivity implements com.hornet.da
         mCalendar = findViewById(R.id.calendar);
         textOutput = findViewById(R.id.textOutput);
         mCalendar.setOnDateSetListener(this);
-        mCalendar.setHighlightedDays(getSampleModelList());
-        mCalendar.setSelectableDays(getSampleModelList());
         setTitle("Nepali Calendar");
     }
 

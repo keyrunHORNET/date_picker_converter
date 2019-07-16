@@ -23,7 +23,6 @@ import com.hornet.dateconverter.Utils;
 
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
@@ -44,6 +43,7 @@ public class Calendar extends LinearLayout
     private Model mCalendar;
     private HashSet<java.util.Calendar> highlightedDays = new HashSet<>();
     private DateRangeLimiter mDateRangeLimiter = mDefaultLimiter;
+    private boolean highlightSaturdays;
 
     public Calendar(Context context) {
         this(context, null);
@@ -219,7 +219,7 @@ public class Calendar extends LinearLayout
     }
 
 
-    public void setSelectableDays(List<Model> myList) {
+    private void setSelectableDays(List<Model> myList) {
         java.util.Calendar[] days = new java.util.Calendar[myList.size()];
         for (int i = 0; i < myList.size(); i++) {
             java.util.Calendar mDay = new GregorianCalendar(myList.get(i).getYear(), myList.get(i).getMonth(), myList.get(i).getDay());
@@ -228,6 +228,33 @@ public class Calendar extends LinearLayout
         mDefaultLimiter.setSelectableDays(days);
         if (mDayPickerView != null) mDayPickerView.onChange();
     }
+
+    private void highlightAllSaturdays(boolean highlight) {
+        highlightSaturdays = highlight;
+
+        if (highlightSaturdays) {
+            highlightedDays.addAll(getSaturdays());
+        } else {
+            if (highlightedDays.containsAll(getSaturdays())) {
+                highlightedDays.removeAll(getSaturdays());
+            }
+        }
+    }
+
+    private HashSet<java.util.Calendar> getSaturdays() {
+        HashSet<java.util.Calendar> saturdaysHashSet = new HashSet<>();
+        List<Model> saturdays = DateConverter.getAllSaturdays();
+        java.util.Calendar[] days = new java.util.Calendar[saturdays.size()];
+        for (int i = 0; i < saturdays.size(); i++) {
+            java.util.Calendar mDay = new GregorianCalendar(saturdays.get(i).getYear(), saturdays.get(i).getMonth(), saturdays.get(i).getDay());
+            days[i] = mDay;
+        }
+        for (java.util.Calendar highlightedDay : days) {
+            saturdaysHashSet.add(Utils.trimToMidnight((java.util.Calendar) highlightedDay.clone()));
+        }
+        return saturdaysHashSet;
+    }
+
 
     public void notifyDateSet() {
         if (mCallback != null) {
