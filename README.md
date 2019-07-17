@@ -12,13 +12,6 @@
 Date Picker | Calendar 
 ---- | ---- 
 ![Date Picker](https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2018-06-04.png) | ![Calendar](https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/calendar.png) 
-<p align="center">
-  <img width="300" height="550" src="https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2018-06-04.png">
-</p> 
-
-<p align="center">
-  <img width="300" height="550" src="https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2018-06-04.png">
-</p> 
 
 ### demo (old version)
 https://play.google.com/store/apps/details?id=com.hornet.nepalidateconverter
