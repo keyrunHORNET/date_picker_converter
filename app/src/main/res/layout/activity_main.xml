@@ -1,238 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
 
 
-    <LinearLayout
+    </data>
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.hornet.nepalidateconverter.MainActivity">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="Conversion Range is 1913-2033 AD and 1970-2089 BS" />
+        android:layout_height="match_parent">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:weightSum="100">
-
-
-            <EditText
-                android:id="@+id/convertEditTextYear"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="40"
-                android:hint="Year"
-                android:inputType="date"
-                android:maxLength="4" />
-
-            <EditText
-                android:id="@+id/convertEditTextMonth"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="30"
-                android:hint="Month"
-                android:inputType="date"
-                android:maxLength="2" />
-
-            <EditText
-                android:id="@+id/convertEditTextDay"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="30"
-                android:hint="Day"
-                android:inputType="date"
-                android:maxLength="2" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            tools:context="com.hornet.nepalidateconverter.MainActivity">
 
             <Button
-                android:id="@+id/adToBsConvertButton"
-                android:layout_width="wrap_content"
+                android:id="@+id/btnCalendar"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="AD->BS" />
+                android:layout_width="match_parent"
+                android:text="View Calendar" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
 
-            <Button
-
-                android:id="@+id/bsToAdConvertButton"
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="BS->AD" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/outputConvertTextView"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="Output of conversion will be shown here" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
-
-        <TextView
-
-            android:id="@+id/outputDatePickerTextView"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="The date you picked will be shown here" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/materialDatePickerButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="@string/pick_date_button" />
+                android:gravity="center"
+                android:text="Conversion Range is 1913-2033 AD and 1970-2089 BS" />
 
-            <Button
-                android:id="@+id/materialTimePickerButton"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+
+                <EditText
+                    android:id="@+id/convertEditTextYear"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="40"
+                    android:hint="Year"
+                    android:inputType="date"
+                    android:maxLength="4" />
+
+                <EditText
+                    android:id="@+id/convertEditTextMonth"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:hint="Month"
+                    android:inputType="date"
+                    android:maxLength="2" />
+
+                <EditText
+                    android:id="@+id/convertEditTextDay"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:hint="Day"
+                    android:inputType="date"
+                    android:maxLength="2" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/adToBsConvertButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="AD->BS" />
+
+
+                <Button
+
+                    android:id="@+id/bsToAdConvertButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="BS->AD" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/outputConvertTextView"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Output of conversion will be shown here" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+
+                android:id="@+id/outputDatePickerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="The date you picked will be shown here" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/materialDatePickerButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/pick_date_button" />
+
+                <Button
+                    android:id="@+id/materialTimePickerButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/pick_time_button" />
+
+
+            </LinearLayout>
+
+            <TextView
+
+                android:id="@+id/outputTimePickerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="The Time you picked will be shown here" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <CheckBox
+                android:id="@+id/mode_dark_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="@string/pick_time_button" />
+                android:text="@string/mode_dark_date" />
+
+            <CheckBox
+                android:id="@+id/mode_custom_accent_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mode_custom_accent" />
+
+            <CheckBox
+                android:id="@+id/dismiss_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/dismiss_date" />
+
+            <CheckBox
+                android:id="@+id/show_year_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/show_year_first" />
+
+            <CheckBox
+                android:id="@+id/title_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/title_date" />
+
+            <CheckBox
+                android:id="@+id/limit_past_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/limit_past_date" />
+
+            <CheckBox
+                android:id="@+id/limit_selectable_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/limit_selectable_date" />
+
+            <CheckBox
+                android:id="@+id/disable_selected_dates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/disable_selected_dates" />
+
+            <CheckBox
+                android:id="@+id/dialog_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/dialog_version_two" />
+
+            <CheckBox
+                android:id="@+id/dialog_highlightDays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/dialog_highlight_days" />
+
+            <CheckBox
+                android:id="@+id/dialog_switch_orientation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/dialog_switch_orientation" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
 
 
         </LinearLayout>
 
-        <TextView
-
-            android:id="@+id/outputTimePickerTextView"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="The Time you picked will be shown here" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
-
-        <CheckBox
-            android:id="@+id/mode_dark_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mode_dark_date" />
-
-        <CheckBox
-            android:id="@+id/mode_custom_accent_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mode_custom_accent" />
-
-        <CheckBox
-            android:id="@+id/dismiss_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/dismiss_date" />
-
-        <CheckBox
-            android:id="@+id/show_year_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/show_year_first" />
-
-        <CheckBox
-            android:id="@+id/title_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/title_date" />
-
-        <CheckBox
-            android:id="@+id/limit_past_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/limit_past_date" />
-
-        <CheckBox
-            android:id="@+id/limit_selectable_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/limit_selectable_date" />
-
-        <CheckBox
-            android:id="@+id/disable_selected_dates"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/disable_selected_dates" />
-
-        <CheckBox
-            android:id="@+id/dialog_version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/dialog_version_two" />
-
-        <CheckBox
-            android:id="@+id/dialog_highlightDays"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/dialog_highlight_days" />
-
-        <CheckBox
-            android:id="@+id/dialog_switch_orientation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/dialog_switch_orientation" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
-
-
-    </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
+</layout>

@@ -1,13 +1,11 @@
 package com.hornet.nepalidateconverter;
 
+import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hornet.dateconverter.DateConverter;
@@ -15,65 +13,33 @@ import com.hornet.dateconverter.DatePicker.DatePickerDialog;
 import com.hornet.dateconverter.Model;
 import com.hornet.dateconverter.TimePicker.TimePickerDialog;
 import com.hornet.dateconverter.Utils;
+import com.hornet.nepalidateconverter.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
-        View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+        View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, com.hornet.dateconverter.CalendarView.Calendar.OnDateSetListener {
 
-    EditText year, month, day;
-    Button adToBs, bsToAd, datePicker, timePicker;
-    TextView outputConversion, outputDatePicker, outputTimePicker;
     DateConverter dateConverter;
-    private CheckBox modeDarkDate;
-    private CheckBox modeCustomAccentDate;
-    private CheckBox dismissDate;
-    private CheckBox titleDate;
-    private CheckBox showYearFirst;
-    private CheckBox disablePastDays;
-    private CheckBox limitSelectableDays;
-    private CheckBox disableSelectedDays;
-    private CheckBox tryNewVersion;
-    private CheckBox highlightDays;
-    private CheckBox switchScrollOrientation;
-
-
+    ActivityMainBinding mainBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         dateConverter = new DateConverter();
-        year = findViewById(R.id.convertEditTextYear);
-        month = findViewById(R.id.convertEditTextMonth);
-        day = findViewById(R.id.convertEditTextDay);
-        adToBs = findViewById(R.id.adToBsConvertButton);
-        bsToAd = findViewById(R.id.bsToAdConvertButton);
-        datePicker = findViewById(R.id.materialDatePickerButton);
-        timePicker = findViewById(R.id.materialTimePickerButton);
-        outputConversion = findViewById(R.id.outputConvertTextView);
-        outputDatePicker = findViewById(R.id.outputDatePickerTextView);
-        outputTimePicker = findViewById(R.id.outputTimePickerTextView);
+        setTitle("Nepali Date Picker Converter");
 
-        adToBs.setOnClickListener(this);
-        bsToAd.setOnClickListener(this);
-        datePicker.setOnClickListener(this);
-        timePicker.setOnClickListener(this);
+        mainBinding.adToBsConvertButton.setOnClickListener(this);
+        mainBinding.bsToAdConvertButton.setOnClickListener(this);
+        mainBinding.materialDatePickerButton.setOnClickListener(this);
+        mainBinding.materialTimePickerButton.setOnClickListener(this);
+        mainBinding.btnCalendar.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CalendarActivity.class)));
+//        mainBinding.calendar.setOnDateSetListener(this);
+//        mainBinding.calendar.setHighlightedDays(getSampleModelList());
 
-        modeCustomAccentDate = findViewById(R.id.mode_custom_accent_date);
-        disablePastDays = findViewById(R.id.limit_past_date);
-        modeDarkDate = findViewById(R.id.mode_dark_date);
-        titleDate = findViewById(R.id.title_date);
-        dismissDate = findViewById(R.id.dismiss_date);
-        showYearFirst = findViewById(R.id.show_year_first);
-        tryNewVersion = findViewById(R.id.dialog_version);
-        limitSelectableDays = findViewById(R.id.limit_selectable_date);
-        disableSelectedDays = findViewById(R.id.disable_selected_dates);
-        highlightDays = findViewById(R.id.dialog_highlightDays);
-        switchScrollOrientation = findViewById(R.id.dialog_switch_orientation);
-
-        modeDarkDate.setChecked(Utils.isDarkTheme(this, modeDarkDate.isChecked()));
+        mainBinding.modeDarkDate.setChecked(Utils.isDarkTheme(this, mainBinding.modeDarkDate.isChecked()));
 
     }
 
@@ -82,51 +48,40 @@ public class MainActivity extends AppCompatActivity implements
         Calendar now = Calendar.getInstance();
 
         if (v.getId() == R.id.materialDatePickerButton) {
-            /*
-            DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this,
-                    2015,
-                    3,
-                    17);*/
-            /*
-            DatePickerDialog dpd = DatePickerDialog.newInstance(MainActivity.this,
-                    now.get(Calendar.YEAR),
-                    now.get(Calendar.MONTH),
-                    now.get(Calendar.DAY_OF_MONTH));
-            */
 
             DatePickerDialog dpd = DatePickerDialog.newInstance(this,dateConverter.getNepaliDate(now));
 
-            if (tryNewVersion.isChecked()) {
+            if (mainBinding.dialogVersion.isChecked()) {
                 dpd.setVersion(DatePickerDialog.Version.VERSION_2);
             } else {
                 dpd.setVersion(DatePickerDialog.Version.VERSION_1);
             }
 
-            dpd.setThemeDark(modeDarkDate.isChecked());
-            dpd.dismissOnPause(dismissDate.isChecked());
-            dpd.showYearPickerFirst(showYearFirst.isChecked());
-            if (switchScrollOrientation.isChecked()) {
+            dpd.setThemeDark(mainBinding.modeDarkDate.isChecked());
+            dpd.dismissOnPause(mainBinding.dismissDate.isChecked());
+            dpd.showYearPickerFirst(mainBinding.showYearFirst.isChecked());
+            if (mainBinding.dialogSwitchOrientation.isChecked()) {
                 if (dpd.getVersion() == DatePickerDialog.Version.VERSION_1) {
                     dpd.setScrollOrientation(DatePickerDialog.ScrollOrientation.HORIZONTAL);
                 } else {
                     dpd.setScrollOrientation(DatePickerDialog.ScrollOrientation.VERTICAL);
                 }
             }
-            if (modeCustomAccentDate.isChecked()) {
+            if (mainBinding.modeCustomAccentDate.isChecked()) {
                 dpd.setAccentColor(Color.parseColor("#9C27B0"));
             }
-            if (titleDate.isChecked()) {
+            if (mainBinding.titleDate.isChecked()) {
                 dpd.setTitle("DatePicker Title");
             }
-            if (disablePastDays.isChecked())
+            if (mainBinding.limitPastDate.isChecked())
                 dpd.setMinDate(dateConverter.getTodayNepaliDate());
-            if (highlightDays.isChecked()) {
+            if (mainBinding.dialogHighlightDays.isChecked()) {
                 dpd.setHighlightedDays(getSampleModelList());
             }
-            if (limitSelectableDays.isChecked()) {
+            if (mainBinding.limitSelectableDate.isChecked()) {
                 dpd.setSelectableDays(getSampleModelList());
             }
-            if (disableSelectedDays.isChecked()) {
+            if (mainBinding.disableSelectedDates.isChecked()) {
                 dpd.setDisabledDays(getSampleModelList());
             }
             dpd.show(getSupportFragmentManager(), "DatePicker");
@@ -138,19 +93,19 @@ public class MainActivity extends AppCompatActivity implements
                     now.get(Calendar.MINUTE),
                     false);
 
-            if (tryNewVersion.isChecked()) {
+            if (mainBinding.dialogVersion.isChecked()) {
                 tpd.setVersion(TimePickerDialog.Version.VERSION_2);
             } else {
                 tpd.setVersion(TimePickerDialog.Version.VERSION_1);
             }
 
-            tpd.setThemeDark(modeDarkDate.isChecked());
-            tpd.dismissOnPause(dismissDate.isChecked());
+            tpd.setThemeDark(mainBinding.modeDarkDate.isChecked());
+            tpd.dismissOnPause(mainBinding.dismissDate.isChecked());
 
-            if (modeCustomAccentDate.isChecked()) {
+            if (mainBinding.modeCustomAccentDate.isChecked()) {
                 tpd.setAccentColor(Color.parseColor("#9C27B0"));
             }
-            if (titleDate.isChecked()) {
+            if (mainBinding.titleDate.isChecked()) {
                 tpd.setTitle("TimePicker Title");
             }
             tpd.show(getFragmentManager(), "TimePicker");
@@ -158,9 +113,9 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         if (checkEditTextParameter()) {
-            int yy = Integer.parseInt(year.getText().toString());
-            int mm = Integer.parseInt(month.getText().toString());
-            int dd = Integer.parseInt(day.getText().toString());
+            int yy = Integer.parseInt(mainBinding.convertEditTextYear.getText().toString());
+            int mm = Integer.parseInt(mainBinding.convertEditTextMonth.getText().toString());
+            int dd = Integer.parseInt(mainBinding.convertEditTextDay.getText().toString());
 
             switch (v.getId()) {
                 case R.id.adToBsConvertButton:
@@ -168,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements
                         Model nepDate = dateConverter.getNepaliDate(yy, mm, dd);
                         String date = "" + nepDate.getYear() + " " + getResources().getString(DateConverter.getNepaliMonthString(nepDate.getMonth())) + " " +
                                 nepDate.getDay() + " " + getDayOfWeek(nepDate.getDayOfWeek());
-                        outputConversion.setText(date);
+                        mainBinding.outputConvertTextView.setText(date);
                     } catch (IllegalArgumentException e) {
                         Toast.makeText(MainActivity.this, "Date out of Range", Toast.LENGTH_LONG).show();
                     }
@@ -178,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements
                         Model engDate = dateConverter.getEnglishDate(yy, mm, dd);
                         String date = "" + engDate.getYear() + " " + getEnglishMonth(engDate.getMonth()) + " " +
                                 engDate.getDay() + " " + getDayOfWeek(engDate.getDayOfWeek());
-                        outputConversion.setText(date);
+                        mainBinding.outputConvertTextView.setText(date);
                     } catch (IllegalArgumentException e) {
                         Toast.makeText(MainActivity.this, "Date out of Range", Toast.LENGTH_LONG).show();
                     }
@@ -272,14 +227,14 @@ public class MainActivity extends AppCompatActivity implements
      */
 
     public boolean checkEditTextParameter() {
-        if (year.getText().toString().length() == 0) {
-            year.setError("Empty Field");
+        if (mainBinding.convertEditTextYear.getText().toString().length() == 0) {
+            mainBinding.convertEditTextYear.setError("Empty Field");
         } else {
-            if (month.getText().toString().length() == 0) {
-                month.setError("Empty Field");
+            if (mainBinding.convertEditTextMonth.getText().toString().length() == 0) {
+                mainBinding.convertEditTextMonth.setError("Empty Field");
             } else {
-                if (day.getText().toString().length() == 0) {
-                    day.setError("Empty Field");
+                if (mainBinding.convertEditTextDay.getText().toString().length() == 0) {
+                    mainBinding.convertEditTextDay.setError("Empty Field");
                 } else {
                     return true;
                 }
@@ -292,14 +247,19 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         String date = "You picked the following date: " + dayOfMonth + " " + getResources().getString(DateConverter.getNepaliMonthString(monthOfYear)) + " " + year;
-        outputDatePicker.setText(date);
+        mainBinding.outputDatePickerTextView.setText(date);
     }
 
 
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
         String time = "You picked the following time:- " + hourOfDay + ":" + minute + ":" + second;
-        outputTimePicker.setText(time);
+        mainBinding.outputTimePickerTextView.setText(time);
 
+    }
+
+    @Override
+    public void onDateClick(View calendar, int year, int month, int day) {
+        Toast.makeText(this, "year :: " + year + "  month :: " + month + " day :: " + day, Toast.LENGTH_SHORT).show();
     }
 }

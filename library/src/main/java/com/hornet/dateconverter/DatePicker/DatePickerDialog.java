@@ -293,7 +293,6 @@ public class DatePickerDialog extends DialogFragment implements
             mCalendar = dc.getTodayNepaliDate();
         }
 
-
     }
 
     @Override

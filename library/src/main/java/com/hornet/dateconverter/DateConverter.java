@@ -27,6 +27,7 @@ import org.jetbrains.annotations.Contract;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -727,7 +728,7 @@ public class DateConverter {
      * @return {@link Calendar} Gregorian calendar
      */
     @SuppressWarnings("unused")
-    public Calendar convertModelToCalendar(Model tempModel) {
+    public static Calendar convertModelToCalendar(Model tempModel) {
         return new GregorianCalendar(tempModel.getYear(), tempModel.getMonth(), tempModel.getDay(), 0, 0, 0);
     }
 
@@ -736,7 +737,29 @@ public class DateConverter {
      * @return {@link Model} dateModel after conversion from the given Calendar
      */
     @SuppressWarnings("unused")
-    public Model convertCalendarToModel(Calendar date) {
+    public static Model  convertCalendarToModel(Calendar date) {
         return new Model(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+    }
+
+    public static ArrayList<Model> getAllSaturdays() {
+
+        /*incomplete todo complete*/
+        ArrayList<Model> saturdays = new ArrayList<>();
+
+        /*Ashar*/
+        saturdays.add(new Model(2076, 2, 7));
+        saturdays.add(new Model(2076, 2, 14));
+        saturdays.add(new Model(2076, 2, 21));
+        saturdays.add(new Model(2076, 2, 28));
+
+        /*Shrawan*/
+        saturdays.add(new Model(2076, 3, 4));
+        saturdays.add(new Model(2076, 3, 11));
+        saturdays.add(new Model(2076, 3, 18));
+        saturdays.add(new Model(2076, 3, 25));
+        saturdays.add(new Model(2076, 3, 32));
+
+
+        return saturdays;
     }
 }

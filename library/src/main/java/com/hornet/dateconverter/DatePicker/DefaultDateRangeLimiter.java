@@ -31,7 +31,7 @@ import java.util.HashSet;
 import java.util.TimeZone;
 import java.util.TreeSet;
 
-class DefaultDateRangeLimiter implements DateRangeLimiter {
+public class DefaultDateRangeLimiter implements DateRangeLimiter {
     private static final int DEFAULT_START_YEAR = 1970;
     private static final int DEFAULT_END_YEAR = 2090;
 
@@ -43,7 +43,7 @@ class DefaultDateRangeLimiter implements DateRangeLimiter {
     private TreeSet<Calendar> selectableDays = new TreeSet<>();
     private HashSet<Calendar> disabledDays = new HashSet<>();
 
-    DefaultDateRangeLimiter() {}
+    public DefaultDateRangeLimiter() {}
 
     @SuppressWarnings({"unchecked", "WeakerAccess"})
     public DefaultDateRangeLimiter(Parcel in) {
@@ -82,7 +82,7 @@ class DefaultDateRangeLimiter implements DateRangeLimiter {
         }
     };
 
-    void setSelectableDays(@NonNull Calendar[] days) {
+    public void setSelectableDays(@NonNull Calendar[] days) {
         for (Calendar selectableDay : days) {
             this.selectableDays.add(Utils.trimToMidnight((Calendar) selectableDay.clone()));
         }
@@ -102,7 +102,7 @@ class DefaultDateRangeLimiter implements DateRangeLimiter {
         mMaxDate = Utils.trimToMidnight((Calendar) calendar.clone());
     }
 
-    void setController(@NonNull DatePickerController controller) {
+    public void setController(@NonNull DatePickerController controller) {
         mController = controller;
     }
 
