@@ -9,6 +9,13 @@
 ### Contributor
  `Jeffrey Jongko`
 
+Date Picker | Calendar 
+---- | ---- 
+![Date Picker](https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2018-06-04.png) | ![Calendar](https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/calendar.png) 
+<p align="center">
+  <img width="300" height="550" src="https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2018-06-04.png">
+</p> 
+
 <p align="center">
   <img width="300" height="550" src="https://raw.githubusercontent.com/keyrunHORNET/date_picker_converter/master/Screenshot_2018-06-04.png">
 </p> 
@@ -44,6 +51,25 @@ https://play.google.com/store/apps/details?id=com.hornet.nepalidateconverter
  ```
 You may also add the library as an Android Library to your project. All the library files live in ```library```.
 
+## Using Calendar
+include the calendar in your desired layout
+```xml
+ <com.hornet.dateconverter.CalendarView.Calendar
+        android:id="@+id/calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp" />
+```
+In order to receive the date set in the picker, you will need to implement the `CalendarView.Calendar.OnDateSetListener` interface. This will be a the `Activity` or `Fragment` that creates the calendar in their respective layout. Then hook up the interface with calendar in your layout.
+
+```java
+calendar.setOnDateSetListener(this);
+
+@Override
+   public void onDateClick(View calendar, int year, int month, int day) {
+        Toast.makeText(this, "year :: " + year + "  month :: " + (month + 1) + " day :: " + day, Toast.LENGTH_SHORT).show();
+   }
+
+```
 ## Using Date Picker / Time Picker
  
 ### Implement an `OnDateSetListener` / `OnTimeSetListener`

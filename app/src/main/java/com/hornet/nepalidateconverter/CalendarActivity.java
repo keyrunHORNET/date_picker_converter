@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hornet.dateconverter.CalendarView.Calendar;
 import com.hornet.dateconverter.DateConverter;
@@ -26,6 +27,7 @@ public class CalendarActivity extends AppCompatActivity implements com.hornet.da
         mCalendar = findViewById(R.id.calendar);
         textOutput = findViewById(R.id.textOutput);
         mCalendar.setOnDateSetListener(this);
+        mCalendar.setHighlightedDays(DateConverter.getAllSaturdays());
         setTitle("Nepali Calendar");
     }
 
