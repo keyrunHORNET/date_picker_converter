@@ -52,7 +52,7 @@ include the calendar in your desired layout
         android:layout_width="wrap_content"
         android:layout_height="300dp" />
 ```
-In order to receive the date set in the picker, you will need to implement the `CalendarView.Calendar.OnDateSetListener` interface. This will be a the `Activity` or `Fragment` that creates the calendar in their respective layout. Then hook up the interface with calendar in your layout.
+In order to receive the date checked in the calendar, you will need to implement the `CalendarView.Calendar.OnDateSetListener` interface. This will be a the `Activity` or `Fragment` that creates the calendar in their respective layout. Then hook up the interface with calendar in your layout.
 
 ```java
 calendar.setOnDateSetListener(this);
