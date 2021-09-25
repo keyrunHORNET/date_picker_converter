@@ -1,5 +1,8 @@
 package com.hornet.dateconverter;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,9 +10,6 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 /**
  * Created by Kiran Gyawali on 7/1/2019.
@@ -157,7 +157,7 @@ public class DateConverterTest {
     public void convertModelToCalendar() {
         Model testModel = dc.getTodayNepaliDate();
 
-        Calendar testCalendar = dc.convertModelToCalendar(testModel);
+        Calendar testCalendar = DateConverter.convertModelToCalendar(testModel);
 
         assertThat(testModel.getYear(), is(testCalendar.get(Calendar.YEAR)));
         assertThat(testModel.getMonth(), is(testCalendar.get(Calendar.MONTH)));
@@ -169,7 +169,7 @@ public class DateConverterTest {
 
         Calendar testCalendar = Calendar.getInstance();
 
-        Model testModel = dc.convertCalendarToModel(testCalendar);
+        Model testModel = DateConverter.convertCalendarToModel(testCalendar);
 
         assertThat(testModel.getYear(), is(testCalendar.get(Calendar.YEAR)));
         assertThat(testModel.getMonth(), is(testCalendar.get(Calendar.MONTH)));

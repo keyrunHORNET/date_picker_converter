@@ -18,10 +18,10 @@
 
 package com.hornet.dateconverter;
 
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.Contract;
 import org.joda.time.DateTime;

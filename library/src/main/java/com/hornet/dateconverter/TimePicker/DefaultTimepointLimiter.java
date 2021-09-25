@@ -1,15 +1,16 @@
 package com.hornet.dateconverter.TimePicker;
 
+import static com.hornet.dateconverter.TimePicker.TimePickerDialog.HOUR_INDEX;
+import static com.hornet.dateconverter.TimePicker.TimePickerDialog.MINUTE_INDEX;
+
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.TreeSet;
-
-import static com.hornet.dateconverter.TimePicker.TimePickerDialog.HOUR_INDEX;
-import static com.hornet.dateconverter.TimePicker.TimePickerDialog.MINUTE_INDEX;
 
 
 /**
@@ -83,7 +84,8 @@ class DefaultTimepointLimiter implements TimepointLimiter {
         exclusiveSelectableTimes = getExclusiveSelectableTimes(mSelectableTimes, mDisabledTimes);
     }
 
-    @Nullable Timepoint getMinTime() {
+    @Nullable
+    Timepoint getMinTime() {
         return mMinTime;
     }
 

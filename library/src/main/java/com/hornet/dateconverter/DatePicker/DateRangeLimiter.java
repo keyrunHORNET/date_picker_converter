@@ -17,7 +17,8 @@
 package com.hornet.dateconverter.DatePicker;
 
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.util.Calendar;
 
@@ -27,7 +28,8 @@ public interface DateRangeLimiter extends Parcelable {
 
     int getMaxYear();
 
-    @NonNull Calendar getStartDate();
+    @NonNull
+    Calendar getStartDate();
 
     @NonNull Calendar getEndDate();
 
