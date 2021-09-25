@@ -23,10 +23,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
 
 import com.hornet.dateconverter.R;
 
@@ -34,7 +35,7 @@ import com.hornet.dateconverter.R;
 /**
  * A text view which, when pressed or activated, displays a colored circle around the text.
  */
-public class TextViewWithCircularIndicator extends android.support.v7.widget.AppCompatTextView {
+public class TextViewWithCircularIndicator extends AppCompatTextView {
 
     private static final int SELECTED_CIRCLE_ALPHA = 255;
 

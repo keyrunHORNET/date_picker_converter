@@ -2,7 +2,8 @@ package com.hornet.dateconverter;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v4.util.SimpleArrayMap;
+
+import androidx.collection.SimpleArrayMap;
 
 /**
  * Created by Hornet on 5/3/2016.

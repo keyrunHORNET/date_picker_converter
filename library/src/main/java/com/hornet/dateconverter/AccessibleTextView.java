@@ -5,12 +5,13 @@ import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Button;
-import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 /**
  * Created by Hornet on 4/30/2016.
  */
-public class AccessibleTextView extends android.support.v7.widget.AppCompatTextView {
+public class AccessibleTextView extends AppCompatTextView {
     public AccessibleTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }

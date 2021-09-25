@@ -1,6 +1,7 @@
 package com.hornet.dateconverter;
 
-import android.support.annotation.IntRange;
+
+import androidx.annotation.IntRange;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

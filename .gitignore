@@ -2,7 +2,16 @@
 .gradle
 /local.properties
 .idea/
+/.idea/
 .DS_Store
 /build
 /captures
 /.idea/caches/build_file_checksums.ser
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.externalNativeBuild
+.cxx
