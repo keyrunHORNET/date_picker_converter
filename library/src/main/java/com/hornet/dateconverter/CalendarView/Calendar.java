@@ -18,6 +18,7 @@ import com.hornet.dateconverter.DatePicker.DayPickerGroup;
 import com.hornet.dateconverter.DatePicker.DefaultDateRangeLimiter;
 import com.hornet.dateconverter.DatePicker.MonthAdapter;
 import com.hornet.dateconverter.Model;
+import com.hornet.dateconverter.NepaliCalendarUtils;
 import com.hornet.dateconverter.R;
 import com.hornet.dateconverter.Utils;
 
@@ -243,7 +244,7 @@ public class Calendar extends LinearLayout
 
     private HashSet<java.util.Calendar> getSaturdays() {
         HashSet<java.util.Calendar> saturdaysHashSet = new HashSet<>();
-        List<Model> saturdays = DateConverter.getAllSaturdays();
+        List<Model> saturdays = NepaliCalendarUtils.INSTANCE.getAllSaturdays();
         java.util.Calendar[] days = new java.util.Calendar[saturdays.size()];
         for (int i = 0; i < saturdays.size(); i++) {
             java.util.Calendar mDay = new GregorianCalendar(saturdays.get(i).getYear(), saturdays.get(i).getMonth(), saturdays.get(i).getDay());
